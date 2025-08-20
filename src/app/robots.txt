@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /l/*
+
+Sitemap: https://www.geosoftech.com/sitemap.xml

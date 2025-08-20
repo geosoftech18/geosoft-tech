@@ -1,0 +1,9 @@
+{
+	"tabWidth": 2,
+	"useTabs": false,
+	"singleQuote": true,
+	"endOfLine": "lf",
+	"trailingComma": "es5",
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"importOrderSortSpecifiers": true
+}
