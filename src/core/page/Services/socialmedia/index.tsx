@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import  Button  from "@/core/components/Button"
+import { Button } from "@/core/components/ui/button"
 import { Card, CardContent } from "@/core/components/card"
 import { Badge } from "@/core/components/badge"
 import { Input } from "@/core/components/input"
@@ -1114,7 +1114,7 @@ export default function DigitalMarketingService() {
 
                         <Button
                           size="lg"
-                          className="w-full bg-gradient-to-r from-blue-700 to-blue-700 text-white  hover:from-[#1447e6]/90 hover:to-[#1447e6]/90 text-accent-foreground h-14 text-lg flex justify-center items-center"
+                          className="w-full bg-gradient-to-r from-blue-700 to-blue-700 !text-white  hover:from-[#1447e6]/90 hover:to-[#1447e6]/90 text-accent-foreground h-14 text-lg flex justify-center items-center"
                           onClick={() => setCurrentAuditStep(2)}
                           disabled={!auditFormData.website}
                         >
