@@ -1733,7 +1733,7 @@ export default function DigitalMarketingService() {
                       <div className="bg-gradient-to-r from-[#1447e6]/5 to-[#1447e6]/10 p-4 rounded-lg border border-[#1447e6]/20">
                         <div className="flex items-center justify-between mb-3">
                           <span className="text-sm font-medium text-foreground">Campaign Performance</span>
-                          <Badge variant="primary" className="text-xs bg-[#1447e6] text-white">
+                          <Badge variant="default" className="text-xs bg-[#1447e6] text-white">
                             <TrendingUp className="h-3 w-3 mr-1 text-white" />
                             Live Data
                           </Badge>
@@ -2971,9 +2971,9 @@ export default function DigitalMarketingService() {
             <p className="text-muted-foreground">
               <span className="font-semibold text-foreground">15+ Industries Served</span> •
               <span className="ml-2">300+ Successful Campaigns</span> •
-              <button variant="link" className="p-0 h-auto  text-[#1447e6] hover:text-[#1447e6]/80">
+              <Button variant="link" className="p-0 h-auto  text-[#1447e6] hover:text-[#1447e6]/80">
                 See All Industries →
-              </button>
+              </Button>
             </p>
           </div>
         </div>
