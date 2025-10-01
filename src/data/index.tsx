@@ -46,41 +46,49 @@ export const services = [
     name: 'Website Design',
     subtitle: 'Elevate your web experience',
     url: '/home/services/service-1.jpg',
+    link: '/services/webdevelopment',
   },
   {
     name: 'Social Media',
     subtitle: 'Unlock your social Potential',
     url: '/home/services/service-2.jpg',
+    link: '/services/socialmedia',
   },
   {
     name: 'SEO',
     subtitle: 'Dominate the digital landscape',
     url: '/home/services/service-3.jpg',
+    link: '/#',
   },
   {
     name: 'Content Marketing',
     subtitle: 'Connect, Engage, Convert',
     url: '/home/services/service-4.jpg',
+    link: '/#',
   },
   {
     name: 'Website Design',
     subtitle: 'Elevate your web experience',
     url: '/home/services/service-1.jpg',
+    link: '/services/webdevelopment',
   },
   {
     name: 'Social Media',
     subtitle: 'Unlock your social Potential',
     url: '/home/services/service-2.jpg',
+    link: '/services/socialmedia',
   },
   {
     name: 'SEO',
     subtitle: 'Dominate the digital landscape',
     url: '/home/services/service-3.jpg',
+    link: '/#',
   },
   {
     name: 'Content Marketing',
     subtitle: 'Connect, Engage, Convert',
     url: '/home/services/service-4.jpg',
+    link: '/#',
   },
 ];
 

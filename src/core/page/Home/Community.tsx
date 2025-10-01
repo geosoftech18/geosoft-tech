@@ -19,7 +19,7 @@ const Community = (props: Props) => {
     <div className="group relative h-full w-full bg-[url(/home/community.jpg)] bg-cover bg-no-repeat">
       <div className="absolute inset-0 z-0 w-full bg-black/30 group-hover:bg-black/50" />
       <div className="relative z-10 mx-auto flex w-full max-w-lg flex-col items-center gap-5 px-5 py-14">
-        <h2 className="text-center text-5xl font-bold text-white md:text-6xl lg:text-7xl">
+        <h2 className="text-center text-5xl font-bold text-white md:text-5xl lg:text-5xl">
           Build a stunning site today.
         </h2>
         <p className="text-center text-lg text-neutral-200">

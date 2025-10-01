@@ -8,8 +8,10 @@ import 'swiper/css/navigation';
 import { services } from '@/data';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
+import { useRouter } from 'next/navigation';
 
 const Services = () => {
+  const router = useRouter();
   return (
     <section className="h-full w-full" id="services">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:py-24">
@@ -63,8 +65,8 @@ const Services = () => {
           modules={[Navigation]}
         >
           {services.map((item, index) => (
-            <SwiperSlide key={index}>
-              <div className="group relative h-96 w-full overflow-hidden rounded-md transition-all duration-500 hover:scale-105">
+            <SwiperSlide key={index} >
+              <div onClick={() => router.push(item.link)} className="group relative h-96 w-full overflow-hidden rounded-md transition-all duration-500 hover:scale-105">
                 <img
                   className="h-full w-full object-cover object-center"
                   src={item.url}

@@ -1,0 +1,455 @@
+"use client"
+
+import { motion, AnimatePresence } from "framer-motion"
+import { Palette, Code, Search, Headphones, X, ArrowRight, ArrowLeft } from "lucide-react"
+
+import { useState } from "react"
+
+export default function ServicesSection() {
+  const [isFormOpen, setIsFormOpen] = useState(false)
+  const [currentStep, setCurrentStep] = useState(1)
+  const [selectedService, setSelectedService] = useState("")
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    projectType: "",
+    budget: "",
+    timeline: "",
+    message: "",
+  })
+
+  const services = [
+    {
+      icon: Palette,
+      title: "Website Designing",
+      description: "UI/UX design, prototyping, and branding solutions for stunning websites.",
+      cta: "Request Demo →",
+    },
+    {
+      icon: Code,
+      title: "Website Development",
+      description: "CMS, custom development, e-commerce, and portal solutions.",
+      cta: "Get Free Quote →",
+    },
+    {
+      icon: Search,
+      title: "SEO & Performance Optimization",
+      description: "Boost your rankings and site speed for maximum visibility.",
+      cta: "Request Demo →",
+    },
+    {
+      icon: Headphones,
+      title: "Maintenance & Support",
+      description: "24/7 support and ongoing maintenance for your website.",
+      cta: "Request Demo →",
+    },
+  ]
+
+  const handleServiceClick = (serviceTitle: string) => {
+    setSelectedService(serviceTitle)
+    setIsFormOpen(true)
+    setCurrentStep(1)
+  }
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const nextStep = () => {
+    if (currentStep < 3) setCurrentStep(currentStep + 1)
+  }
+
+  const prevStep = () => {
+    if (currentStep > 1) setCurrentStep(currentStep - 1)
+  }
+
+  const handleSubmit = () => {
+    // Create WhatsApp message
+    const message = `Hi! I'm interested in ${selectedService}.
+    
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Company: ${formData.company}
+Project Type: ${formData.projectType}
+Budget: ${formData.budget}
+Timeline: ${formData.timeline}
+Message: ${formData.message}`
+
+    const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, "_blank")
+    setIsFormOpen(false)
+    setCurrentStep(1)
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      projectType: "",
+      budget: "",
+      timeline: "",
+      message: "",
+    })
+  }
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+      scale: 0.9,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  }
+
+  return (
+    <>
+      <section className="py-20 bg-gradient-to-b from-[#adece9] to-white">
+        <div className="container mx-auto px-4">
+          {/* Section Header */}
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#02297e] mb-4">Our Website Services</h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              We cover everything from design to development, SEO, and long-term support.
+            </p>
+          </motion.div>
+
+          {/* Services Grid */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                className="bg-white rounded-2xl shadow-lg p-8 text-center group cursor-pointer border border-gray-100"
+                
+                whileHover={{
+                  y: -5,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                  borderColor: "rgb(59 130 246)",
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Icon */}
+                <motion.div
+                  className="w-20 h-20 mx-auto mb-6 bg-blue-700 rounded-full flex items-center justify-center"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <service.icon className="w-10 h-10 text-white" />
+                </motion.div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
+
+                {/* Description */}
+                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+
+                {/* CTA Button */}
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <button
+                    className="bg-gradient-to-r from-blue-700 to-[#012a82] hover:from-[#012a82] hover:to-blue-700 text-white rounded-xl px-6 py-2 text-sm font-medium transition-all duration-300"
+                    onClick={() => handleServiceClick(service.title)}
+                  >
+                    {service.cta}
+                  </button>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Trust Strip */}
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <div className="inline-flex flex-wrap items-center justify-center gap-8 text-gray-600 text-sm md:text-base">
+              <div className="flex items-center gap-2">
+                <span className="text-green-500">✅</span>
+                <span className="font-medium">Trusted by 300+ Businesses</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-blue-500">🌍</span>
+                <span className="font-medium">Global Clients</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-purple-500">⚡</span>
+                <span className="font-medium">24/7 Support</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <AnimatePresence>
+        {isFormOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsFormOpen(false)}
+          >
+            <motion.div
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="p-6 border-b border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">Get Started</h3>
+                    <p className="text-sm text-gray-600">{selectedService}</p>
+                  </div>
+                  <button
+                    onClick={() => setIsFormOpen(false)}
+                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="mt-4">
+                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                    <span>Step {currentStep} of 3</span>
+                    <span>{Math.round((currentStep / 3) * 100)}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-gradient-to-r from-blue-600 to-blue-700 h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${(currentStep / 3) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Form Content */}
+              <div className="p-6">
+
+                {/* Step 1: Basic Info */} {/* Step 2: Project Details */}
+                {currentStep === 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-4"
+                  >
+                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Project Details</h4>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
+                      <select
+                        value={formData.projectType}
+                        onChange={(e) => handleInputChange("projectType", e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value="">Select project type</option>
+                        <option value="New Website">New Website</option>
+                        <option value="Website Redesign">Website Redesign</option>
+                        <option value="E-commerce Store">E-commerce Store</option>
+                        <option value="Web Application">Web Application</option>
+                        <option value="Landing Page">Landing Page</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range</label>
+                      <select
+                        value={formData.budget}
+                        onChange={(e) => handleInputChange("budget", e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value="">Select budget range</option>
+                        <option value="$1,000 - $5,000">$1,000 - $5,000</option>
+                        <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                        <option value="$10,000 - $25,000">$10,000 - $25,000</option>
+                        <option value="$25,000+">$25,000+</option>
+                        <option value="Not sure">Not sure</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Timeline</label>
+                      <select
+                        value={formData.timeline}
+                        onChange={(e) => handleInputChange("timeline", e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      >
+                        <option value="">Select timeline</option>
+                        <option value="ASAP">ASAP</option>
+                        <option value="1-2 weeks">1-2 weeks</option>
+                        <option value="1 month">1 month</option>
+                        <option value="2-3 months">2-3 months</option>
+                        <option value="3+ months">3+ months</option>
+                        <option value="Just exploring">Just exploring</option>
+                      </select>
+                    </div>
+                  </motion.div>
+                )}
+                {/* Step 2: Message & Submit */}
+                {currentStep === 2 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-4"
+                  >
+                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Additional Details</h4>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Project Description</label>
+                        <textarea
+                        value={formData.message}
+                        onChange={(e) => handleInputChange("message", e.target.value)}
+                        placeholder="Tell us more about your project requirements, goals, and any specific features you need..."
+                        className="w-full h-32 resize-none"
+                      />
+                    </div>
+
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h5 className="font-medium text-blue-900 mb-2">What happens next?</h5>
+                      <ul className="text-sm text-blue-800 space-y-1">
+                        <li>• We'll contact you within 2 hours</li>
+                        <li>• Free consultation & project analysis</li>
+                        <li>• Custom proposal with timeline & pricing</li>
+                        <li>• No commitment required</li>
+                      </ul>
+                    </div>
+                  </motion.div>
+                )}
+                {/* Step 3: Basic Info */}
+                {currentStep === 3 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-4"
+                  >
+                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Tell us about yourself</h4>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                      <input
+                        value={formData.name}
+                        onChange={(e) => handleInputChange("name", e.target.value)}
+                        placeholder="Enter your full name"
+                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
+                        placeholder="Enter your email"
+                        className="w-fullborder rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                        <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange("phone", e.target.value)}
+                        placeholder="Enter your phone number"
+                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+                      <input
+                        value={formData.company}
+                        onChange={(e) => handleInputChange("company", e.target.value)}
+                        placeholder="Enter your company name (optional)"
+                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+
+               
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-gray-100">
+                <div className="flex items-center justify-between">
+                  {currentStep > 1 ? (
+                    <button onClick={prevStep} className="flex items-center gap-2 bg-transparent">
+                      <ArrowLeft className="w-4 h-4" />
+                      Back
+                    </button>
+                  ) : (
+                    <div />
+                  )}
+
+                  {currentStep < 3 ? (
+                    <button
+                      onClick={nextStep}
+                      disabled={
+                        (currentStep === 1 && (!formData.projectType || !formData.budget || !formData.timeline)) ||
+                        (currentStep === 2 && (!formData.projectType || !formData.budget || !formData.timeline))
+                      }
+                      className="bg-gradient-to-r text-white from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-700 flex items-center gap-2 rounded-lg"
+                    >
+                      Next
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleSubmit}
+                      className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 flex items-center gap-2"
+                    >
+                      Send via WhatsApp
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
