@@ -211,7 +211,7 @@ export default function HeroSection() {
   if (!mounted) return null
 
   return (
-    <section className="relative md:pt-10 min-h-screen overflow-hidden ">
+    <section className="relative pt-20 md:pt-10 min-h-screen overflow-hidden ">
       {/* Background Pattern Overlay */}
       <div className="absolute inset-0 opacity-10">
         <div
@@ -296,27 +296,30 @@ export default function HeroSection() {
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4"
+                className="flex flex-row gap-2 sm:gap-3 md:gap-4 md:pt-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="group">
+                <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="group flex-1">
                   <button
-                    
-                    className="bg-blue-700 hover:from-[#71e2f0] hover:to-[#adece9] font-semibold px-8 py-4 h-14 rounded-2xl shadow-xl border-0 w-full sm:w-auto transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-orange-500/25"
+                    onClick={() => handleServiceClick("Get Free Quote")}
+                    className="bg-blue-700 hover:from-[#71e2f0] hover:to-[#adece9] text-sm sm:text-base font-semibold px-4 sm:px-6 md:px-8 py-3 sm:py-4 h-12 sm:h-14 rounded-2xl shadow-xl border-0 w-full transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-orange-500/25"
                   >
-                    <span className="flex items-center gap-2 text-white " onClick={() => handleServiceClick("Get Free Quote")}>🚀 Get Free Quote</span>
+                    <span className="flex justify-center items-center gap-2 text-white">
+                      🚀 <span className="hidden sm:inline text-white">Get Free Quote</span><span className="sm:hidden text-white">Get Quote</span>
+                    </span>
                   </button>
                 </motion.div>
 
-                <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="group">
+                <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="group flex-1">
                   <button
-                    
-                  onClick={() => handleWhatsAppClick()}
-                    className="border-2 border-white/30 text-white hover:bg-white hover:text-purple-600 font-semibold px-8 py-4 h-14 rounded-2xl shadow-xl w-full sm:w-auto bg-white/5 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-white/25"
+                    onClick={() => handleWhatsAppClick()}
+                    className="border-2 border-white/30 text-white hover:bg-white hover:text-purple-600 font-semibold px-4 sm:px-6 md:px-8 py-3 sm:py-4 h-12 sm:h-14 rounded-2xl shadow-xl w-full bg-white/5 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-white/25"
                   >
-                    <span className="flex items-center gap-2 text-[#032a7f] ">📞 Schedule a Call</span>
+                    <span className="flex justify-center  items-center gap-2 text-[#032a7f]">
+                      📞 <span className="hidden sm:inline">Schedule a Call</span><span className="sm:hidden">Call Now</span>
+                    </span>
                   </button>
                 </motion.div>
               </motion.div>

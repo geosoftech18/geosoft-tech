@@ -17,7 +17,7 @@ export default function StickyFloatingButtons() {
     if (typeof window !== "undefined") {
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
       if (isMobile) {
-        window.location.href = "tel:+7776085112"
+        window.location.href = "tel:+91 7776085112"
       } else {
         alert("Call us at: +91 77760 85112")
       }
