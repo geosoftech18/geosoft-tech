@@ -12,7 +12,7 @@ const testimonials = [
     company: "CFA",
     role: " Founder & Chief Mentor",
     text: "Creating a standout website can significantly boost business visibility; Geo Softech seems well equipped for that.",
-    avatar: "/services/webdevelopment/professional-woman-ceo.png",
+    avatar: "/services/Sanjay Kathuria, CFA.png",
     rating: 5,
     hasVideo: true,
   },
@@ -22,7 +22,7 @@ const testimonials = [
     company: " Conscious Foundation",
     role: "Self-employed",
     text: "Totally agree! Crisp, clear,and impactful — exactly the kind of content businesses need more of.",
-    avatar: "/services/webdevelopment/professional-marketing-director.png",
+    avatar: "/services/BK Dadhich.png",
     rating: 5,
     hasVideo: false,
   },
@@ -32,7 +32,7 @@ const testimonials = [
     company: "InfluencerConnect",
     role: "Founder",
     text: "Nice share! Simple, clear, and straight to the point — exactly how good business communication should be. This is the kind of content that earns trust an shows your team’s expertise. Keep up the good work!",
-    avatar: "/services/webdevelopment/professional-woman-founder-headshot.png",
+    avatar: "/services/Saumya Dudeja.png",
     rating: 5,
     hasVideo: false,
   },
@@ -42,7 +42,7 @@ const testimonials = [
     company: "Binplus Technologies",
     role: " Founder and Director ",
     text:  "Truly inspiring — simple yet impactful. Great to see such  meaningful work being shared.",
-    avatar: "/services/webdevelopment/professional-cto-headshot.png",
+    avatar: "/services/Devvarth Chavriya.png",
     rating: 5,
     hasVideo: false,
   },
@@ -52,7 +52,7 @@ const testimonials = [
     company: "",
     role: "  Business Administrator ",
     text:  "Very interesting! Shows a solid understanding of what modern businesses need in a web development partner.",
-    avatar: "/services/webdevelopment/professional-cto-headshot.png",
+    avatar: "/services/Neeraj Arora.png",
     rating: 5,
     hasVideo: false,
   },
@@ -62,7 +62,7 @@ const testimonials = [
     company: "Nipundta",
     role: " Chief Executive Officer",
     text:  "Great initiative by Amar Korde👏 — clear, professional, and focused on real business value. Wishing you continued success!",
-    avatar: "/services/webdevelopment/professional-cto-headshot.png",
+    avatar: "/services/Swapnil Mishra.png",
     rating: 5,
     hasVideo: false,
   },
@@ -72,7 +72,7 @@ const testimonials = [
     company: "",
     role: "Technical Manager",
     text:  "Great start, sir! Really impressive approach and clear presentation. Looking forward to seeing more amazing work from you. Keep it up!",
-    avatar: "/services/webdevelopment/professional-cto-headshot.png",
+    avatar: "/services/Gopal Tarpe.png",
     rating: 5,
     hasVideo: false,
   },
@@ -82,7 +82,7 @@ const testimonials = [
     company: "Icreativehub",
     role: "self-employed",
     text:  'Geo Softech nails custom websites with responsive design and SEO expertise—built to boost your visibility!" GEO Softech',
-    avatar: "/services/webdevelopment/professional-cto-headshot.png",
+    avatar: "/services/Indira Priyadarshini Dash.png",
     rating: 5,
     hasVideo: false,
   },
@@ -120,17 +120,17 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % testimonials.length)
+      setCurrentSlide((prev) => (prev + 1) % (testimonials.length - slidesToShow + 1))
     }, 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, [slidesToShow])
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % testimonials.length)
+    setCurrentSlide((prev) => (prev + 1) % (testimonials.length - slidesToShow + 1))
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    setCurrentSlide((prev) => (prev - 1 + (testimonials.length - slidesToShow + 1)) % (testimonials.length - slidesToShow + 1))
   }
 
   const handleWhatsApp = () => {
@@ -149,13 +149,13 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#032d7d] mb-3 sm:mb-4 px-4">
+          <h2 className="font-avant-garde text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#032d7d] mb-3 sm:mb-4 px-4">
             What Our{" "}
             <span className="bg-gradient-to-r from-[#0ab865] to-[#aeebe9] bg-clip-text text-transparent">
               Clients Say
             </span>
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+          <p className="font-avant-garde text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             Don't just take our word for it. Here's what industry leaders say about working with us.
           </p>
         </motion.div>
@@ -233,7 +233,7 @@ export default function TestimonialsSection() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center mt-6 sm:mt-8 space-x-1">
-            {testimonials.map((_, index) => (
+            {Array.from({ length: testimonials.length - slidesToShow + 1 }).map((_, index) => (
               <div
                 key={index}
                 onClick={() => setCurrentSlide(index)}
@@ -263,7 +263,7 @@ export default function TestimonialsSection() {
         >
           <button
             onClick={handleWhatsApp}
-            className="bg-gradient-to-r from-[#032d7d] to-[#04bf63] hover:from-[#04bf63] hover:to-[#032d7d] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base lg:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto"
+            className="font-avant-garde bg-gradient-to-r from-[#032d7d] to-[#04bf63] hover:from-[#04bf63] hover:to-[#032d7d] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-sm sm:text-base lg:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-full sm:w-auto"
           >
             Want to be our next success story? → Let's Talk
           </button>

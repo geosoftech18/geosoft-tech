@@ -40,7 +40,7 @@ export default function FAQSection() {
     const message = encodeURIComponent(
       "Hi! I have some questions about your website design and development services. Can we discuss my project?",
     )
-    const phoneNumber = "1234567890" // Replace with your actual WhatsApp number
+    const phoneNumber = "7776085112" // Replace with your actual WhatsApp number
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
   }
 

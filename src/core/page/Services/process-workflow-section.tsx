@@ -61,7 +61,7 @@ const handleCTAClick = () => {
   const message = encodeURIComponent(
     "Hi! I'm interested in your web development process. Can you tell me more about how you can help build my website?",
   )
-  const phoneNumber = "1234567890" // Replace with your actual WhatsApp number
+  const phoneNumber = "7776085112" // Replace with your actual WhatsApp number
   window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
 }
 

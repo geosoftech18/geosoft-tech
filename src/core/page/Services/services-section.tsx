@@ -19,6 +19,8 @@ export default function ServicesSection() {
     timeline: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const services = [
     {
@@ -65,33 +67,58 @@ export default function ServicesSection() {
     if (currentStep > 1) setCurrentStep(currentStep - 1)
   }
 
-  const handleSubmit = () => {
-    // Create WhatsApp message
-    const message = `Hi! I'm interested in ${selectedService}.
+  const handleSubmit = async () => {
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
     
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Company: ${formData.company}
-Project Type: ${formData.projectType}
-Budget: ${formData.budget}
-Timeline: ${formData.timeline}
-Message: ${formData.message}`
+    try {
+      const response = await fetch('/api/form-submission', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          selectedService,
+          formSource: 'services-section',
+        }),
+      })
 
-    const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, "_blank")
-    setIsFormOpen(false)
-    setCurrentStep(1)
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      projectType: "",
-      budget: "",
-      timeline: "",
-      message: "",
-    })
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitStatus('success')
+        
+        // Open WhatsApp with the formatted message
+        if (result.whatsappUrl) {
+          window.open(result.whatsappUrl, "_blank")
+        }
+        
+        // Show success message
+        setTimeout(() => {
+          setIsFormOpen(false)
+          setCurrentStep(1)
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            company: "",
+            projectType: "",
+            budget: "",
+            timeline: "",
+            message: "",
+          })
+          setSubmitStatus('idle')
+        }, 2000)
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const containerVariants = {
@@ -297,10 +324,11 @@ Message: ${formData.message}`
                         className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="">Select budget range</option>
-                        <option value="$1,000 - $5,000">$1,000 - $5,000</option>
-                        <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                        <option value="$10,000 - $25,000">$10,000 - $25,000</option>
-                        <option value="$25,000+">$25,000+</option>
+                        <option value="₹20,000 - ₹50,000">₹20,000 - ₹50,000</option>
+                        <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                        <option value="₹1,00,000 - ₹2,00,000">₹1,00,000 - ₹2,00,000</option>
+                        
+                        <option value="₹2,00,000+">₹2,00,000+</option>
                         <option value="Not sure">Not sure</option>
                       </select>
                     </div>
@@ -314,7 +342,7 @@ Message: ${formData.message}`
                       >
                         <option value="">Select timeline</option>
                         <option value="ASAP">ASAP</option>
-                        <option value="1-2 weeks">1-2 weeks</option>
+                        
                         <option value="1 month">1 month</option>
                         <option value="2-3 months">2-3 months</option>
                         <option value="3+ months">3+ months</option>
@@ -381,7 +409,7 @@ Message: ${formData.message}`
                         value={formData.email}
                         onChange={(e) => handleInputChange("email", e.target.value)}
                         placeholder="Enter your email"
-                        className="w-fullborder rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
+                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
                       />
                     </div>
 
@@ -408,7 +436,43 @@ Message: ${formData.message}`
                   </motion.div>
                 )}
 
-               
+                {/* Status Messages */}
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-green-50 border border-green-200 rounded-lg p-4"
+                  >
+                    <div className="flex items-center gap-2 text-green-800">
+                      <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs">✓</span>
+                      </div>
+                      <div>
+                        <p className="font-medium">Form submitted successfully!</p>
+                        <p className="text-sm">Email sent to your team & WhatsApp message prepared.</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-50 border border-red-200 rounded-lg p-4"
+                  >
+                    <div className="flex items-center gap-2 text-red-800">
+                      <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                        <span className="text-white text-xs">✗</span>
+                      </div>
+                      <div>
+                        <p className="font-medium">Submission failed</p>
+                        <p className="text-sm">Please try again or contact us directly.</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
               </div>
 
               {/* Footer */}
@@ -438,10 +502,36 @@ Message: ${formData.message}`
                   ) : (
                     <button
                       onClick={handleSubmit}
-                      className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 flex items-center gap-2"
+                      disabled={isSubmitting || !formData.name || !formData.email || !formData.phone}
+                      className={`text-white flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+                        isSubmitting 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : submitStatus === 'success'
+                          ? 'bg-green-600 hover:bg-green-700'
+                          : submitStatus === 'error'
+                          ? 'bg-red-600 hover:bg-red-700'
+                          : 'bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700'
+                      }`}
                     >
-                      Send via WhatsApp
-                      <ArrowRight className="w-4 h-4 text-white" />
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          Sending...
+                        </>
+                      ) : submitStatus === 'success' ? (
+                        <>
+                          ✓ Sent Successfully!
+                        </>
+                      ) : submitStatus === 'error' ? (
+                        <>
+                          ✗ Try Again
+                        </>
+                      ) : (
+                        <>
+                          Send via WhatsApp
+                          <ArrowRight className="w-4 h-4 text-white" />
+                        </>
+                      )}
                     </button>
                   )}
                 </div>

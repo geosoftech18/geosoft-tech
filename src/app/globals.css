@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Test font loading */
+.font-avant-garde {
+  font-family: var(--font-avant-garde), 'Arial', sans-serif !important;
+}
+
 @layer base {
   * {
     @apply border-border;

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Chivo } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { root_meta_data } from '@/seo';
 import Navbar from '@/core/components/Navbar';
@@ -7,6 +8,44 @@ import Footer from '@/core/common/Footer';
 import Script from 'next/script';
 
 const chivo = Chivo({ subsets: ['latin'] });
+
+// ITC Avant Garde Gothic font configuration
+const avantGarde = localFont({
+  src: [
+    {
+      path: '../fonts/ITC Avant Garde Gothic CE Book/ITC Avant Garde Gothic CE Book.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ITC Avant Garde Gothic Medium/ITC Avant Garde Gothic Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ITC Avant Garde Gothic Bold/ITC Avant Garde Gothic Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/ITC Avant Garde Gothic CE Book Oblique/ITC Avant Garde Gothic CE Book Oblique.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/ITC Avant Garde Gothic Medium Oblique/ITC Avant Garde Gothic Medium Oblique.otf',
+      weight: '500',
+      style: 'italic',
+    },
+    {
+      path: '../fonts/ITC Avant Garde Gothic Bold Oblique/ITC Avant Garde Gothic Bold Oblique.otf',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-avant-garde',
+  display: 'swap',
+});
 
 export const metadata: Metadata = root_meta_data();
 
@@ -44,7 +83,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
           />
         </noscript>
       </head>
-      <body className={chivo.className}>
+      <body className={`${avantGarde.className} ${avantGarde.variable}`}>
         <Navbar
           logo={{
             url: '/logo/logo.webp',

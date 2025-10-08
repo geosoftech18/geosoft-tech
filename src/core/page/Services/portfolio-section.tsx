@@ -9,63 +9,104 @@ import { ExternalLink, TrendingUp, Zap, ShoppingCart } from "lucide-react"
 const portfolioItems = [
   {
     id: 1,
-    title: "E-commerce Store Redesign",
-    description: "Complete redesign of online fashion store with modern UI/UX",
-    result: "+220% Leads",
-    resultType: "growth",
-    tech: "Built with Next.js & WooCommerce",
-    image: "/services/webdevelopment/modern-ecommerce-fashion-store-website-design.png",
-    category: "E-commerce",
+    
+    title: "Elima Waste Management",
+    description: "Elima provides waste management and recycling solutions.",
+    result: "85% Faster",
+    resultType: "performance",
+    tech: "Built with Next.js & Firebase",
+    image: "/services/webdevelopment/elima.png",
+    category: "Environmental",
+    link: "https://elima.in",
+    
   },
   {
     id: 2,
-    title: "SaaS Dashboard Platform",
-    description: "Clean, intuitive dashboard for project management software",
+    title: "Texport International",
+    description: "Texport International makes and exports woven & knitted garments like ladies’ and kids’ fashion from Mumbai, India",
     result: "3x Sales",
     resultType: "sales",
     tech: "Built with React & Node.js",
-    image: "/services/webdevelopment/modern-saas-dashboard-interface-design.png",
-    category: "SaaS",
+    image: "/services/webdevelopment/texport.png",
+    category: "Apparel",
+    link: "https://texportinternational.com",
   },
   {
     id: 3,
-    title: "Restaurant Website",
-    description: "Mobile-first restaurant website with online ordering system",
+    title: "Genuine Filings",
+    description: "Genuine Filings helps businesses with company registration, GST, tax compliance, and other legal filings.",
     result: "95% Faster",
     resultType: "performance",
     tech: "Built with Next.js & Stripe",
-    image: "/services/webdevelopment/modern-restaurant-website-design-with-online-order.png",
-    category: "Restaurant",
+    image: "/services/webdevelopment/genuine-filings.png",
+    category: "business services",
+    link: "https://genuinefilings.com",
   },
   {
     id: 4,
-    title: "Healthcare Portal",
-    description: "Patient management system with appointment booking",
+    title: "Finmates",
+    description: "Finmates provides outsourced financial management and advisory services — acting as a virtual CFO",
     result: "+180% Users",
     resultType: "growth",
     tech: "Built with Next.js & PostgreSQL",
-    image: "/services/webdevelopment/modern-healthcare-patient-portal-website-design.png",
-    category: "Healthcare",
+    image: "/services/webdevelopment/finmates.png",
+    category: "finance",
+    link: "https://finmates.in",
   },
   {
     id: 5,
-    title: "Real Estate Platform",
+    title: "Gyan Vihar",
     description: "Property listing website with advanced search filters",
     result: "5x Conversions",
     resultType: "sales",
     tech: "Built with Next.js & MongoDB",
-    image: "/services/webdevelopment/modern-real-estate-property-listing-website-design.png",
-    category: "Real Estate",
+    image: "/services/webdevelopment/gyan-vihar.png",
+    category: "Education",
+    link: "https://gyanvihar.org",
   },
   {
     id: 6,
-    title: "Educational Platform",
-    description: "Online learning platform with course management system",
+    title: "NH Studioz",
+    description: "NH Studioz is an Indian content house distributing films and media, showcasing latest releases and movie catalogs.",
     result: "85% Faster",
     resultType: "performance",
     tech: "Built with Next.js & Firebase",
-    image: "/services/webdevelopment/modern-educational-online-learning-platform-design.png",
-    category: "Education",
+    image: "/services/webdevelopment/nh-studio.png",
+    category: "Entertainment",
+    link: "https://nhstudioz.tv",
+  },
+  {
+    id: 7,
+    title: "The Perfectory",
+    description: "Complete redesign of online fashion store with modern UI/UX",
+    result: "+220% Leads",
+    resultType: "growth",
+    tech: "Built with Next.js & WooCommerce",
+    image: "/services/webdevelopment/theperfectory.png",
+    category: "E-commerce",
+    link: "https://theperfectory.com",
+  },
+  {
+    id: 8,
+    title: "Aviation Legacy",
+    description: "Aviation Legacy provides flight support services — such as flight planning, permits, ground support, catering, and navigation assistance.",
+    result: "85% Faster",
+    resultType: "performance",
+    tech: "Built with Next.js & Firebase",
+    image: "/services/webdevelopment/aviation-legacy.png",
+    category: "Air services",
+    link: "https://avnlegacy.aero",
+  },
+  {
+    id: 9,
+    title: "DBS Mintek",
+    description: "DBS Mintek is a BPO firm providing inbound & outbound call center, email, chat support, and customer service outsourcing.",
+    result: "85% Faster",
+    resultType: "performance",
+    tech: "Built with Next.js & Firebase",
+    image: "/services/webdevelopment/DBS-mintek.png",
+    category: "telecom",
+    link: "https://dbsmintek.com",
   },
 ]
 
@@ -209,12 +250,12 @@ export default function PortfolioSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                   >
-                    <div className="bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+                    <a href={item.link} target="_blank" className="bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
                       Full Page View
-                    </div>
-                    <div className="bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
+                    </a>
+                    <a href={item.link} target="_blank" className="bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
                       Visit
-                    </div>
+                    </a>
                   </motion.div>
                 )}
 
@@ -255,7 +296,7 @@ export default function PortfolioSection() {
                     className="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
                     whileHover={{ scale: 1.1 }}
                   >
-                    <ExternalLink className="w-5 h-5" />
+                    <ExternalLink className="w-5 h-5" onClick={() => window.open(item.link, "_blank")}/>
                   </motion.div>
                 </div>
               </div>

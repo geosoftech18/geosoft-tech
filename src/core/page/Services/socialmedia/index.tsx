@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/core/components/card"
 import { Badge } from "@/core/components/badge"
 import { Input } from "@/core/components/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/core/components/select"
-
+import TestimonialsSection from "../testimonials-section"
 import { useToast } from "@/hooks/use-toast"
 import {
   ArrowRight,
@@ -450,6 +450,16 @@ export default function DigitalMarketingService() {
     website: "",
     industry: "",
   })
+
+  const clientLogos = [
+    { name: "Lodha Group", logo: "/partners/p1.webp" },
+    { name: "Slim feel", logo: "/partners/p2.webp" },
+    { name: "framezOmania", logo: "/partners/p3.webp" },
+  { name: "Dheera", logo: "/partners/p4.webp" },
+  { name: "Stationery", logo: "/partners/p5.webp" },
+  { name: "Digital Dhaba", logo: "/partners/p6.webp" },
+  { name: "Muscle", logo: "/partners/p7.webp" },
+  ]
 
   const [currentAuditStep, setCurrentAuditStep] = useState(1)
   const [auditBudgetValue, setAuditBudgetValue] = useState(50000)
@@ -982,14 +992,18 @@ export default function DigitalMarketingService() {
       </section>
 
       {/* Trust Logos Section */}
-      <section className="border-t bg-muted/30 px-6 py-12 lg:px-8">
+      <section className="border-t !border-gray-300 bg-gray-50 px-6 py-8 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-center text-sm text-muted-foreground mb-8">Trusted by industry leaders</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-            {["Google Partner", "Meta Business", "HubSpot", "Clutch", "Trustpilot", "Forbes"].map((logo) => (
-              <div key={logo} className="flex items-center gap-2 text-muted-foreground">
-                <div className="h-8 w-8 rounded bg-muted-foreground/20" />
-                <span className="text-sm font-medium">{logo}</span>
+          <p className="text-center text-sm text-muted-foreground ">Trusted by industry leaders</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 ">
+            {clientLogos.map((client:any, index:any) => (
+              <div key={client.name} className="flex items-center gap-2 text-muted-foreground  hover:opacity-100 opacity-60">
+                <img 
+                  src={client.logo} 
+                  alt={client.name}
+                  className="h-24 w-20 rounded object-contain"
+                />
+                
               </div>
             ))}
           </div>
@@ -2256,7 +2270,7 @@ export default function DigitalMarketingService() {
           {/* Client Logos Authority Wall */}
           <div className="mb-16">
             <p className="text-center text-sm text-muted-foreground mb-8">Brands we've helped grow</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 items-center justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 items-center justify-items-center gap-2">
               {[
                 { name: "Partner 1", logo: "/partners/p1.webp" },
                 { name: "Partner 2", logo: "/partners/p2.webp" },
@@ -2268,7 +2282,7 @@ export default function DigitalMarketingService() {
               ].map((brand, i) => (
                 <div
                   key={i}
-                  className="w-20 h-12 sm:w-24 sm:h-16 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer border border-gray-200 p-2"
+                  className="w-28 h-16 sm:w-32 sm:h-20 bg-white rounded-lg flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer border border-gray-200 p-2"
                 >
                   <img
                     src={brand.logo}
@@ -2333,207 +2347,8 @@ export default function DigitalMarketingService() {
           </div> */}
 
           {/* Written Reviews Carousel */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-center mb-8">What Our Clients Say</h3>
-
-            <div className="relative">
-              {/* Carousel Container */}
-              <div
-                className="overflow-hidden rounded-2xl"
-                onMouseEnter={() => setIsReviewsAutoPlaying(false)}
-                onMouseLeave={() => setIsReviewsAutoPlaying(true)}
-              >
-                <div
-                  className="flex transition-transform duration-500 ease-in-out"
-                  style={{
-                    transform: `translateX(-${currentReviewsSlide * (100 / getCardsPerSlide())}%)`,
-                  }}
-                >
-                  {[
-                    {
-                      rating: 5,
-                      quote:
-                        "Geo SofTech transformed our digital marketing. In just 4 months, our traffic grew 5X and ad ROI doubled. The team feels like an extension of our business.",
-                      name: "Amit Sharma",
-                      position: "CEO, EcomX Pvt Ltd",
-                      avatar: "/professional-indian-businessman.png",
-                    },
-                    {
-                      rating: 5,
-                      quote:
-                        "Their AI-powered approach to SEO is incredible. We went from page 3 to top 3 rankings for our main keywords in just 6 months. Highly recommend!",
-                      name: "Jennifer Walsh",
-                      position: "Marketing Director, TechFlow",
-                      avatar: "/professional-blonde-woman.png",
-                    },
-                    {
-                      rating: 5,
-                      quote:
-                        "Best marketing investment we've made. The ROI calculator they provided was spot-on, and results exceeded projections. Communication is top-notch.",
-                      name: "David Kim",
-                      position: "Founder, StartupBoost",
-                      avatar: "/professional-asian-man-in-glasses.jpg",
-                    },
-                    {
-                      rating: 5,
-                      quote:
-                        "Outstanding results! Our conversion rate increased by 340% and cost per acquisition dropped by 60%. The team's expertise in PPC is unmatched.",
-                      name: "Sarah Mitchell",
-                      position: "CMO, GrowthTech Solutions",
-                      avatar: "/professional-woman-smiling.png",
-                    },
-                    {
-                      rating: 5,
-                      quote:
-                        "Game-changing partnership. Their content marketing strategy helped us become thought leaders in our industry. Revenue grew 250% in 8 months.",
-                      name: "Michael Chen",
-                      position: "VP Marketing, InnovateCorp",
-                      avatar: "/professional-man-suit.png",
-                    },
-                    {
-                      rating: 5,
-                      quote:
-                        "Exceptional service and results. The email automation campaigns they built generated $2M in additional revenue. Couldn't be happier!",
-                      name: "Lisa Rodriguez",
-                      position: "Director of Sales, ScaleUp Inc",
-                      avatar: "/professional-woman-presenting-charts.jpg",
-                    },
-                  ].map((review, index) => (
-                    <div key={index} className={`flex-shrink-0 px-2 sm:px-4 ${
-                      getCardsPerSlide() === 1 ? 'w-full' : 
-                      getCardsPerSlide() === 2 ? 'w-1/2' : 'w-1/3'
-                    }`}>
-                      <Card className="h-full hover:shadow-xl transition-all duration-300 group bg-gradient-to-br from-background to-muted/20 border-border/50">
-                        <CardContent className="p-6 space-y-4 h-full flex flex-col">
-                          <div className="flex gap-1">
-                            {[...Array(review.rating)].map((_, j) => (
-                              <Star key={j} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            ))}
-                          </div>
-                          <blockquote className="text-muted-foreground leading-relaxed flex-grow">
-                            "{review.quote}"
-                          </blockquote>
-                          <div className="flex items-center gap-3 pt-4 border-t border-border/50">
-                            <img
-                              src={review.avatar || "/placeholder.svg"}
-                              alt={review.name}
-                              className="w-12 h-12 rounded-full object-cover ring-2 ring-accent/20"
-                            />
-                            <div>
-                              <p className="font-semibold text-foreground">{review.name}</p>
-                              <p className="text-sm text-muted-foreground">{review.position}</p>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Navigation Controls */}
-              <div className="flex items-center justify-between mt-8">
-                {/* Slide Indicators */}
-                <div className="flex items-center gap-2">
-                  {/* Desktop indicators (3 cards) */}
-                  <div className="hidden lg:flex items-center gap-1">
-                    {Array.from({ length: Math.ceil(6 / 3) }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => goToReviewsSlide(index * 3)}
-                        className={`!h-3 !w-3 !p-0 !m-0 rounded-full transition-all duration-300 border-0 ${
-                          index === Math.floor(currentReviewsSlide / 3)
-                            ? "bg-[#1447e6] scale-110"
-                            : "bg-muted hover:bg-muted-foreground/50"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  {/* Tablet indicators (2 cards) */}
-                  <div className="hidden md:flex lg:hidden items-center gap-1">
-                    {Array.from({ length: Math.ceil(6 / 2) }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => goToReviewsSlide(index * 2)}
-                        className={`!h-3 !w-3 !p-0 !m-0 rounded-full transition-all duration-300 border-0 ${
-                          index === Math.floor(currentReviewsSlide / 2)
-                            ? "bg-[#1447e6] scale-110"
-                            : "bg-muted hover:bg-muted-foreground/50"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  {/* Mobile indicators (1 card) */}
-                  <div className="md:hidden flex items-center gap-1">
-                    {Array.from({ length: 6 }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => goToReviewsSlide(index)}
-                        className={`!h-3 !w-3 !p-0 !m-0 rounded-full transition-all duration-300 border-0 ${
-                          index === currentReviewsSlide
-                            ? "bg-[#1447e6] scale-110"
-                            : "bg-muted hover:bg-muted-foreground/50"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Navigation Buttons */}
-                <div className="flex items-center gap-3">
-                  {/* Auto-play Toggle */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setIsReviewsAutoPlaying(!isReviewsAutoPlaying)}
-                    className="text-xs flex items-center justify-center"
-                  >
-                    {isReviewsAutoPlaying ? (
-                      <>
-                        <Pause className="h-3 w-3 mr-1" />
-                        Pause
-                      </>
-                    ) : (
-                      <>
-                        <Play className="h-3 w-3 mr-1" />
-                        Play
-                      </>
-                    )}
-                  </Button>
-
-                  {/* Previous Button */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={prevReviewsSlide}
-                    className="hover:bg-accent hover:text-accent-foreground bg-transparent"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-
-                  {/* Next Button */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={nextReviewsSlide}
-                    className="hover:bg-accent hover:text-accent-foreground bg-transparent"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-
-              {/* Carousel Progress Bar */}
-              <div className="mt-4 w-full bg-muted rounded-full h-1 overflow-hidden">
-                <div
-                  className="h-full bg-[#1447e6] transition-all duration-300 ease-out"
-                  style={{
-                    width: `${((Math.floor(currentReviewsSlide / getCardsPerSlide()) + 1) / Math.ceil(6 / getCardsPerSlide())) * 100}%`,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
+        
+          <TestimonialsSection />
 
           {/* Trust Badges */}
           <div className="mb-12">
@@ -3047,7 +2862,7 @@ export default function DigitalMarketingService() {
                   <span className="font-semibold text-gray-900">Limited Time Offer</span>
                 </div>
                 <p className="text-sm text-gray-700">
-                  Get a comprehensive marketing audit worth $500 - completely free!
+                  Get a comprehensive marketing audit worth $100 - completely free!
                 </p>
               </div>
 
@@ -3064,7 +2879,7 @@ export default function DigitalMarketingService() {
 
                 <Button className="w-full h-12 bg-gradient-to-r from-[#1447e6] to-[#1447e6] hover:from-[#1447e6]/90 hover:to-secondary/90 text-lg font-semibold flex items-center justify-center p-0">
                   <Zap className="mr-2 h-5 w-5 text-white" />
-                  Claim My Free $500 Audit
+                  Claim My Free $100 Audit
                 </Button>
               </form>
 
@@ -3109,7 +2924,7 @@ export default function DigitalMarketingService() {
                   <span className="font-semibold text-gray-900">Limited Time Offer</span>
                 </div>
                 <p className="text-sm text-gray-700">
-                  Get a comprehensive marketing audit worth $500 - completely free!
+                  Get a comprehensive marketing audit worth $100 - completely free!
                 </p>
               </div>
 
@@ -3126,7 +2941,7 @@ export default function DigitalMarketingService() {
 
                 <button className="w-full h-12 bg-gradient-to-r from-[#1447e6] to-[#1447e6] hover:fr[#1447e6]/90 hover:to-secondary/90 text-lg font-semibold flex items-center justify-center p-0">
                   <Zap className="mr-2 h-5 w-5 text-white" />
-                  Claim My Free $500 Audit
+                  Claim My Free $100 Audit
                 </button>
               </form>
 
@@ -3501,7 +3316,7 @@ export default function DigitalMarketingService() {
                 </div>
                 <span className="font-semibold text-gray-900">Limited Time Offer</span>
               </div>
-              <p className="text-sm text-gray-700">Get a comprehensive marketing audit worth $500 - completely free!</p>
+              <p className="text-sm text-gray-700">Get a comprehensive marketing audit worth $100 - completely free!</p>
             </div>
 
             <form className="space-y-4">
@@ -3517,7 +3332,7 @@ export default function DigitalMarketingService() {
 
               <Button className="w-full h-12 bg-gradient-to-r  text-white from-[#1447e6] to-[#1447e6] hover:from-[#1447e6]/90 hover:to-[#1447e6]/90 text-lg font-semibold flex items-center justify-center p-0">
                 <Zap className="mr-2 h-5 w-5 text-white" />
-                Claim My Free $500 Audit
+                Claim My Free $100 Audit
               </Button>
             </form>
 

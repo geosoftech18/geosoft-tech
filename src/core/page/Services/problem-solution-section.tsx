@@ -28,7 +28,7 @@ export default function ProblemSolutionSection() {
     e.preventDefault()
     // Handle form submission here
     const message = `Hi! I'm ${formData.name}. Email: ${formData.email}, Phone: ${formData.phone}. Current website: ${formData.website}. Message: ${formData.message}`
-    window.open(`https://wa.me/1234567890?text=${encodeURIComponent(message)}`, "_blank")
+    window.open(`https://wa.me/7776085112?text=${encodeURIComponent(message)}`, "_blank")
   }
 
   const containerVariants = {

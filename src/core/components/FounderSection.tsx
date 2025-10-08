@@ -9,7 +9,7 @@ const FounderSection = () => {
       <div className="relative mx-auto grid max-w-6xl grid-cols-4 items-center space-y-8 overflow-hidden rounded-lg border border-solid p-8 md:h-80 md:grid-cols-8 lg:grid-cols-12">
         <h2
           color="dark"
-          className="col-span-full text-5xl font-bold text-neutral-800 md:col-span-2 lg:col-span-3 lg:!text-7xl"
+          className="col-span-full text-5xl font-bold text-neutral-800 md:col-span-2 lg:col-span-3 lg:!text-5xl"
         >
           Meet The Founder
         </h2>

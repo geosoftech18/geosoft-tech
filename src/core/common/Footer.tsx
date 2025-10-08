@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaInstagram } from 'react-icons/fa6';
+import { FaInstagram, FaMapPin, FaPhone, FaRegEnvelope,FaLinkedinIn,FaFacebook} from 'react-icons/fa6';
 import { FaTwitter } from 'react-icons/fa6';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -70,16 +70,16 @@ const Footer = (props: Props) => {
       </div>
       <section className=" h-full w-full">
         <div className="mx-auto w-full max-w-7xl px-5 ">
-          <div className="mt-40 flex w-full flex-col items-start md:flex-row md:items-center ">
-            <div className="flex w-full justify-center p-5 text-start md:w-1/2 md:justify-start md:text-center">
+          <div className="mt-16 flex w-full flex-col items-start md:flex-row md:items-center ">
+            <div className="flex w-full justify-center p-5 pl-0 pb-0 text-start md:w-1/2 md:justify-start md:text-center">
               <Image
-                src={'/logo/logo.webp'}
+                src={'/logo/logo.png'}
                 alt="logo"
-                width={100}
-                height={100}
+                width={200}
+                height={200}
               />
             </div>
-            <div className="flex flex-wrap justify-center space-x-4 p-5 md:w-1/2 md:justify-start">
+            {/* <div className="flex flex-wrap justify-center space-x-4 p-5 md:w-1/2 md:justify-start">
               <Link href="/">
                 <p>Home</p>
               </Link>
@@ -92,8 +92,143 @@ const Footer = (props: Props) => {
               <Link href="/contact-us">
                 <p>Contact Us</p>
               </Link>
+            </div> */}
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+          {/* Company Info */}
+          <div>
+            <h3 className="text-xl sm:text-2xl font-bold  mb-3 sm:mb-4">GEO Softech</h3>
+            
+            <p className=" mb-4 sm:mb-6 text-xs sm:text-sm">
+              Mumbai's leading website designing company, creating digital experiences that drive business growth since
+              2018.
+            </p>
+            <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+              <div className="flex items-center gap-2">
+                <FaMapPin className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+                <span>Mumbai, Maharashtra, India</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaPhone className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+                <span>+91 77760 85112</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaRegEnvelope className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+                <span>info@geosoftech.com</span>
+              </div>
             </div>
           </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Our Services</h4>
+            <ul className="space-y-2 text-xs sm:text-sm text-background/80">
+              <li>
+                <a href="/services/webdevelopment" className="hover:text-primary transition-colors">
+                  Website Design
+                </a>
+              </li>
+              <li>
+                <a href="/services/socialmedia" className="hover:text-primary transition-colors">
+                  Digital Marketing
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  E-commerce Development
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  SEO Services
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Mobile App Development
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Website Maintenance
+                </a>
+              </li>
+             
+            </ul>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-xs sm:text-sm text-background/80">
+              <li>
+                <a href="/" className="hover:text-primary transition-colors">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="/services" className="hover:text-primary transition-colors">
+                  Services
+                </a>
+              </li>
+              <li>
+                <a href="/portfolio" className="hover:text-primary transition-colors">
+                  Portfolio
+                </a>
+              </li>
+              <li>
+                <a href="/about" className="hover:text-primary transition-colors">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="/contact-us" className="hover:text-primary transition-colors">
+                  Contact Us
+                </a>
+              </li>
+              {/* <li>
+                <a href="#" className="hover:text-primary transition-colors">
+                  Blog
+                </a>
+              </li> */}
+            </ul>
+          </div>
+
+          {/* Industries */}
+          <div>
+            <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Cities We Serve</h4>
+            <ul className="space-y-2 text-xs sm:text-sm text-background/80">
+            <li>
+                <a href="/services/webdevelopment/mumbai-development" className="hover:text-primary transition-colors">
+                  Mumbai
+                </a>
+              </li>
+              <li>
+                <a href="/services/webdevelopment/pune-development" className="hover:text-primary transition-colors">
+                  Pune
+                </a>
+              </li>
+              <li>
+                <a href="/services/webdevelopment/development-in-nagpur" className="hover:text-primary transition-colors">
+                  Nagpur
+                </a>
+              </li>
+              <li>
+                <a href="/services/webdevelopment/jaipur-development" className="hover:text-primary transition-colors">
+                  Jaipur
+                </a>
+              </li>
+              <li>
+                <a href="/services/webdevelopment/surat-development" className="hover:text-primary transition-colors">
+                  Surat
+                </a>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+
           <hr className="my-5" />
           <div className="flex w-full flex-col  items-start md:flex-row md:items-center ">
             <div className="w-full p-5 text-center md:ml-5 md:w-2/3  md:text-start">
@@ -108,8 +243,10 @@ const Footer = (props: Props) => {
               </p>
             </div>
             <div className="flex  w-full  justify-center space-x-8 p-5 md:w-1/4">
-              <FaInstagram className="text-3xl" />
-              <FaTwitter className="text-3xl" />
+              <a href="https://www.instagram.com/geosoftech/?hl=en"><FaInstagram className="text-3xl"  /></a>
+              <a href="https://www.facebook.com/geosoftechsolutions/"><FaFacebook className="text-3xl" /></a>
+                    <FaTwitter className="text-3xl" />
+                <a href="https://www.linkedin.com/company/14536380/admin/dashboard"><FaLinkedinIn className="text-3xl" /></a>  
             </div>
           </div>
         </div>
