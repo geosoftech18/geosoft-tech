@@ -69,6 +69,8 @@ export default function ProcessWorkflowSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [stepsPerSlide, setStepsPerSlide] = useState(4)
   const [totalSlides, setTotalSlides] = useState(Math.ceil(processSteps.length / 4))
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isHovered, setIsHovered] = useState(false)
 
   // Update steps per slide based on screen size
   useEffect(() => {
@@ -96,12 +98,36 @@ export default function ProcessWorkflowSection() {
     }
   }, [stepsPerSlide, currentSlide])
 
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!isAutoPlaying || isHovered) return
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides)
+    }, 5000) // 5 seconds
+
+    return () => clearInterval(interval)
+  }, [isAutoPlaying, isHovered, totalSlides])
+
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides)
+    // Temporarily pause auto-play when user manually navigates
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000) // Resume after 10 seconds
   }
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
+    // Temporarily pause auto-play when user manually navigates
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000) // Resume after 10 seconds
+  }
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index)
+    // Temporarily pause auto-play when user manually navigates
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000) // Resume after 10 seconds
   }
 
   const getCurrentSteps = () => {
@@ -137,23 +163,36 @@ export default function ProcessWorkflowSection() {
           </p>
         </motion.div>
 
-        <div className="relative bg-white/60 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-12 shadow-xl border border-white/20">
+        <div 
+          className="relative bg-white/60 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-12 shadow-xl border border-white/20"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <div className="flex flex-col sm:flex-row items-center justify-between mb-8 sm:mb-12 gap-4">
             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              <div className="text-sm font-medium text-gray-500">
-                Steps {currentSlide * stepsPerSlide + 1}-
-                {Math.min((currentSlide + 1) * stepsPerSlide, processSteps.length)} of {processSteps.length}
+              <div className="flex items-center space-x-3">
+                <div className="text-sm font-medium text-gray-500">
+                  Steps {currentSlide * stepsPerSlide + 1}-
+                  {Math.min((currentSlide + 1) * stepsPerSlide, processSteps.length)} of {processSteps.length}
+                </div>
+                {isAutoPlaying && !isHovered && (
+                  <div className="flex items-center space-x-1 text-xs text-green-600">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span>Auto</span>
+                  </div>
+                )}
               </div>
               <div className="flex space-x-2">
                 {Array.from({ length: totalSlides }).map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setCurrentSlide(index)}
+                    onClick={() => goToSlide(index)}
                     className={`!w-3 !h-3 !p-0 rounded-full transition-all duration-300 ${
                       index === currentSlide
-                        ? "bg-blue-700 scale-125"
+                        ? "bg-[#04bf63] scale-125"
                         : "bg-gray-300 hover:bg-gray-400"
                     }`}
+                    aria-label={`Go to step ${index + 1}`}
                   />
                 ))}
               </div>
@@ -162,19 +201,21 @@ export default function ProcessWorkflowSection() {
             <div className="flex space-x-2">
               <motion.button
                 onClick={prevSlide}
-                className="p-2 sm:p-3 rounded-full bg-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
+                className="p-2 sm:p-3 rounded-full bg-[#04bf63] shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 disabled={currentSlide === 0}
+                aria-label="Previous steps"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </motion.button>
               <motion.button
                 onClick={nextSlide}
-                className="p-2 sm:p-3 rounded-full bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                className="p-2 sm:p-3 rounded-full bg-[#04bf63] text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 disabled={currentSlide === totalSlides - 1}
+                aria-label="Next steps"
               >
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </motion.button>
@@ -202,7 +243,7 @@ export default function ProcessWorkflowSection() {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                   >
                     <div className="relative bg-gradient-to-br from-white to-gray-50/50 rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100/50 group-hover:border-blue-200/50 h-full">
-                      <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-6 h-6 sm:w-8 sm:h-8 bg-[#072d7a] rounded-full flex items-center justify-center text-xs sm:text-sm font-bold text-white shadow-lg">
+                      <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-6 h-6 sm:w-8 sm:h-8 bg-[#04bf63] rounded-full flex items-center justify-center text-xs sm:text-sm font-bold text-white shadow-lg">
                         {step.id}
                       </div>
 
@@ -239,7 +280,7 @@ export default function ProcessWorkflowSection() {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
               <motion.div
-                className="bg-gradient-to-r from-[#072d7a] to-[#acece9] h-1.5 sm:h-2 rounded-full"
+                className="bg-gradient-to-r from-[#04bf63] to-[#acece9] h-1.5 sm:h-2 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
                 transition={{ duration: 0.5 }}
@@ -258,7 +299,7 @@ export default function ProcessWorkflowSection() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <button
               onClick={handleCTAClick}
-              className="bg-gradient-to-r from-[#072d7a] to-green-400 hover:from-[#072d7a]  hover:to-[#072d7a] text-white px-10 py-5 text-sm md:text-lg font-semibold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border-0"
+              className=" bg-gradient-to-r from-[#00be62] to-[#01bd64] hover:from-[#03c166] hover:to-[#03c166] text-white px-10 py-5 text-sm md:text-lg font-semibold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border-0"
             >
               See How We Can Build Yours →
             </button>

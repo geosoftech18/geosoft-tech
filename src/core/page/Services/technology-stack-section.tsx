@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 const frontendTechnologies = [
   {
@@ -172,6 +172,79 @@ const itemVariants = {
   },
 }
 
+// Custom hook for counter animation
+const useCounter = (end: number, duration: number = 2000, start: number = 0) => {
+  const [count, setCount] = useState(start)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  useEffect(() => {
+    if (!isVisible) return
+
+    let startTime: number
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime
+      const progress = Math.min((currentTime - startTime) / duration, 1)
+      
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+      const currentCount = Math.floor(start + (end - start) * easeOutQuart)
+      
+      setCount(currentCount)
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+    
+    requestAnimationFrame(animate)
+  }, [isVisible, end, start, duration])
+
+  return { count, ref }
+}
+
+// Stats Counter Component
+const StatsCounter = ({ 
+  end, 
+  suffix = "", 
+  label, 
+  color, 
+  duration = 2000 
+}: {
+  end: number
+  suffix?: string
+  label: string
+  color: string
+  duration?: number
+}) => {
+  const { count, ref } = useCounter(end, duration)
+
+  return (
+    <div className="text-center" ref={ref}>
+      <div className={`text-3xl font-bold ${color} mb-2`}>
+        {count}{suffix}
+      </div>
+      <div className="text-gray-600 font-medium">{label}</div>
+    </div>
+  )
+}
+
 export default function TechnologyStackSection() {
   const [activeTab, setActiveTab] = useState<"all" | "frontend" | "backend" | "database" | "CMS">("all")
   const [currentSlide, setCurrentSlide] = useState<number>(0)
@@ -249,36 +322,75 @@ export default function TechnologyStackSection() {
               ‹
             </button>
           )}
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-2 shadow-xl border border-white/20">
-            <div className="flex flex-wrap justify-center gap-2">
-              {[{key: "all", label: "All", icon: "🔍"},
-                { key: "frontend", label: "Frontend", icon: "🎨" },
-                { key: "backend", label: "Backend", icon: "⚙️" },
-                { key: "database", label: "Database Systems", icon: "🗄️" },
-                { key: "CMS", label: "CMS", icon: "🛒" },
-              ].map((tab) => (
-                <button
-                  key={tab.key}
-                  onClick={() => setActiveTab(tab.key as any)}
-                  className={`relative px-4 md:px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 text-sm md:text-base ${
-                    activeTab === tab.key
-                      ? "bg-gradient-to-r from-[#2dca81] to-[#adece9] text-white shadow-lg"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                  }`}
-                >
-                  <span className="text-lg">{tab.icon}</span>
-                  <span className="whitespace-nowrap">{tab.label}</span>
-                  {activeTab === tab.key && (
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-[#2dca81] to-[#adece9] rounded-xl"
-                      layoutId="activeTab"
-                      style={{ zIndex: -1 }}
-                    />
-                  )}
-                </button>
-              ))}
+          
+          {/* Mobile: Horizontal Scrollable Tabs */}
+          <div className="md:hidden w-full">
+            <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-2 shadow-xl border border-white/20">
+              <div className="flex overflow-x-auto scrollbar-hide gap-2 px-2 py-1">
+                {[{key: "all", label: "All", icon: "🔍"},
+                  { key: "frontend", label: "Frontend", icon: "🎨" },
+                  { key: "backend", label: "Backend", icon: "⚙️" },
+                  { key: "database", label: "Database", icon: "🗄️" },
+                  { key: "CMS", label: "CMS", icon: "🛒" },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveTab(tab.key as any)}
+                    className={`relative flex-shrink-0 px-4 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 text-sm ${
+                      activeTab === tab.key
+                        ? "bg-gradient-to-r from-[#2dca81] to-[#adece9] text-white shadow-lg"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                    }`}
+                  >
+                    <span className="text-lg">{tab.icon}</span>
+                    <span className="whitespace-nowrap">{tab.label}</span>
+                    {activeTab === tab.key && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-[#2dca81] to-[#adece9] rounded-xl"
+                        layoutId="activeTabMobile"
+                        style={{ zIndex: -1 }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+
+          {/* Desktop: Centered Tabs */}
+          <div className="hidden md:block">
+            <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-2 shadow-xl border border-white/20">
+              <div className="flex flex-wrap justify-center gap-2">
+                {[{key: "all", label: "All", icon: "🔍"},
+                  { key: "frontend", label: "Frontend", icon: "🎨" },
+                  { key: "backend", label: "Backend", icon: "⚙️" },
+                  { key: "database", label: "Database Systems", icon: "🗄️" },
+                  { key: "CMS", label: "CMS", icon: "🛒" },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveTab(tab.key as any)}
+                    className={`relative px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center gap-2 text-base ${
+                      activeTab === tab.key
+                        ? "bg-gradient-to-r from-[#2dca81] to-[#adece9] text-white shadow-lg"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                    }`}
+                  >
+                    <span className="text-lg">{tab.icon}</span>
+                    <span className="whitespace-nowrap">{tab.label}</span>
+                    {activeTab === tab.key && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-[#2dca81] to-[#adece9] rounded-xl"
+                        layoutId="activeTabDesktop"
+                        style={{ zIndex: -1 }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {canPaginate && (
             <button
               onClick={goNext}
@@ -350,18 +462,27 @@ export default function TechnologyStackSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">20+</div>
-              <div className="text-gray-600 font-medium">Technologies Mastered</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 mb-2">99.9%</div>
-              <div className="text-gray-600 font-medium">Uptime Guaranteed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-pink-600 mb-2">24/7</div>
-              <div className="text-gray-600 font-medium">Technical Support</div>
-            </div>
+            <StatsCounter 
+              end={20} 
+              suffix="+" 
+              label="Technologies Mastered" 
+              color="text-blue-600"
+              duration={2500}
+            />
+            <StatsCounter 
+              end={99.9} 
+              suffix="%" 
+              label="Uptime Guaranteed" 
+              color="text-purple-600"
+              duration={3000}
+            />
+            <StatsCounter 
+              end={24} 
+              suffix="/7" 
+              label="Technical Support" 
+              color="text-pink-600"
+              duration={2000}
+            />
           </div>
 
           <p className="text-gray-700 font-medium flex items-center justify-center gap-2 text-lg">

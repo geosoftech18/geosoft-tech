@@ -373,7 +373,7 @@ export default function HeroSection() {
                         alt="Website Mockup"
                         width={800}
                         height={500}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                         priority
                       />
                     </div>

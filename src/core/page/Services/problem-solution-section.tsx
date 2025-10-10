@@ -353,19 +353,20 @@ export default function ProblemSolutionSection() {
 
             {/* Trust Elements */}
             <motion.div
-              className="flex flex-wrap items-center gap-6 pt-4"
+              className="flex flex-row items-center gap-10 sm:gap-4 pt-4 overflow-x-auto scrollbar-hide"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 1, duration: 0.6 }}
             >
-              <div className="flex items-center gap-2 text-amber-600">
-                <Star className="w-5 h-5 fill-current" />
-                <span className="font-semibold">300+ Websites Built</span>
+              <div className="flex items-center gap-2 text-amber-600 flex-shrink-0">
+                <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
+                <span className="font-semibold hidden md:block">300+ Websites Built</span><span className="md:hidden font-semibold text-xs sm:text-sm whitespace-nowrap">300+ Websites</span>
               </div>
-              <div className="flex items-center gap-2 text-green-600">
-                <Clock className="w-5 h-5" />
-                <span className="font-semibold">2-4 Weeks Delivery</span>
+              <div className="flex items-center gap-2 text-green-600 flex-shrink-0">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="font-semibold hidden md:block">2-4 Weeks Delivery</span>
+                <span className="font-semibold md:hidden text-xs sm:text-sm whitespace-nowrap">2-4 Weeks Delivery</span>
               </div>
             </motion.div>
           </motion.div>

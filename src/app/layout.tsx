@@ -82,6 +82,21 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
             src="https://px.ads.linkedin.com/collect/?pid=5967722&fmt=gif"
           />
         </noscript>
+        
+        {/* Google Analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-710578432"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-710578432');
+          `}
+        </Script>
       </head>
       <body className={`${avantGarde.className} ${avantGarde.variable}`}>
         <Navbar

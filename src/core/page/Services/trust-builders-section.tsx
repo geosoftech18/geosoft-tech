@@ -1,35 +1,132 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useEffect, useState, useRef } from "react"
 
 import { CheckCircle, Clock, Code, TrendingUp, Star } from "lucide-react"
+
+// Custom hook for counter animation
+const useCounter = (end: number, duration: number = 2000, start: number = 0) => {
+  const [count, setCount] = useState(start)
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => observer.disconnect()
+  }, [isVisible])
+
+  useEffect(() => {
+    if (!isVisible) return
+
+    let startTime: number
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime
+      const progress = Math.min((currentTime - startTime) / duration, 1)
+      
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
+      const currentCount = Math.floor(start + (end - start) * easeOutQuart)
+      
+      setCount(currentCount)
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+    
+    requestAnimationFrame(animate)
+  }, [isVisible, end, start, duration])
+
+  return { count, ref }
+}
 
 const trustMetrics = [
   {
     icon: CheckCircle,
-    number: "300+",
+    endValue: 300,
+    suffix: "+",
     label: "Successful Projects",
     description: "Delivered on time and within budget",
+    duration: 2500,
   },
   {
     icon: Clock,
-    number: "7+",
+    endValue: 7,
+    suffix: "+",
     label: "Years of Experience",
     description: "Industry expertise and proven track record",
+    duration: 2000,
   },
   {
     icon: Code,
-    number: "15+",
+    endValue: 15,
+    suffix: "+",
     label: "Technologies Mastered",
     description: "Next.js, Node.js, WordPress, WooCommerce & more",
+    duration: 2200,
   },
   {
     icon: TrendingUp,
-    number: "2.5x",
+    endValue: 2.5,
+    suffix: "x",
     label: "Average Conversion Increase",
     description: "Measurable results for our clients",
+    duration: 3000,
   },
 ]
+
+// Trust Metric Counter Component
+const TrustMetricCounter = ({ 
+  metric, 
+  index 
+}: { 
+  metric: typeof trustMetrics[0]
+  index: number 
+}) => {
+  const { count, ref } = useCounter(metric.endValue, metric.duration)
+
+  return (
+    <motion.div
+      key={index}
+      className="text-center group"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      whileHover={{ scale: 1.05 }}
+    >
+      <div className="relative mb-6">
+        {/* Gradient Circle Background */}
+        <div className="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+          <metric.icon className="w-10 h-10 text-blue-700" />
+        </div>
+
+        {/* Glow Effect */}
+        <div className="absolute inset-0 w-20 h-20 mx-auto bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
+      </div>
+
+      <div className="space-y-2" ref={ref}>
+        <div className="text-4xl md:text-5xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">
+          {count}{metric.suffix}
+        </div>
+        <div className="text-lg font-semibold text-slate-200">{metric.label}</div>
+        <div className="text-sm text-slate-300 max-w-xs mx-auto lg:block md:block hidden">{metric.description}</div>
+      </div>
+    </motion.div>
+  )
+}
 
 const clientLogos = [
   { name: "Lodha Group", logo: "/partners/p1.webp" },
@@ -67,7 +164,7 @@ export default function TrustBuildersSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Why Businesses Choose Us</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Why Businesses Choose Us</h2>
           <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto">
             Proven expertise, reliable delivery, and measurable results.
           </p>
@@ -75,38 +172,9 @@ export default function TrustBuildersSection() {
 
         {/* Trust Metrics Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {trustMetrics.map((metric, index) => {
-            const IconComponent = metric.icon
-            return (
-              <motion.div
-                key={index}
-                className="text-center group"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="relative mb-6">
-                  {/* Gradient Circle Background */}
-                  <div className="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                    <IconComponent className="w-10 h-10 text-blue-700" />
-                  </div>
-
-                  {/* Glow Effect */}
-                  <div className="absolute inset-0 w-20 h-20 mx-auto bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300" />
-                </div>
-
-                <div className="space-y-2">
-                  <div className="text-4xl md:text-5xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">
-                    {metric.number}
-                  </div>
-                  <div className="text-lg font-semibold text-slate-200">{metric.label}</div>
-                  <div className="text-sm text-slate-300 max-w-xs mx-auto lg:block md:block hidden ">{metric.description}</div>
-                </div>
-              </motion.div>
-            )
-          })}
+          {trustMetrics.map((metric, index) => (
+            <TrustMetricCounter key={index} metric={metric} index={index} />
+          ))}
         </div>
 
         {/* Client Logos Strip */}
