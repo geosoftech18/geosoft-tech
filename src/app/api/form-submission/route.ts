@@ -17,13 +17,13 @@ type FormData = {
   name: string;
   email: string;
   phone: string;
-  company: string;
+  company?: string;
   projectType: string;
-  budget: string;
-  timeline: string;
-  message: string;
+  budget?: string;
+  timeline?: string;
+  message?: string;
   selectedService: string;
-  formSource?: 'hero-section' | 'services-section';
+  formSource?: 'hero-section' | 'services-section' | 'problem-solution-section' | 'quote-form-section';
 };
 
 export async function POST(req: Request) {
@@ -31,10 +31,10 @@ export async function POST(req: Request) {
     const formData: FormData = await req.json();
     
     // Validate required fields
-    if (!formData.name || !formData.email || !formData.phone) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.projectType) {
       return NextResponse.json({ 
         success: false, 
-        message: 'Missing required fields' 
+        message: 'Missing required fields: name, email, phone, and projectType are required' 
       }, { status: 400 });
     }
 
@@ -47,11 +47,11 @@ export async function POST(req: Request) {
         phone: formData.phone,
         company: formData.company || '',
         projectType: formData.projectType,
-        budget: formData.budget,
-        timeline: formData.timeline,
-        message: formData.message,
+        budget: formData.budget || 'Not specified',
+        timeline: formData.timeline || 'Not specified',
+        message: formData.message || '',
         selectedService: formData.selectedService,
-        formSource: formData.formSource || 'hero-section'
+        formSource: (formData.formSource || 'hero-section') as 'hero-section' | 'services-section' | 'problem-solution-section' | 'quote-form-section'
       });
       submissionId = submission._id;
       console.log('✅ Form submission saved to database with ID:', submissionId);
@@ -67,15 +67,9 @@ export async function POST(req: Request) {
 • Name: ${formData.name}
 • Email: ${formData.email}
 • Phone: ${formData.phone}
-• Company: ${formData.company || 'Not provided'}
 
 📋 *Project Details:*
 • Project Type: ${formData.projectType}
-• Budget Range: ${formData.budget}
-• Timeline: ${formData.timeline}
-
-💬 *Message:*
-${formData.message}
 
 ---
 *This inquiry was submitted via your website contact form.*`;
@@ -93,20 +87,12 @@ ${formData.message}
           <p><strong>Name:</strong> ${formData.name}</p>
           <p><strong>Email:</strong> ${formData.email}</p>
           <p><strong>Phone:</strong> ${formData.phone}</p>
-          <p><strong>Company:</strong> ${formData.company || 'Not provided'}</p>
         </div>
 
         <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="color: #1e40af; margin-top: 0;">Project Details</h3>
           <p><strong>Service:</strong> ${formData.selectedService}</p>
           <p><strong>Project Type:</strong> ${formData.projectType}</p>
-          <p><strong>Budget Range:</strong> ${formData.budget}</p>
-          <p><strong>Timeline:</strong> ${formData.timeline}</p>
-        </div>
-
-        <div style="background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <h3 style="color: #92400e; margin-top: 0;">Project Description</h3>
-          <p style="white-space: pre-wrap;">${formData.message}</p>
         </div>
 
         <div style="margin-top: 30px; padding: 15px; background: #e0f2fe; border-radius: 8px; border-left: 4px solid #0284c7;">

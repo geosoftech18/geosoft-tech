@@ -13,9 +13,10 @@ export default function ProblemSolutionSection() {
     name: "",
     email: "",
     phone: "",
-    website: "",
-    message: "",
+    projectType: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const painPoints = [
     "Slow loading websites",
@@ -24,11 +25,59 @@ export default function ProblemSolutionSection() {
     "No SEO or online visibility",
   ]
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    const message = `Hi! I'm ${formData.name}. Email: ${formData.email}, Phone: ${formData.phone}. Current website: ${formData.website}. Message: ${formData.message}`
-    window.open(`https://wa.me/7776085112?text=${encodeURIComponent(message)}`, "_blank")
+    
+    if (!formData.name || !formData.email || !formData.phone || !formData.projectType) {
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    
+    try {
+      const response = await fetch('/api/form-submission', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          selectedService: 'Website Analysis & Proposal',
+          formSource: 'problem-solution-section',
+        }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitStatus('success')
+        
+        // Open WhatsApp with the formatted message
+        if (result.whatsappUrl) {
+          window.open(result.whatsappUrl, "_blank")
+        }
+        
+        // Reset form and close after delay
+        setTimeout(() => {
+          setShowForm(false)
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            projectType: "",
+          })
+          setSubmitStatus('idle')
+        }, 2000)
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const containerVariants = {
@@ -280,66 +329,113 @@ export default function ProblemSolutionSection() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <input
-                        placeholder="Your Name *"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        required
-                        className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="email"
-                        placeholder="Email Address *"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        required
-                        className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <input
-                        type="tel"
-                        placeholder="Phone Number"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        placeholder="Current Website (if any)"
-                        value={formData.website}
-                        onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                        className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none"
-                      />
-                    </div>
+                  <div>
+                    <input
+                      placeholder="Your Name *"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
                   </div>
 
                   <div>
-                    <textarea
-                      placeholder="Tell us about your project requirements..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="min-h-[100px] border rounded-md px-4 w-full focus:border-gray-400 focus:outline-none"
+                    <input
+                      type="email"
+                      placeholder="Email Address *"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                   </div>
+
+                  <div>
+                    <input
+                      type="tel"
+                      placeholder="Phone Number *"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      required
+                      className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+
+                  <div>
+                    <select
+                      value={formData.projectType}
+                      onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                      required
+                      className="h-12 border rounded-md px-4 w-full focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                    >
+                      <option value="">Select Project Type *</option>
+                      <option value="New Website">New Website</option>
+                      <option value="Website Redesign">Website Redesign</option>
+                      <option value="E-commerce Store">E-commerce Store</option>
+                      <option value="Web Application">Web Application</option>
+                      <option value="Landing Page">Landing Page</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  {/* Status Messages */}
+                  {submitStatus === 'success' && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <div className="flex items-center gap-2 text-green-800">
+                        <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs">✓</span>
+                        </div>
+                        <div>
+                          <p className="font-medium">Form submitted successfully!</p>
+                          <p className="text-sm">Email sent to your team & WhatsApp message prepared.</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                      <div className="flex items-center gap-2 text-red-800">
+                        <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs">✗</span>
+                        </div>
+                        <div>
+                          <p className="font-medium">Submission failed</p>
+                          <p className="text-sm">Please try again or contact us directly.</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="flex gap-3">
                     <button
                       type="submit"
-                      className="flex-1 bg-gradient-to-r from-[#0ac062] to-[#00bf62]  text-white h-12 text-lg rounded-md font-semibold flex items-center justify-center"
+                      disabled={isSubmitting || !formData.name || !formData.email || !formData.phone || !formData.projectType}
+                      className={`flex-1 bg-gradient-to-r from-[#0ac062] to-[#00bf62] text-white h-12 text-lg rounded-md font-semibold flex items-center justify-center ${
+                        isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
                     >
-                      <Send className="w-5 h-5 mr-2 text-white" />
-                      <span className="text-white font-semibold">Send Proposal Request</span>
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2 text-white" />
+                          <span className="text-white font-semibold">Send Proposal Request</span>
+                        </>
+                      )}
                     </button>
-                    <button type="button" onClick={() => setShowForm(false)} className="px-6 h-12 border rounded-md">
+                    <button 
+                      type="button" 
+                      onClick={() => {
+                        setShowForm(false)
+                        setFormData({ name: "", email: "", phone: "", projectType: "" })
+                        setSubmitStatus('idle')
+                      }} 
+                      className="px-6 h-12 border rounded-md"
+                    >
                       Cancel
                     </button>
                   </div>

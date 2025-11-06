@@ -11,7 +11,7 @@ export interface CreateFormSubmissionData {
   timeline: string;
   message: string;
   selectedService: string;
-  formSource: 'hero-section' | 'services-section';
+  formSource: 'hero-section' | 'services-section' | 'problem-solution-section' | 'quote-form-section';
 }
 
 export class FormService {

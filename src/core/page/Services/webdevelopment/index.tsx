@@ -8,6 +8,7 @@ import ServicesSection from "../services-section";
 import TrustBuildersSection from "../trust-builders-section";
 import ProcessWorkflowSection from "../process-workflow-section";
 import FAQSection from "../faq-section";
+import QuoteFormSection from "../quote-form-section";
 
 export default function Home() {
     return (
@@ -15,6 +16,7 @@ export default function Home() {
         <HeroSection />
         <ProblemSolutionSection />
         <ServicesSection />
+        <QuoteFormSection />
         <TrustBuildersSection />
         <ProcessWorkflowSection />
         <PortfolioSection />

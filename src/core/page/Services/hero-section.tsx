@@ -5,7 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TypeAnimation } from "react-type-animation"
-import { X ,ArrowLeft,ArrowRight} from "lucide-react"
+import { X, ArrowRight, MessageCircle } from "lucide-react"
 
 import Image from "next/image"
 
@@ -93,20 +93,16 @@ const WhatsAppButton = () => {
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false)
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [currentStep, setCurrentStep] = useState(1)
   const [selectedService, setSelectedService] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    company: "",
     projectType: "",
-    budget: "",
-    timeline: "",
-    message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false)
   
   // City names for typewriter effect
   const cityNames = [
@@ -125,26 +121,44 @@ export default function HeroSection() {
   const handleServiceClick = (serviceTitle: string) => {
     setSelectedService(serviceTitle)
     setIsFormOpen(true)
-    setCurrentStep(1)
   }
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const nextStep = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1)
-  }
-
-  const prevStep = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1)
-  }
-
   const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(
-      "Hi! I'm interested in  discussing my project requirements.",
-    )
-    window.open(`https://wa.me/7776085112?text=${message}`, "_blank")
+    const whatsappMessage = `🎯 *New Project Inquiry - ${selectedService || 'Web Development'}*
+
+👤 *Contact Details:*
+• Name: ${formData.name}
+• Email: ${formData.email}
+• Phone: ${formData.phone}
+• Project Type: ${formData.projectType}
+
+📋 *Project Information:*
+• Service: ${selectedService || 'Web Development'}
+
+💬 *Message:*
+Hi! I'm interested in discussing my project requirements. Please contact me to discuss further details.
+
+Thank you!`
+    
+    const encodedMessage = encodeURIComponent(whatsappMessage)
+    window.open(`https://wa.me/7776085112?text=${encodedMessage}`, "_blank")
+    
+    // Close popup and reset form after opening WhatsApp
+    setShowWhatsAppPopup(false)
+    setTimeout(() => {
+      setIsFormOpen(false)
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        projectType: "",
+      })
+      setSubmitStatus('idle')
+    }, 500)
   }
 
   
@@ -172,26 +186,9 @@ export default function HeroSection() {
       if (result.success) {
         setSubmitStatus('success')
         
-        // Open WhatsApp with the formatted message
-        if (result.whatsappUrl) {
-          window.open(result.whatsappUrl, "_blank")
-        }
-        
-        // Show success message
+        // Show WhatsApp popup after 2 seconds
         setTimeout(() => {
-          setIsFormOpen(false)
-          setCurrentStep(1)
-          setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            company: "",
-            projectType: "",
-            budget: "",
-            timeline: "",
-            message: "",
-          })
-          setSubmitStatus('idle')
+          setShowWhatsAppPopup(true)
         }, 2000)
       } else {
         setSubmitStatus('error')
@@ -445,170 +442,77 @@ export default function HeroSection() {
                     <X className="w-5 h-5" />
                   </button>
                 </div>
-
-                {/* Progress Bar */}
-                <div className="mt-4">
-                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                    <span>Step {currentStep} of 3</span>
-                    <span>{Math.round((currentStep / 3) * 100)}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-gradient-to-r from-blue-600 to-blue-700 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${(currentStep / 3) * 100}%` }}
-                    />
-                  </div>
-                </div>
               </div>
 
               {/* Form Content */}
               <div className="p-6">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="space-y-4"
+                >
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Tell us about your project</h4>
 
-                {/* Step 1: Basic Info */} {/* Step 2: Project Details */}
-                {currentStep === 1 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Project Details</h4>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                    <input
+                      value={formData.name}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      placeholder="Enter your full name"
+                      className="w-full border rounded-md px-4 py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
-                      <select
-                        value={formData.projectType}
-                        onChange={(e) => handleInputChange("projectType", e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select project type</option>
-                        <option value="New Website">New Website</option>
-                        <option value="Website Redesign">Website Redesign</option>
-                        <option value="E-commerce Store">E-commerce Store</option>
-                        <option value="Web Application">Web Application</option>
-                        <option value="Landing Page">Landing Page</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      placeholder="Enter your email"
+                      className="w-full border rounded-md px-4 py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range</label>
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => handleInputChange("budget", e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select budget range</option>
-                        <option value="₹20,000 - ₹50,000">₹20,000 - ₹50,000</option>
-                        <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
-                        <option value="₹1,00,000 - ₹2,00,000">₹1,00,000 - ₹2,00,000</option>
-                        
-                        <option value="₹2,00,000+">₹2,00,000+</option>
-                        <option value="Not sure">Not sure</option>
-                      </select>
-                    </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      placeholder="Enter your phone number"
+                      className="w-full border rounded-md px-4 py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Timeline</label>
-                      <select
-                        value={formData.timeline}
-                        onChange={(e) => handleInputChange("timeline", e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select timeline</option>
-                        <option value="ASAP">ASAP</option>
-                        <option value="1 month">1 month</option>
-                        <option value="2-3 months">2-3 months</option>
-                        <option value="3+ months">3+ months</option>
-                        <option value="Just exploring">Just exploring</option>
-                      </select>
-                    </div>
-                  </motion.div>
-                )}
-                {/* Step 2: Message & Submit */}
-                {currentStep === 2 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Additional Details</h4>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Project Description</label>
-                        <textarea
-                        value={formData.message}
-                        onChange={(e) => handleInputChange("message", e.target.value)}
-                        placeholder="Tell us more about your project requirements, goals, and any specific features you need..."
-                        className="w-full h-32 resize-none border-2 rounded-md px-4 focus:shadow-lg focus:outline-none "
-                      />
-                    </div>
-
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <h5 className="font-medium text-blue-900 mb-2">What happens next?</h5>
-                      <ul className="text-sm text-blue-800 space-y-1">
-                        <li>• We'll contact you within 2 hours</li>
-                        <li>• Free consultation & project analysis</li>
-                        <li>• Custom proposal with timeline & pricing</li>
-                        <li>• No commitment required</li>
-                      </ul>
-                    </div>
-                  </motion.div>
-                )}
-                {/* Step 3: Basic Info */}
-                {currentStep === 3 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Tell us about yourself</h4>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                      <input
-                        value={formData.name}
-                        onChange={(e) => handleInputChange("name", e.target.value)}
-                        placeholder="Enter your full name"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange("email", e.target.value)}
-                        placeholder="Enter your email"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                        <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => handleInputChange("phone", e.target.value)}
-                        placeholder="Enter your phone number"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
-                      <input
-                        value={formData.company}
-                        onChange={(e) => handleInputChange("company", e.target.value)}
-                        placeholder="Enter your company name (optional)"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-                  </motion.div>
-                )}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Project Type *</label>
+                    <select
+                      value={formData.projectType}
+                      onChange={(e) => handleInputChange("projectType", e.target.value)}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="">Select project type</option>
+                      <option value="New Website">New Website</option>
+                      <option value="Website Redesign">Website Redesign</option>
+                      <option value="E-commerce Store">E-commerce Store</option>
+                      <option value="Web Application">Web Application</option>
+                      <option value="Landing Page">Landing Page</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+{/* 
+                  <div className="bg-blue-50 p-4 rounded-lg mt-4">
+                    <h5 className="font-medium text-blue-900 mb-2">What happens next?</h5>
+                    <ul className="text-sm text-blue-800 space-y-1">
+                      <li>• We'll contact you within 2 hours</li>
+                      <li>• Free consultation & project analysis</li>
+                      <li>• Custom proposal with timeline & pricing</li>
+                      <li>• No commitment required</li>
+                    </ul>
+                  </div> */}
+                </motion.div>
 
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
@@ -622,8 +526,8 @@ export default function HeroSection() {
                         <span className="text-white text-xs">✓</span>
                       </div>
                       <div>
-                        <p className="font-medium">Form submitted successfully!</p>
-                        <p className="text-sm">Email sent to your team & WhatsApp message prepared.</p>
+                        <p className="font-medium">Thank you for your submission!</p>
+                        <p className="text-sm">We've received your information and will contact you soon.</p>
                       </div>
                     </div>
                   </motion.div>
@@ -651,64 +555,130 @@ export default function HeroSection() {
 
               {/* Footer */}
               <div className="p-6 border-t border-gray-100">
-                <div className="flex items-center justify-between">
-                  {currentStep > 1 ? (
-                    <button onClick={prevStep} className="flex items-center gap-2 bg-transparent">
-                      <ArrowLeft className="w-4 h-4" />
-                      Back
-                    </button>
-                  ) : (
-                    <div />
-                  )}
-
-                  {currentStep < 3 ? (
-                    <button
-                      onClick={nextStep}
-                      disabled={
-                        (currentStep === 1 && (!formData.projectType || !formData.budget || !formData.timeline)) ||
-                        (currentStep === 2 && (!formData.projectType || !formData.budget || !formData.timeline))
-                      }
-                      className="bg-gradient-to-r text-white from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-700 flex items-center gap-2 rounded-lg"
-                    >
-                      Next
-                      <ArrowRight className="w-4 h-4 text-white" />
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleSubmit}
-                      disabled={isSubmitting || !formData.name || !formData.email || !formData.phone}
-                      className={`text-white flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
-                        isSubmitting 
-                          ? 'bg-gray-400 cursor-not-allowed' 
-                          : submitStatus === 'success'
-                          ? 'bg-green-600 hover:bg-green-700'
-                          : submitStatus === 'error'
-                          ? 'bg-red-600 hover:bg-red-700'
-                          : 'bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700'
-                      }`}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Sending...
-                        </>
-                      ) : submitStatus === 'success' ? (
-                        <>
-                          ✓ Sent Successfully!
-                        </>
-                      ) : submitStatus === 'error' ? (
-                        <>
-                          ✗ Try Again
-                        </>
-                      ) : (
-                        <>
-                          Send via WhatsApp
-                          <ArrowRight className="w-4 h-4 text-white" />
-                        </>
-                      )}
-                    </button>
-                  )}
+                <div className="flex items-center justify-end">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting || !formData.name || !formData.email || !formData.phone || !formData.projectType}
+                    className={`text-white flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+                      isSubmitting 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : submitStatus === 'success'
+                        ? 'bg-green-600 hover:bg-green-700'
+                        : submitStatus === 'error'
+                        ? 'bg-red-600 hover:bg-red-700'
+                        : 'bg-gradient-to-r from-blue-600 to-blue-600 hover:from-green-700 hover:to-blue-700'
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : submitStatus === 'success' ? (
+                      <>
+                        ✓ Sent Successfully!
+                      </>
+                    ) : submitStatus === 'error' ? (
+                      <>
+                        ✗ Try Again
+                      </>
+                    ) : (
+                      <>
+                        Submit
+                        <ArrowRight className="w-4 h-4 text-white" />
+                      </>
+                    )}
+                  </button>
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* WhatsApp Popup */}
+      <AnimatePresence>
+        {showWhatsAppPopup && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowWhatsAppPopup(false)}
+          >
+            <motion.div
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="p-6 border-b border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                      <MessageCircle className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">Connect Instantly</h3>
+                      <p className="text-sm text-gray-600">Send your details via WhatsApp</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowWhatsAppPopup(false)}
+                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                <div className="space-y-4">
+                  <p className="text-gray-700">
+                    Would you like to send your project details directly to our team via WhatsApp for instant response?
+                  </p>
+                  
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <span className="font-semibold">Name:</span>
+                      <span>{formData.name}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <span className="font-semibold">Email:</span>
+                      <span>{formData.email}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <span className="font-semibold">Phone:</span>
+                      <span>{formData.phone}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <span className="font-semibold">Project:</span>
+                      <span>{formData.projectType}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-gray-100 flex items-center gap-3">
+                {/* <button
+                  onClick={() => setShowWhatsAppPopup(false)}
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+                >
+                  Maybe Later
+                </button> */}
+                <button
+                  onClick={handleWhatsAppClick}
+                  className="flex-1 px-4 py-3 w-full bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+                  </svg>
+                  Send on WhatsApp
+                </button>
               </div>
             </motion.div>
           </motion.div>

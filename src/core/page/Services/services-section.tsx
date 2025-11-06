@@ -1,23 +1,18 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { Palette, Code, Search, Headphones, X, ArrowRight, ArrowLeft } from "lucide-react"
+import { Palette, Code, Search, Headphones, X, ArrowRight } from "lucide-react"
 
 import { useState } from "react"
 
 export default function ServicesSection() {
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [currentStep, setCurrentStep] = useState(1)
   const [selectedService, setSelectedService] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    company: "",
     projectType: "",
-    budget: "",
-    timeline: "",
-    message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -52,19 +47,10 @@ export default function ServicesSection() {
   const handleServiceClick = (serviceTitle: string) => {
     setSelectedService(serviceTitle)
     setIsFormOpen(true)
-    setCurrentStep(1)
   }
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const nextStep = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1)
-  }
-
-  const prevStep = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1)
   }
 
   const handleSubmit = async () => {
@@ -97,16 +83,11 @@ export default function ServicesSection() {
         // Show success message
         setTimeout(() => {
           setIsFormOpen(false)
-          setCurrentStep(1)
           setFormData({
             name: "",
             email: "",
             phone: "",
-            company: "",
             projectType: "",
-            budget: "",
-            timeline: "",
-            message: "",
           })
           setSubmitStatus('idle')
         }, 2000)
@@ -270,171 +251,77 @@ export default function ServicesSection() {
                     <X className="w-5 h-5" />
                   </button>
                 </div>
-
-                {/* Progress Bar */}
-                <div className="mt-4">
-                  <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                    <span>Step {currentStep} of 3</span>
-                    <span>{Math.round((currentStep / 3) * 100)}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-gradient-to-r from-blue-600 to-blue-700 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${(currentStep / 3) * 100}%` }}
-                    />
-                  </div>
-                </div>
               </div>
 
               {/* Form Content */}
               <div className="p-6">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="space-y-4"
+                >
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Tell us about your project</h4>
 
-                {/* Step 1: Basic Info */} {/* Step 2: Project Details */}
-                {currentStep === 1 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Project Details</h4>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                    <input
+                      value={formData.name}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      placeholder="Enter your full name"
+                      className="w-full border rounded-md px-4 py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
-                      <select
-                        value={formData.projectType}
-                        onChange={(e) => handleInputChange("projectType", e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select project type</option>
-                        <option value="New Website">New Website</option>
-                        <option value="Website Redesign">Website Redesign</option>
-                        <option value="E-commerce Store">E-commerce Store</option>
-                        <option value="Web Application">Web Application</option>
-                        <option value="Landing Page">Landing Page</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      placeholder="Enter your email"
+                      className="w-full border rounded-md px-4 py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range</label>
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => handleInputChange("budget", e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select budget range</option>
-                        <option value="₹20,000 - ₹50,000">₹20,000 - ₹50,000</option>
-                        <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
-                        <option value="₹1,00,000 - ₹2,00,000">₹1,00,000 - ₹2,00,000</option>
-                        
-                        <option value="₹2,00,000+">₹2,00,000+</option>
-                        <option value="Not sure">Not sure</option>
-                      </select>
-                    </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      placeholder="Enter your phone number"
+                      className="w-full border rounded-md px-4 py-2 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Timeline</label>
-                      <select
-                        value={formData.timeline}
-                        onChange={(e) => handleInputChange("timeline", e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select timeline</option>
-                        <option value="ASAP">ASAP</option>
-                        
-                        <option value="1 month">1 month</option>
-                        <option value="2-3 months">2-3 months</option>
-                        <option value="3+ months">3+ months</option>
-                        <option value="Just exploring">Just exploring</option>
-                      </select>
-                    </div>
-                  </motion.div>
-                )}
-                {/* Step 2: Message & Submit */}
-                {currentStep === 2 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Additional Details</h4>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Project Type *</label>
+                    <select
+                      value={formData.projectType}
+                      onChange={(e) => handleInputChange("projectType", e.target.value)}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="">Select project type</option>
+                      <option value="New Website">New Website</option>
+                      <option value="Website Redesign">Website Redesign</option>
+                      <option value="E-commerce Store">E-commerce Store</option>
+                      <option value="Web Application">Web Application</option>
+                      <option value="Landing Page">Landing Page</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Project Description</label>
-                        <textarea
-                        value={formData.message}
-                        onChange={(e) => handleInputChange("message", e.target.value)}
-                        placeholder="Tell us more about your project requirements, goals, and any specific features you need..."
-                        className="w-full h-32 resize-none"
-                      />
-                    </div>
-
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <h5 className="font-medium text-blue-900 mb-2">What happens next?</h5>
-                      <ul className="text-sm text-blue-800 space-y-1">
-                        <li>• We'll contact you within 2 hours</li>
-                        <li>• Free consultation & project analysis</li>
-                        <li>• Custom proposal with timeline & pricing</li>
-                        <li>• No commitment required</li>
-                      </ul>
-                    </div>
-                  </motion.div>
-                )}
-                {/* Step 3: Basic Info */}
-                {currentStep === 3 && (
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="space-y-4"
-                  >
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Tell us about yourself</h4>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                      <input
-                        value={formData.name}
-                        onChange={(e) => handleInputChange("name", e.target.value)}
-                        placeholder="Enter your full name"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                      <input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange("email", e.target.value)}
-                        placeholder="Enter your email"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-                        <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => handleInputChange("phone", e.target.value)}
-                        placeholder="Enter your phone number"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
-                      <input
-                        value={formData.company}
-                        onChange={(e) => handleInputChange("company", e.target.value)}
-                        placeholder="Enter your company name (optional)"
-                        className="w-full border rounded-md px-4 focus:shadow-lg focus:outline-none h-10"
-                      />
-                    </div>
-                  </motion.div>
-                )}
+                  {/* <div className="bg-blue-50 p-4 rounded-lg mt-4">
+                    <h5 className="font-medium text-blue-900 mb-2">What happens next?</h5>
+                    <ul className="text-sm text-blue-800 space-y-1">
+                      <li>• We'll contact you within 2 hours</li>
+                      <li>• Free consultation & project analysis</li>
+                      <li>• Custom proposal with timeline & pricing</li>
+                      <li>• No commitment required</li>
+                    </ul>
+                  </div> */}
+                </motion.div>
 
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
@@ -477,63 +364,40 @@ export default function ServicesSection() {
 
               {/* Footer */}
               <div className="p-6 border-t border-gray-100">
-                <div className="flex items-center justify-between">
-                  {currentStep > 1 ? (
-                    <button onClick={prevStep} className="flex items-center gap-2 bg-transparent">
-                      <ArrowLeft className="w-4 h-4" />
-                      Back
-                    </button>
-                  ) : (
-                    <div />
-                  )}
-
-                  {currentStep < 3 ? (
-                    <button
-                      onClick={nextStep}
-                      disabled={
-                        (currentStep === 1 && (!formData.projectType || !formData.budget || !formData.timeline)) ||
-                        (currentStep === 2 && (!formData.projectType || !formData.budget || !formData.timeline))
-                      }
-                      className="bg-gradient-to-r text-white from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-700 flex items-center gap-2 rounded-lg"
-                    >
-                      Next
-                      <ArrowRight className="w-4 h-4 text-white" />
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleSubmit}
-                      disabled={isSubmitting || !formData.name || !formData.email || !formData.phone}
-                      className={`text-white flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
-                        isSubmitting 
-                          ? 'bg-gray-400 cursor-not-allowed' 
-                          : submitStatus === 'success'
-                          ? 'bg-green-600 hover:bg-green-700'
-                          : submitStatus === 'error'
-                          ? 'bg-red-600 hover:bg-red-700'
-                          : 'bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700'
-                      }`}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Sending...
-                        </>
-                      ) : submitStatus === 'success' ? (
-                        <>
-                          ✓ Sent Successfully!
-                        </>
-                      ) : submitStatus === 'error' ? (
-                        <>
-                          ✗ Try Again
-                        </>
-                      ) : (
-                        <>
-                          Send via WhatsApp
-                          <ArrowRight className="w-4 h-4 text-white" />
-                        </>
-                      )}
-                    </button>
-                  )}
+                <div className="flex items-center justify-end">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting || !formData.name || !formData.email || !formData.phone || !formData.projectType}
+                    className={`text-white flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
+                      isSubmitting 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : submitStatus === 'success'
+                        ? 'bg-green-600 hover:bg-green-700'
+                        : submitStatus === 'error'
+                        ? 'bg-red-600 hover:bg-red-700'
+                        : 'bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700'
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Sending...
+                      </>
+                    ) : submitStatus === 'success' ? (
+                      <>
+                        ✓ Sent Successfully!
+                      </>
+                    ) : submitStatus === 'error' ? (
+                      <>
+                        ✗ Try Again
+                      </>
+                    ) : (
+                      <>
+                        Submit
+                        <ArrowRight className="w-4 h-4 text-white" />
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
             </motion.div>

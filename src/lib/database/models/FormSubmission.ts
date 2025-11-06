@@ -10,7 +10,7 @@ export interface IFormSubmission extends Document {
   timeline: string;
   message: string;
   selectedService: string;
-  formSource: 'hero-section' | 'services-section';
+  formSource: 'hero-section' | 'services-section' | 'problem-solution-section' | 'quote-form-section';
   status: 'pending' | 'contacted' | 'converted' | 'lost';
   createdAt: Date;
   updatedAt: Date;
@@ -68,7 +68,7 @@ const FormSubmissionSchema = new Schema<IFormSubmission>({
   formSource: {
     type: String,
     required: [true, 'Form source is required'],
-    enum: ['hero-section', 'services-section'],
+    enum: ['hero-section', 'services-section', 'problem-solution-section', 'quote-form-section'],
     default: 'hero-section'
   },
   status: {

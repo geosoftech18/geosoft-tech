@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { ExternalLink, TrendingUp, Zap, ShoppingCart } from "lucide-react"
 
 const portfolioItems = [
@@ -140,16 +140,24 @@ export default function PortfolioSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
   const [clickedCard, setClickedCard] = useState<number | null>(null)
 
-  const handleViewPortfolio = () => {
+  const handleViewPortfolio = useCallback(() => {
     const message = encodeURIComponent(
       "Hi! I'm interested in viewing your full portfolio and discussing my project requirements.",
     )
     window.open(`https://wa.me/7776085112?text=${message}`, "_blank")
-  }
+  }, [])
 
-  const handleCardClick = (cardId: number) => {
-    setClickedCard(clickedCard === cardId ? null : cardId)
-  }
+  const handleCardClick = useCallback((cardId: number) => {
+    setClickedCard(prev => prev === cardId ? null : cardId)
+  }, [])
+
+  const handleHoverStart = useCallback((id: number) => {
+    setHoveredCard(id)
+  }, [])
+
+  const handleHoverEnd = useCallback(() => {
+    setHoveredCard(null)
+  }, [])
 
   return (
     <section className="py-24 bg-white relative overflow-hidden">
@@ -161,68 +169,71 @@ export default function PortfolioSection() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-16 md:mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.4 }}
         >
-          <motion.h2
-            className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#072d7a] mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#072d7a] mb-6">
             Our Work{" "}
             <span className="bg-gradient-to-r from-[#00be62] to-[#01bd64] bg-clip-text text-transparent">
               Speaks for Itself
             </span>
-          </motion.h2>
-          <motion.p
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             See how our designs have helped businesses grow online with measurable results and stunning visuals.
-          </motion.p>
+          </p>
         </motion.div>
 
         {/* Portfolio Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {portfolioItems.map((item, index) => (
+          {portfolioItems.map((item, index) => {
+            const isHovered = hoveredCard === item.id
+            const isClicked = clickedCard === item.id
+            const shouldAnimate = isHovered || isClicked
+            const isPriority = index < 3 // First 3 images get priority loading
+
+            return (
             <motion.div
               key={item.id}
-              className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer"
+              className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden cursor-pointer will-change-transform"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              onHoverStart={() => setHoveredCard(item.id)}
-              onHoverEnd={() => setHoveredCard(null)}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              whileHover={{ y: -8, scale: 1.01 }}
+              onHoverStart={() => handleHoverStart(item.id)}
+              onHoverEnd={handleHoverEnd}
               onClick={() => handleCardClick(item.id)}
             >
               {/* Image Container */}
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-64 overflow-hidden bg-gray-100">
                 <motion.div
-                  className="relative w-full h-[150%]"
+                  className="relative w-full h-[150%] will-change-transform"
                   animate={{
-                    y: hoveredCard === item.id || clickedCard === item.id ? "-25%" : "0%",
+                    y: shouldAnimate ? "-25%" : "0%",
                   }}
                   transition={{
-                    duration: 2,
-                    ease: "easeInOut",
+                    duration: 1.5,
+                    ease: [0.4, 0, 0.2, 1],
                     type: "tween",
                   }}
+                  style={{ transform: 'translateZ(0)' }}
                 >
                   <Image
                     src={item.image || "/placeholder.svg"}
                     alt={item.title}
                     fill
-                    className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={isPriority}
+                    loading={isPriority ? "eager" : "lazy"}
+                    quality={85}
+                    className="object-cover object-top"
+                    style={{ 
+                      transform: shouldAnimate ? 'scale(1.05)' : 'scale(1)',
+                      transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
                   />
                 </motion.div>
 
@@ -243,91 +254,84 @@ export default function PortfolioSection() {
                   </div>
                 </div>
 
-                {(hoveredCard === item.id || clickedCard === item.id) && (
-                  <motion.div
-                    className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-20 flex gap-2"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
+                {shouldAnimate && (
+                  <div
+                    className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-20 flex gap-2 transition-all duration-300"
+                    style={{ 
+                      opacity: shouldAnimate ? 1 : 0,
+                      transform: shouldAnimate ? 'translate(-50%, 0)' : 'translate(-50%, 10px)'
+                    }}
                   >
-                    <a href={item.link} target="_blank" className="bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
-                      Full Page View
+                    <a 
+                      href={item.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="bg-white/90 backdrop-blur-sm text-gray-700 px-3 py-1.5 rounded-full text-xs font-medium hover:bg-white transition-colors"
+                    >
+                      Visit Site
                     </a>
-                    <a href={item.link} target="_blank" className="bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-1 rounded-full text-xs font-medium">
-                      Visit
-                    </a>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Hover Overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: hoveredCard === item.id ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none transition-opacity duration-300"
+                  style={{ opacity: isHovered ? 1 : 0 }}
                 />
 
                 {/* Hover Content */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 p-6 text-white"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{
-                    y: hoveredCard === item.id ? 0 : 20,
-                    opacity: hoveredCard === item.id ? 1 : 0,
+                <div
+                  className="absolute bottom-0 left-0 right-0 p-6 text-white pointer-events-none transition-all duration-300"
+                  style={{ 
+                    transform: isHovered ? 'translateY(0)' : 'translateY(20px)',
+                    opacity: isHovered ? 1 : 0
                   }}
-                  transition={{ duration: 0.3 }}
                 >
                   <h3 className="text-xl text-white font-bold mb-2">{item.title}</h3>
                   <p className="text-gray-200 mb-3 text-sm leading-relaxed">{item.description}</p>
                   <p className="text-blue-300 text-sm font-medium">{item.tech}</p>
-                </motion.div>
+                </div>
               </div>
 
               {/* Card Content (Always Visible) */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{item.description}</p>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">{item.description}</p>
 
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">{item.tech}</span>
-                  <motion.div
-                    className="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
-                    whileHover={{ scale: 1.1 }}
+                  <div
+                    className="text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
                   >
-                    <ExternalLink className="w-5 h-5" onClick={() => window.open(item.link, "_blank")}/>
-                  </motion.div>
+                    <ExternalLink 
+                      className="w-5 h-5 hover:scale-110 transition-transform" 
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        window.open(item.link, "_blank")
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
-          ))}
+          )})}
         </div>
 
         {/* CTA Button */}
-        <motion.div
-          className="text-center flex justify-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <button
-              onClick={handleViewPortfolio}
-              className="bg-gradient-to-r from-[#00be62] to-[#01bd64] hover:from-[#03c166] hover:to-[#03c166] text-white px-8  rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group flex"
-            >
-              View Full Portfolio
-              <motion.div
-                className="ml-2 group-hover:translate-x-1 transition-transform text-white"
-                initial={{ x: 0 }}
-                whileHover={{ x: 4 }}
-              >
-                →
-              </motion.div>
-            </button>
-          </motion.div>
-        </motion.div>
+        <div className="text-center flex justify-center">
+          <button
+            onClick={handleViewPortfolio}
+            className="bg-gradient-to-r from-[#00be62] to-[#01bd64] hover:from-[#03c166] hover:to-[#03c166] text-white px-8 py-3 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group flex items-center hover:scale-105 active:scale-95"
+          >
+            View Full Portfolio
+            <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">
+              →
+            </span>
+          </button>
+        </div>
       </div>
     </section>
   )
