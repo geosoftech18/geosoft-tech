@@ -9,6 +9,7 @@ import TrustBuildersSection from "../trust-builders-section";
 import ProcessWorkflowSection from "../process-workflow-section";
 import FAQSection from "../faq-section";
 import QuoteFormSection from "../quote-form-section";
+import ContactFormSection from "../contact-form-section";
 
 export default function Home() {
     return (
@@ -16,6 +17,7 @@ export default function Home() {
         <HeroSection />
         <ProblemSolutionSection />
         <ServicesSection />
+        <ContactFormSection />
         <QuoteFormSection />
         <TrustBuildersSection />
         <ProcessWorkflowSection />
@@ -23,6 +25,7 @@ export default function Home() {
         <TestimonialsSection />
         <TechnologyStackSection />
         <FAQSection />
+    
         <StickyFloatingButtons />
       </main>
     )

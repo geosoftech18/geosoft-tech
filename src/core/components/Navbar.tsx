@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CgClose } from 'react-icons/cg';
@@ -31,7 +31,7 @@ const Navbar: React.FC<navbar.index> = ({ logo, navlist }) => {
 
   return (
     <nav
-      className={`xsm:bg-transparent fixed inset-x-0 top-0 z-50 w-full bg-white data-[scrolled=true]:bg-white data-[scrolled=true]:!transition-all `}
+      className={`fixed inset-x-0 top-0 z-50 w-full bg-white data-[scrolled=true]:bg-white data-[scrolled=true]:!transition-all `}
       data-aos="fade-down"
       data-aos-duration="400"
       data-aos-delay="0"
@@ -83,8 +83,16 @@ export default Navbar;
 
 const NavList: React.FC<navbar.navlist> = ({ links }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const menuRef = useRef<HTMLUListElement>(null);
+  const menuButtonRef = useRef<HTMLDivElement>(null);
 
-  const handleClickMenu = (value: boolean) => {
+  const handleClickMenu = useCallback((value: boolean) => {
+    // Only apply GSAP animations on mobile
+    if (window.innerWidth >= 1024) {
+      setIsOpenMenu(false);
+      return;
+    }
+
     const menuItems = document.querySelectorAll('#menu-item');
     if (value) {
       setIsOpenMenu(true);
@@ -120,11 +128,127 @@ const NavList: React.FC<navbar.navlist> = ({ links }) => {
         }
       );
     }
-  };
+  }, []);
+
+  // Ensure menu items are always visible on desktop
+  useEffect(() => {
+    const restoreDesktopMenu = () => {
+      if (window.innerWidth >= 1024) {
+        // Close mobile menu when on desktop
+        if (isOpenMenu) {
+          setIsOpenMenu(false);
+        }
+        // Reset GSAP animations and restore menu items visibility
+        const menuItems = document.querySelectorAll('#menu-item');
+        if (menuItems.length > 0) {
+          menuItems.forEach((item) => {
+            const element = item as HTMLElement;
+            // Clear all inline styles set by GSAP
+            gsap.killTweensOf(element);
+            gsap.set(element, {
+              opacity: 1,
+              height: 'auto',
+              y: 0,
+              clearProps: 'all'
+            });
+            // Force remove any inline styles that might hide the element
+            element.style.opacity = '';
+            element.style.height = '';
+            element.style.transform = '';
+            element.style.display = '';
+            element.style.visibility = '';
+          });
+        }
+      }
+    };
+
+    const handleResize = () => {
+      restoreDesktopMenu();
+    };
+
+    window.addEventListener('resize', handleResize);
+    // Check immediately on mount
+    setTimeout(() => {
+      restoreDesktopMenu();
+    }, 0);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isOpenMenu]);
+
+  // Additional effect to ensure menu is visible on desktop mount
+  useEffect(() => {
+    if (window.innerWidth >= 1024) {
+      const menuItems = document.querySelectorAll('#menu-item');
+      menuItems.forEach((item) => {
+        const element = item as HTMLElement;
+        // Ensure no GSAP animations are running
+        gsap.killTweensOf(element);
+        // Clear any inline styles
+        element.style.opacity = '';
+        element.style.height = '';
+        element.style.transform = '';
+        element.style.display = '';
+        element.style.visibility = '';
+      });
+    }
+  }, []);
+
+  // Close menu when clicking outside or on menu background (mobile only)
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!isOpenMenu) return;
+      
+      // Only apply on mobile (screen width < 1024px)
+      if (window.innerWidth >= 1024) return;
+      
+      const target = event.target as HTMLElement;
+      
+      // Don't close if clicking the menu button
+      if (menuButtonRef.current?.contains(target)) {
+        return;
+      }
+      
+      // Close if clicking outside the menu
+      if (menuRef.current && !menuRef.current.contains(target)) {
+        handleClickMenu(false);
+        return;
+      }
+      
+      // Close if clicking on the menu background (ul element itself or empty space)
+      if (menuRef.current && target === menuRef.current) {
+        handleClickMenu(false);
+        return;
+      }
+      
+      // Close if clicking on a list item that doesn't contain a link
+      const listItem = target.closest('li');
+      if (listItem && menuRef.current?.contains(listItem)) {
+        const hasLink = listItem.querySelector('a');
+        if (!hasLink) {
+          handleClickMenu(false);
+        }
+      }
+    };
+
+    if (isOpenMenu) {
+      // Use capture phase and add a small delay to avoid immediate closing
+      const timeoutId = setTimeout(() => {
+        document.addEventListener('click', handleClickOutside, true);
+      }, 50);
+      
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener('click', handleClickOutside, true);
+      };
+    }
+  }, [isOpenMenu, handleClickMenu]);
 
   return (
     <>
       <div
+        ref={menuButtonRef}
         className="z-10 ml-auto block h-max w-max cursor-pointer hover:animate-pulse lg:hidden"
         onClick={() => handleClickMenu(!isOpenMenu)}
       >
@@ -135,10 +259,17 @@ const NavList: React.FC<navbar.navlist> = ({ links }) => {
         )}
       </div>
       <ul
-        className="flex transition-all max-lg:absolute max-lg:left-0 max-lg:top-0 max-lg:!h-0 max-lg:w-0 max-lg:flex-col max-lg:overflow-hidden max-lg:data-[expand=true]:!h-screen max-lg:data-[expand]:!w-full max-lg:data-[expand=true]:py-[4.5rem] lg:items-center lg:justify-center lg:space-x-4 lg:rounded-full lg:shadow-head"
+        ref={menuRef}
+        className="flex transition-all max-lg:absolute max-lg:left-0 max-lg:top-0 max-lg:!h-0 max-lg:w-0 max-lg:flex-col max-lg:overflow-hidden max-lg:data-[expand=true]:!h-screen max-lg:data-[expand]:!w-full max-lg:data-[expand=true]:py-[4.5rem] lg:items-center lg:justify-center lg:space-x-4 lg:rounded-full lg:shadow-head max-lg:z-50"
         data-expand={isOpenMenu}
         style={{
           transition: 'height 0.5s', // CSS transition for height change
+        }}
+        onClick={(e) => {
+          // Close menu if clicking on the ul element itself (empty space) - mobile only
+          if (window.innerWidth < 1024 && e.target === e.currentTarget) {
+            handleClickMenu(false);
+          }
         }}
       >
         {links?.map((link, index) => (
@@ -155,7 +286,12 @@ const NavList: React.FC<navbar.navlist> = ({ links }) => {
                 id="menu-item"
                 href={link.url}
                 className="inline-block px-4 py-2 font-bold text-p-2 max-lg:w-full max-lg:border-0 max-lg:border-b max-lg:border-gray-600 max-lg:bg-white max-lg:px-7 max-lg:py-4"
-                onClick={() => setIsOpenMenu(!isOpenMenu)}
+                onClick={() => {
+                  // Only close menu on mobile
+                  if (window.innerWidth < 1024) {
+                    handleClickMenu(false);
+                  }
+                }}
               >
                 {link.name}
               </Link>
@@ -171,7 +307,12 @@ const NavList: React.FC<navbar.navlist> = ({ links }) => {
                           {subLinks.map((subLink, i) => (
                             <li
                               key={i}
-                              onClick={() => setIsOpenMenu(!isOpenMenu)}
+                              onClick={() => {
+                                // Only close menu on mobile
+                                if (window.innerWidth < 1024) {
+                                  handleClickMenu(false);
+                                }
+                              }}
                             >
                               <Link
                                 href={subLink.url}

@@ -102,7 +102,7 @@ export default function QuoteFormSection() {
   }))
 
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 relative overflow-hidden">
+    <section className="block md:hidden py-20 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Floating Particles */}
@@ -421,7 +421,7 @@ export default function QuoteFormSection() {
                         onBlur={() => setFocusedField(null)}
                         required
                         placeholder="Enter your full name"
-                        className={`w-full pl-12 pr-4 py-3.5 border-2 rounded-xl transition-all duration-300 ${
+                        className={`w-full pl-12 pr-4 py-2 border-2 rounded-xl transition-all duration-300 ${
                           focusedField === "name"
                             ? "border-orange-500 shadow-lg shadow-orange-500/20 bg-orange-50/50"
                             : "border-gray-200 hover:border-gray-300 bg-white"
@@ -462,7 +462,7 @@ export default function QuoteFormSection() {
                         onBlur={() => setFocusedField(null)}
                         required
                         placeholder="Enter your email"
-                        className={`w-full pl-12 pr-4 py-3.5 border-2 rounded-xl transition-all duration-300 ${
+                        className={`w-full pl-12 pr-4 py-2 border-2 rounded-xl transition-all duration-300 ${
                           focusedField === "email"
                             ? "border-orange-500 shadow-lg shadow-orange-500/20 bg-orange-50/50"
                             : "border-gray-200 hover:border-gray-300 bg-white"
@@ -503,7 +503,7 @@ export default function QuoteFormSection() {
                         onBlur={() => setFocusedField(null)}
                         required
                         placeholder="Enter your mobile number"
-                        className={`w-full pl-12 pr-4 py-3.5 border-2 rounded-xl transition-all duration-300 ${
+                        className={`w-full pl-12 pr-4 py-2 border-2 rounded-xl transition-all duration-300 ${
                           focusedField === "phone"
                             ? "border-orange-500 shadow-lg shadow-orange-500/20 bg-orange-50/50"
                             : "border-gray-200 hover:border-gray-300 bg-white"
@@ -542,7 +542,7 @@ export default function QuoteFormSection() {
                         onFocus={() => setFocusedField("projectType")}
                         onBlur={() => setFocusedField(null)}
                         required
-                        className={`w-full pl-12 pr-10 py-3.5 border-2 rounded-xl transition-all duration-300 appearance-none ${
+                        className={`w-full pl-12 pr-10 py-2 border-2 rounded-xl transition-all duration-300 appearance-none ${
                           focusedField === "projectType"
                             ? "border-orange-500 shadow-lg shadow-orange-500/20 bg-orange-50/50"
                             : "border-gray-200 hover:border-gray-300 bg-white"
@@ -613,7 +613,7 @@ export default function QuoteFormSection() {
                     <motion.button
                       type="submit"
                       disabled={isSubmitting || !formData.name || !formData.email || !formData.phone || !formData.projectType}
-                      className={`w-full py-4 px-6 rounded-xl font-semibold text-white text-lg flex items-center justify-center gap-2 transition-all duration-300 relative overflow-hidden group ${
+                      className={`w-full py-2 px-6 rounded-xl font-semibold text-white text-lg flex items-center justify-center gap-2 transition-all duration-300 relative overflow-hidden group ${
                         isSubmitting
                           ? 'bg-gray-400 cursor-not-allowed'
                           : submitStatus === 'success'

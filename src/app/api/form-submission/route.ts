@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import mailjet from 'node-mailjet';
-import { FormService } from '@/lib/database/services/formService';
+import { FormService, CreateFormSubmissionData } from '@/lib/database/services/formService';
 
 const mailjetUid = process.env.MAILJET_UID;
 const mailjetPwd = process.env.MAILJET_PWD;
@@ -23,7 +23,7 @@ type FormData = {
   timeline?: string;
   message?: string;
   selectedService: string;
-  formSource?: 'hero-section' | 'services-section' | 'problem-solution-section' | 'quote-form-section';
+  formSource?: 'hero-section' | 'services-section' | 'problem-solution-section' | 'quote-form-section' | 'contact-form-section';
 };
 
 export async function POST(req: Request) {
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
         timeline: formData.timeline || 'Not specified',
         message: formData.message || '',
         selectedService: formData.selectedService,
-        formSource: (formData.formSource || 'hero-section') as 'hero-section' | 'services-section' | 'problem-solution-section' | 'quote-form-section'
+        formSource: (formData.formSource || 'hero-section') as CreateFormSubmissionData['formSource']
       });
       submissionId = submission._id;
       console.log('✅ Form submission saved to database with ID:', submissionId);
