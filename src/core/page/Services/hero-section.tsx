@@ -6,37 +6,8 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TypeAnimation } from "react-type-animation"
 import { X, ArrowRight, MessageCircle } from "lucide-react"
-
-import Image from "next/image"
-
-const FloatingIcon = ({
-  children,
-  delay = 0,
-  x = 0,
-  y = 0,
-}: {
-  children: React.ReactNode
-  delay?: number
-  x?: number
-  y?: number
-}) => (
-  <motion.div
-    className="absolute text-2xl opacity-20"
-    style={{ left: `${x}%`, top: `${y}%` }}
-    animate={{
-      y: [0, -20, 0],
-      rotate: [0, 5, -5, 0],
-    }}
-    transition={{
-      duration: 4,
-      delay,
-      repeat: Number.POSITIVE_INFINITY,
-      ease: "easeInOut",
-    }}
-  >
-    {children}
-  </motion.div>
-)
+import { RiArrowRightSLine, RiArrowRightSFill } from "react-icons/ri"
+import FlipButton from "@/core/components/FlipButton"
 
 
 
@@ -208,203 +179,48 @@ Thank you!`
   if (!mounted) return null
 
   return (
-    <section className="relative pt-20 md:pt-10 min-h-screen overflow-hidden ">
-      {/* Background Pattern Overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px),
-                           radial-gradient(circle at 75% 75%, white 2px, transparent 2px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
-
-      {/* Floating Icons */}
-      <FloatingIcon delay={0} x={10} y={20}>
-        💻
-      </FloatingIcon>
-      <FloatingIcon delay={1} x={85} y={15}>
-        📱
-      </FloatingIcon>
-      <FloatingIcon delay={2} x={15} y={70}>
-        🌐
-      </FloatingIcon>
-      <FloatingIcon delay={1.5} x={80} y={80}>
-        ⚡
-      </FloatingIcon>
-      <FloatingIcon delay={0.5} x={90} y={40}>
-        🚀
-      </FloatingIcon>
-
-      <div className="relative z-10 min-h-screen flex items-center">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-0">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 xl:gap-20 items-center min-h-[80vh]">
-            {/* Left Side - Content */}
-            <motion.div
-              className="lg:col-span-6 xl:col-span-5 space-y-8 lg:space-y-10"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+    <div className="h-full w-full" id="hero">
+      <div className="h-screen w-full bg-[url(/services/webdevelopment/business-meeting.jpg)] bg-cover bg-center bg-no-repeat pt-16">
+        <div className="absolute inset-0 z-0 h-full w-full bg-transparent bg-gradient-to-tr from-t to-s opacity-70" />
+        <div className="relative z-20 m-auto flex h-full w-full max-w-3xl flex-col items-center justify-center gap-5 pt-4 max-md:px-5">
+          <h1 className="text-center text-3xl font-bold leading-none tracking-tighter text-neutral-50 md:text-4xl lg:text-[44px]">
+            <div className="text-neutral-50">Your Trusted Website Designing</div>
+            <div className="text-neutral-50 -mt-3 md:-mt-4">
+              Partner in{" "}
+              <TypeAnimation
+                sequence={[
+                  ...cityNames.flatMap(city => [city, 2000])
+                ]}
+                speed={50}
+                deletionSpeed={30}
+                repeat={Infinity}
+                className="inline-block text-neutral-50"
+              />
+            </div>
+          </h1>
+          <h2 className="text-center text-lg font-semibold text-neutral-50 md:text-xl lg:text-2xl">
+            That Drives Business Growth
+          </h2>
+          <p className="text-center text-lg text-neutral-300 md:text-xl">
+            We build fast, modern, and conversion-focused websites with Next.js, Node.js, and CMS solutions
+            tailored for your business success.
+          </p>
+          <div className="flex items-center justify-center gap-4 sm:gap-9 w-full sm:w-auto">
+            <FlipButton
+              onClick={() => handleServiceClick("Get Free Quote")}
+              default_text="Get Free Quote"
+              hover_text="Let's connect"
+              rounded="rounded-full"
+              icon={<RiArrowRightSLine />}
+              type="secondary"
+              className="flex-1 sm:flex-none sm:w-auto"
+            />
+            <button
+              onClick={() => handleWhatsAppClick()}
+              className="border-2 border-white/30 text-white hover:bg-white hover:text-purple-600 font-semibold px-4 py-3 rounded-full shadow-xl bg-white/5 backdrop-blur-sm transition-all duration-300 flex-shrink-0 flex items-center justify-center"
             >
-              {/* Main Headline */}
-              <motion.div
-                className="space-y-4"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <h1 className="text-3xl sm:text-4xl lg:text-4xl xl:text-4xl mt-6 font-bold text-[#002a80] leading-none tracking-tight">
-                  <div className=" text-[#002a80] bg-clip-text  -mb-4">
-                   Your Trusted Website
-                  </div>
-                  <div className="bg-gradient-to-r from-white via-blue-100 to-purple-100 text-[#002a80] bg-clip-text  -mb-4">
-                   Designing Partner 
-                  </div>
-                  <div className="text-[#002a80] mt-6">
-                     <span className="text-3xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl text-[#002a80]">in {" "}</span>
-                    <TypeAnimation
-                      sequence={[
-                        ...cityNames.flatMap(city => [city, 2000])
-                      ]}
-                      speed={50}
-                      deletionSpeed={30}
-                      repeat={Infinity}
-                      className="inline-block text-blue-700 text-3xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-4xl font-bold"
-                    />
-                    <div className="ml-2 text-[#002a80] text-xl md:text-2xl mt-6">That Drives Business Growth</div>
-                  </div>
-                </h1>
-              </motion.div>
-
-              {/* Subheadline */}
-              <motion.div
-                className="max-w-xl"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                <p className="text-lg sm:text-lg lg:text-xl text-[#6981b3] leading-relaxed font-light md:-mt-4">
-                  We build fast, modern, and conversion-focused websites with Next.js, Node.js, and CMS solutions
-                  tailored for your business success.
-                </p>
-              </motion.div>
-
-              {/* CTA Buttons */}
-              <motion.div
-                className="flex flex-row gap-2 sm:gap-3 md:gap-4 md:pt-4"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="group flex-1">
-                  <button
-                    onClick={() => handleServiceClick("Get Free Quote")}
-                    className="bg-blue-700 hover:from-[#71e2f0] hover:to-[#adece9] text-sm sm:text-base font-semibold px-4 sm:px-6 md:px-8 py-3 sm:py-4 h-12 sm:h-14 rounded-2xl shadow-xl border-0 w-full transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-orange-500/25"
-                  >
-                    <span className="flex justify-center items-center gap-2 text-white">
-                      🚀 <span className="hidden sm:inline text-white">Get Free Quote</span><span className="sm:hidden text-white">Get Quote</span>
-                    </span>
-                  </button>
-                </motion.div>
-
-                <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }} className="group flex-1">
-                  <button
-                    onClick={() => handleWhatsAppClick()}
-                    className="border-2 border-white/30 text-white hover:bg-white hover:text-purple-600 font-semibold px-4 sm:px-6 md:px-8 py-3 sm:py-4 h-12 sm:h-14 rounded-2xl shadow-xl w-full bg-white/5 backdrop-blur-sm transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-white/25"
-                  >
-                    <span className="flex justify-center  items-center gap-2 text-[#032a7f]">
-                      📞 <span className="hidden sm:inline">Schedule a Call</span><span className="sm:hidden">Call Now</span>
-                    </span>
-                  </button>
-                </motion.div>
-              </motion.div>
-
-              {/* Trust Indicators */}
-              <motion.div
-                className=""
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-              >
-                <div className="space-y-6">
-                  <p className="text-[#00bf5f] text-sm font-medium tracking-wide uppercase">
-                    Trusted by 350+ Businesses Worldwide
-                  </p>
-                  {/* <div className="flex flex-wrap gap-6 items-center pb-5">
-                    {[1, 2, 3, 4].map((i) => (
-                      <motion.div
-                        key={i}
-                        className="w-24 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/20"
-                        whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <span className="text-xs text-[#4a6ca7] font-semibold tracking-wider">LOGO</span>
-                      </motion.div>
-                    ))}
-                  </div> */}
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Right Side - Visual Mockup */}
-            <motion.div
-              className="lg:col-span-6 xl:col-span-7 relative flex justify-center lg:justify-end"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <div className="relative max-w-2xl w-full">
-                {/* Laptop Mockup */}
-                <motion.div
-                  className="relative"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                >
-                  <div className="bg-[#C0C0C0] rounded-t-2xl p-3 shadow-2xl border border-gray-3">
-                    {/* Laptop Screen */}
-                    <div className="bg-white rounded-xl overflow-hidden aspect-video shadow-inner">
-                      <Image
-                        src="/services/webdevelopment/development-hero.png"
-                        alt="Website Mockup"
-                        width={800}
-                        height={500}
-                        className="w-full h-full object-contain"
-                        priority
-                      />
-                    </div>
-                  </div>
-                  {/* Laptop Base */}
-                  <div className="bg-[#C0C0C0] h-6 rounded-b-2xl shadow-2xl border-x border-b border-gray-400"></div>
-                </motion.div>
-
-                {/* Enhanced Floating Elements */}
-                <motion.div
-                  className="absolute -top-6 -right-6 bg-gradient-to-r from-green-400 to-green-600 text-white p-4 rounded-2xl shadow-2xl border border-green-300/20"
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                >
-                  <span className="text-xl">✓</span>
-                </motion.div>
-
-                <motion.div
-                  className="absolute -bottom-6 -left-6 bg-gradient-to-r from-blue-400 to-blue-600 text-white p-4 rounded-2xl shadow-2xl border border-blue-300/20"
-                  animate={{ scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-                >
-                  <span className="text-xl">⚡</span>
-                </motion.div>
-
-                <motion.div
-                  className="absolute top-1/2 -left-8 bg-gradient-to-r from-purple-400 to-purple-600 text-white p-3 rounded-xl shadow-xl border border-purple-300/20"
-                  animate={{ x: [0, -10, 0], opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-                >
-                  <span className="text-lg">🚀</span>
-                </motion.div>
-              </div>
-            </motion.div>
+              <RiArrowRightSFill className="text-xl" />
+            </button>
           </div>
         </div>
       </div>
@@ -684,7 +500,6 @@ Thank you!`
           </motion.div>
         )}
       </AnimatePresence>
-
-    </section>
+    </div>
   )
 }

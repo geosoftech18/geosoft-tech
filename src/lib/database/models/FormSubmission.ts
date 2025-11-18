@@ -68,7 +68,7 @@ const FormSubmissionSchema = new Schema<IFormSubmission>({
   formSource: {
     type: String,
     required: [true, 'Form source is required'],
-    enum: ['hero-section', 'services-section', 'problem-solution-section', 'quote-form-section', 'contact-form-section'],
+    enum: ['hero-section', 'services-section', 'problem-solution-section', 'quote-form-section', 'contact-form-section', 'webdevelopment-popup'],
     default: 'hero-section'
   },
   status: {
