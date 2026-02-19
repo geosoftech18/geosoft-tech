@@ -11,6 +11,8 @@ import Testimonials from './Testimonials';
 import Partners from './Partners';
 import Community from './Community';
 import FounderSection from '@/core/components/FounderSection';
+import Certifications from './Certifications';
+import PartnerBadges from './PartnerBadges';
 
 const Home = () => {
   return (
@@ -42,6 +44,12 @@ const Home = () => {
       </FadeInOnScroll>
       <FadeInOnScroll>
         <Partners />
+      </FadeInOnScroll>
+      <FadeInOnScroll>
+        <Certifications />
+      </FadeInOnScroll>
+      <FadeInOnScroll>
+        <PartnerBadges />
       </FadeInOnScroll>
       {/* <FadeInOnScroll>
         <Blogs />

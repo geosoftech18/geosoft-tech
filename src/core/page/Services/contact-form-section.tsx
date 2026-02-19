@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Award, Users, Clock, Monitor, RotateCcw, User, Lightbulb, Timer, X, MessageCircle, CheckCircle } from "lucide-react"
+import { trackGoogleAdsConversion } from "@/lib/utils/googleAdsConversion"
 
 declare global {
   interface Window {
@@ -130,6 +131,9 @@ export default function ContactFormSection() {
 
       if (result.success) {
         setSubmitStatus('success')
+        
+        // Track Google Ads conversion
+        trackGoogleAdsConversion()
         
         // Show WhatsApp popup after 2 seconds
         setTimeout(() => {

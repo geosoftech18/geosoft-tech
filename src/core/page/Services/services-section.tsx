@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Palette, Code, Search, Headphones, X, ArrowRight } from "lucide-react"
 
 import { useState } from "react"
+import { trackGoogleAdsConversion } from "@/lib/utils/googleAdsConversion"
 
 export default function ServicesSection() {
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -74,6 +75,9 @@ export default function ServicesSection() {
 
       if (result.success) {
         setSubmitStatus('success')
+        
+        // Track Google Ads conversion
+        trackGoogleAdsConversion()
         
         // Open WhatsApp with the formatted message
         if (result.whatsappUrl) {

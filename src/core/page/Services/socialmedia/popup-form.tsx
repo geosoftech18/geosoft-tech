@@ -63,10 +63,10 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          company: formData.businessName, // Store businessName as company in database
+          company: formData.businessName,
           projectType: formData.projectType,
-          selectedService: 'Web Development',
-          formSource: 'webdevelopment-popup', // Updated form source identifier
+          selectedService: 'Social Media Marketing',
+          formSource: 'socialmedia-popup',
         }),
       })
 
@@ -156,7 +156,7 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
               {/* Full Background Image */}
               <div className="absolute inset-0">
                 <Image
-                  src="/services/webdevelopment/popup-form-image.png"
+                  src="/services/socialmedia/popup-form-image.png"
                   alt="Woman pointing"
                   fill
                   className="object-cover"
@@ -360,11 +360,11 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                       } focus:outline-none text-gray-900`}
                     >
                       <option value="">Select project type</option>
-                      <option value="New Website">New Website</option>
-                      <option value="Website Redesign">Website Redesign</option>
-                      <option value="E-commerce Store">E-commerce Store</option>
-                      <option value="Web Application">Web Application</option>
-                      <option value="Landing Page">Landing Page</option>
+                      <option value="Social Media Management">Social Media Management</option>
+                      <option value="Content Creation">Content Creation</option>
+                      <option value="Social Media Advertising">Social Media Advertising</option>
+                      <option value="Influencer Marketing">Influencer Marketing</option>
+                      <option value="Social Media Strategy">Social Media Strategy</option>
                       <option value="Other">Other</option>
                     </select>
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -387,13 +387,11 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                   </div>
                 </motion.div>
 
-               
-
                 {submitStatus === 'error' && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-red-50 border-2 border-red-200 rounded-xl p-3"
+                    className="bg-red-50 border-2 border-red-200 rounded-lg p-3"
                   >
                     <div className="flex items-center gap-2 text-red-800">
                       <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0">
@@ -424,24 +422,6 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                   </motion.div>
                 )}
 
-                {submitStatus === 'error' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-red-50 border-2 border-red-200 rounded-lg p-3"
-                  >
-                    <div className="flex items-center gap-2 text-red-800">
-                      <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0">
-                        <span className="text-white text-xs">✗</span>
-                      </div>
-                      <div>
-                        <p className="font-semibold text-sm">Submission failed</p>
-                        <p className="text-xs">Please try again or contact us directly.</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
                 {/* Submit Button */}
                 <motion.div
                   className="relative pt-2"
@@ -462,7 +442,7 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                     whileHover={!isSubmitting && submitStatus !== 'success' ? { scale: 1.02 } : {}}
                     whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                   >
-                    <span className="relative  z-10 flex items-center gap-2">
+                    <span className="relative z-10 flex items-center gap-2">
                       {isSubmitting ? (
                         <>
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -490,4 +470,7 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
     </AnimatePresence>
   )
 }
+
+
+
 

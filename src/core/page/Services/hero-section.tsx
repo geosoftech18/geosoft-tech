@@ -8,6 +8,7 @@ import { TypeAnimation } from "react-type-animation"
 import { X, ArrowRight, MessageCircle } from "lucide-react"
 import { RiArrowRightSLine, RiArrowRightSFill } from "react-icons/ri"
 import FlipButton from "@/core/components/FlipButton"
+import { trackGoogleAdsConversion } from "@/lib/utils/googleAdsConversion"
 
 
 
@@ -156,6 +157,9 @@ Thank you!`
 
       if (result.success) {
         setSubmitStatus('success')
+        
+        // Track Google Ads conversion
+        trackGoogleAdsConversion()
         
         // Show WhatsApp popup after 2 seconds
         setTimeout(() => {

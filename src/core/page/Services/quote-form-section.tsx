@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { ArrowRight, CheckCircle, Send, Sparkles, User, Mail, Phone, Briefcase, Zap, Star } from "lucide-react"
+import { trackGoogleAdsConversion } from "@/lib/utils/googleAdsConversion"
 
 export default function QuoteFormSection() {
   const [formData, setFormData] = useState({
@@ -46,6 +47,9 @@ export default function QuoteFormSection() {
 
       if (result.success) {
         setSubmitStatus('success')
+        
+        // Track Google Ads conversion
+        trackGoogleAdsConversion()
         
         // Open WhatsApp with the formatted message
         if (result.whatsappUrl) {
