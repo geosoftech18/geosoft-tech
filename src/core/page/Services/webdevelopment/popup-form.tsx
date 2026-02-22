@@ -161,8 +161,8 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                   fill
                   className="object-cover"
                   unoptimized
-                />
-              </div>
+              />
+            </div>
 
               {/* 40% Colored Overlay/Tag Effect - Bottom Full Width */}
               <div className="absolute bottom-0 left-0 w-full h-[40%] bg-gradient-to-br from-t via-t/95 to-p-3/90">
@@ -243,20 +243,20 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
                     Name*
                   </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
-                    onFocus={() => setFocusedField("name")}
-                    onBlur={() => setFocusedField(null)}
-                    required
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      onFocus={() => setFocusedField("name")}
+                      onBlur={() => setFocusedField(null)}
+                      required
                     placeholder="Nice to meet you!"
                     className={`w-full px-4 py-2.5 text-sm border rounded-lg transition-all duration-300 bg-gray-50 ${
-                      focusedField === "name"
+                        focusedField === "name"
                         ? "border-blue-500 shadow-md bg-white"
                         : "border-gray-300 hover:border-gray-400"
-                    } focus:outline-none text-gray-900 placeholder:text-gray-400`}
-                  />
+                      } focus:outline-none text-gray-900 placeholder:text-gray-400`}
+                    />
                 </motion.div>
 
                 {/* Mobile Field */}
@@ -269,20 +269,20 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
                     Mobile*
                   </label>
-                  <input
+                    <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
                     onFocus={() => setFocusedField("phone")}
-                    onBlur={() => setFocusedField(null)}
-                    required
+                      onBlur={() => setFocusedField(null)}
+                      required
                     placeholder="We really like to chat"
                     className={`w-full px-4 py-2.5 text-sm border rounded-lg transition-all duration-300 bg-gray-50 ${
                       focusedField === "phone"
                         ? "border-blue-500 shadow-md bg-white"
                         : "border-gray-300 hover:border-gray-400"
-                    } focus:outline-none text-gray-900 placeholder:text-gray-400`}
-                  />
+                      } focus:outline-none text-gray-900 placeholder:text-gray-400`}
+                    />
                 </motion.div>
 
                 {/* Email Field */}
@@ -295,20 +295,20 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
                     Email*
                   </label>
-                  <input
+                    <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
                     onFocus={() => setFocusedField("email")}
-                    onBlur={() => setFocusedField(null)}
-                    required
+                      onBlur={() => setFocusedField(null)}
+                      required
                     placeholder="It's how you get the estimate"
                     className={`w-full px-4 py-2.5 text-sm border rounded-lg transition-all duration-300 bg-gray-50 ${
                       focusedField === "email"
                         ? "border-blue-500 shadow-md bg-white"
                         : "border-gray-300 hover:border-gray-400"
-                    } focus:outline-none text-gray-900 placeholder:text-gray-400`}
-                  />
+                      } focus:outline-none text-gray-900 placeholder:text-gray-400`}
+                    />
                 </motion.div>
 
                 {/* Company Name Field */}
@@ -321,19 +321,19 @@ export default function PopupForm({ isOpen, onClose }: PopupFormProps) {
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
                     Company Name
                   </label>
-                  <input
-                    type="text"
-                    value={formData.businessName}
-                    onChange={(e) => handleInputChange("businessName", e.target.value)}
-                    onFocus={() => setFocusedField("businessName")}
-                    onBlur={() => setFocusedField(null)}
+                    <input
+                      type="text"
+                      value={formData.businessName}
+                      onChange={(e) => handleInputChange("businessName", e.target.value)}
+                      onFocus={() => setFocusedField("businessName")}
+                      onBlur={() => setFocusedField(null)}
                     placeholder="To make you standout from your competition."
                     className={`w-full px-4 py-2.5 text-sm border rounded-lg transition-all duration-300 bg-gray-50 ${
-                      focusedField === "businessName"
+                        focusedField === "businessName"
                         ? "border-blue-500 shadow-md bg-white"
                         : "border-gray-300 hover:border-gray-400"
-                    } focus:outline-none text-gray-900 placeholder:text-gray-400`}
-                  />
+                      } focus:outline-none text-gray-900 placeholder:text-gray-400`}
+                    />
                 </motion.div>
 
                 {/* Project Type Field */}

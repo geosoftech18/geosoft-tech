@@ -33,18 +33,18 @@ const PartnerBadges = () => {
     <section className="h-full w-full border-0 border-b border-solid border-neutral-200">
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:py-24">
         {/* Partner Badges Grid */}
-        <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 md:flex md:flex-wrap items-center justify-center gap-4 md:gap-6 lg:gap-8">
           {partnerBadges.map((badge, index) => (
             <div
               key={index}
-              className="group relative flex h-32 w-full items-center justify-center overflow-hidden rounded-lg bg-white p-4 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg sm:h-36 sm:w-auto sm:min-w-[140px] md:h-40 md:min-w-[160px] lg:h-44 lg:min-w-[180px]"
+              className="group relative flex h-40 w-full items-center justify-center overflow-hidden rounded-lg bg-white p-4 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg md:h-48 md:w-auto md:min-w-[200px] lg:h-52 lg:min-w-[220px]"
             >
               <div className="relative flex h-full w-full items-center justify-center">
                 <Image
                   src={badge.image}
                   alt={badge.name}
-                  width={180}
-                  height={120}
+                  width={240}
+                  height={160}
                   className="object-contain"
                   style={{
                     maxWidth: '100%',
@@ -100,6 +100,7 @@ const PartnerBadges = () => {
 };
 
 export default PartnerBadges;
+
 
 
 
