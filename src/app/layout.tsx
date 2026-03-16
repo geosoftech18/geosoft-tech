@@ -78,7 +78,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
             height="1"
             width="1"
             style={{ display: 'none' }}
-            alt=""
+            alt="LinkedIn tracking pixel"
             src="https://px.ads.linkedin.com/collect/?pid=5967722&fmt=gif"
           />
         </noscript>
@@ -101,7 +101,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
       <body className={`${avantGarde.className} ${avantGarde.variable}`}>
         <Navbar
           logo={{
-            url: '/logo/logo.webp',
+            url: '/logo/logo.png',
             alt: 'GEOSOFTECH',
           }}
           navlist={{
@@ -121,6 +121,10 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
               {
                 name: 'Portfolio',
                 url: '/portfolio',
+              },
+              {
+                name: 'Blogs',
+                url: '/blog',
               },
               {
                 name: 'Contact Us',

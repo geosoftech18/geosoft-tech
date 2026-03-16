@@ -71,12 +71,12 @@ const Footer = (props: Props) => {
       <section className=" h-full w-full">
         <div className="mx-auto w-full max-w-7xl px-5 ">
           <div className="mt-16 flex w-full flex-col items-start md:flex-row md:items-center ">
-            <div className="flex w-full justify-center p-5 pl-0 pb-0 text-start md:w-1/2 md:justify-start md:text-center">
+            <div className="flex w-full justify-center p-5 pl-0 pb-2 text-start md:w-1/2 md:justify-start md:text-center">
               <Image
                 src={'/logo/logo.png'}
                 alt="logo"
-                width={200}
-                height={200}
+                width={80}
+                height={80}
               />
             </div>
             {/* <div className="flex flex-wrap justify-center space-x-4 p-5 md:w-1/2 md:justify-start">

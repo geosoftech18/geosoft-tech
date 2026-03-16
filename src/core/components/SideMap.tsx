@@ -8,7 +8,7 @@ const ContactInfo = ({ content }: Props) => {
   // to add glassmorphism : contact-info
   return (
     <div className="mt-14 flex flex-col items-center justify-center rounded-xl bg-gray-200 p-5 md:items-start md:bg-white">
-      <h1 className="my-5 text-4xl  font-bold md:ml-5">Contact Us</h1>
+      <h2 className="my-5 text-4xl font-bold md:ml-5">Contact Us</h2>
       <div className="flex w-full flex-col items-center justify-center px-5">
         {content.map((item: any, index: number) => (
           <div

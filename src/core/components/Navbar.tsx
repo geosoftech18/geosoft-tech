@@ -38,7 +38,7 @@ const Navbar: React.FC<navbar.index> = ({ logo, navlist }) => {
       data-scrolled={scrolled}
     >
       {navlist?.links && (
-        <div className="flex w-full justify-end bg-neutral-100 lg:hidden">
+        <div className="flex w-full justify-end bg-neutral-100 lg:hidden ">
           <Button
             rounded="rounded-full"
             variant="secondary"
@@ -48,14 +48,14 @@ const Navbar: React.FC<navbar.index> = ({ logo, navlist }) => {
           </Button>
         </div>
       )}
-      <div className="relative mx-auto flex w-full max-w-screen-2xl justify-between gap-4 px-10 py-4">
+      <div className="relative mx-auto flex w-full max-w-screen-2xl justify-between gap-2 px-10 py-2">
         <Link href={'/'}>
           <Image
             src={logo.url}
             alt={logo.alt}
-            width={'100'}
-            height={'40'}
-            className="max-xsm:h-9 relative z-10 h-10 w-full object-contain object-center"
+            width={'200'}
+            height={'200'}
+            className="max-xsm:h-11 relative z-10 lg:h-16 h-14 w-full object-contain object-center"
           />
         </Link>
         {navlist?.links && <NavList links={navlist.links} />}

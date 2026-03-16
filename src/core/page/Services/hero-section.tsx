@@ -63,7 +63,6 @@ const WhatsAppButton = () => {
 }
 
 export default function HeroSection() {
-  const [mounted, setMounted] = useState(false)
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [selectedService, setSelectedService] = useState("")
   const [formData, setFormData] = useState({
@@ -175,12 +174,6 @@ Thank you!`
       setIsSubmitting(false)
     }
   }
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
 
   return (
     <div className="h-full w-full" id="hero">

@@ -65,7 +65,7 @@ const ContactForm = ({}: Props) => {
         <div className="upDownAnimation absolute left-10 top-10">
           <Image
             src={'/shape-person.png'}
-            alt=""
+            alt="Abstract person illustration"
             width={250}
             height={250}
             className="aspect-square h-24 w-24 md:h-32 md:w-32"
@@ -74,7 +74,7 @@ const ContactForm = ({}: Props) => {
         <div className="upDownAnimation  bottom-10 right-10 hidden md:absolute md:block">
           <Image
             src={'/shape-face.png'}
-            alt=""
+            alt="Decorative face illustration"
             width={200}
             height={200}
             className="h-44 w-44"

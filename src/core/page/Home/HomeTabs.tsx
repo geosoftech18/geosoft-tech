@@ -121,7 +121,7 @@ const HomeTabs = () => {
   return (
     <section
       className={`inset-x-0 z-40 w-full bg-white shadow-sm ${
-        isHeaderFixed ? 'fixed top-16 max-lg:top-24' : 'sticky top-0'
+        isHeaderFixed ? 'fixed top-20 max-lg:top-28' : 'sticky top-0'
       }`}
     >
       <ul className="m-auto grid max-w-7xl grid-cols-4">
