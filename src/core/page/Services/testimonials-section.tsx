@@ -2,8 +2,16 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-
-import { ChevronLeft, ChevronRight, Play, Star } from "lucide-react"
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+  FaYoutube,
+  FaPinterest,
+} from "react-icons/fa6"
+import { ChevronLeft, ChevronRight, Play, Star, BadgeCheck } from "lucide-react"
+import { testimonials as homeTestimonials } from "@/data"
 
 const testimonials = [
   {
@@ -92,10 +100,34 @@ const clientLogos = [
   { name: "Lodha Group", logo: "/partners/p1.webp" },
   { name: "Slim feel", logo: "/partners/p2.webp" },
   { name: "framezOmania", logo: "/partners/p3.webp" },
-{ name: "Dheera", logo: "/partners/p4.webp" },
-{ name: "Stationery", logo: "/partners/p5.webp" },
-{ name: "Digital Dhaba", logo: "/partners/p6.webp" },
-{ name: "Muscle", logo: "/partners/p7.webp" },
+  { name: "Dheera", logo: "/partners/p4.webp" },
+  { name: "Stationery", logo: "/partners/p5.webp" },
+  { name: "Digital Dhaba", logo: "/partners/p6.webp" },
+  { name: "Muscle", logo: "/partners/p7.webp" },
+]
+
+// Social media icons array (without Pinterest) for non-service testimonials
+const socialIcons = [
+  { icon: FaFacebook, color: "text-blue-600", bg: "bg-blue-50" },
+  { icon: FaInstagram, color: "text-pink-600", bg: "bg-pink-50" },
+  { icon: FaLinkedinIn, color: "text-blue-700", bg: "bg-blue-50" },
+  { icon: FaTwitter, color: "text-sky-500", bg: "bg-sky-50" },
+  { icon: FaYoutube, color: "text-red-600", bg: "bg-red-50" },
+]
+
+// Merge service testimonials with home page testimonials into single carousel list
+const allTestimonials = [
+  ...testimonials,
+  ...homeTestimonials.map((item, index) => ({
+    id: testimonials.length + index + 1,
+    name: item.name,
+    company: "",
+    role: item.role,
+    text: item.testimonial,
+    avatar: item.url,
+    rating: 5,
+    hasVideo: false,
+  })),
 ]
 
 export default function TestimonialsSection() {
@@ -120,17 +152,21 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % (testimonials.length - slidesToShow + 1))
+      setCurrentSlide((prev) => (prev + 1) % (allTestimonials.length - slidesToShow + 1))
     }, 5000)
     return () => clearInterval(timer)
   }, [slidesToShow])
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % (testimonials.length - slidesToShow + 1))
+    setCurrentSlide((prev) => (prev + 1) % (allTestimonials.length - slidesToShow + 1))
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + (testimonials.length - slidesToShow + 1)) % (testimonials.length - slidesToShow + 1))
+    setCurrentSlide(
+      (prev) =>
+        (prev - 1 + (allTestimonials.length - slidesToShow + 1)) %
+        (allTestimonials.length - slidesToShow + 1),
+    )
   }
 
   const handleWhatsApp = () => {
@@ -169,7 +205,14 @@ export default function TestimonialsSection() {
                 transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)`,
               }}
             >
-              {testimonials.map((testimonial, index) => (
+              {allTestimonials.map((testimonial, index) => {
+                const isServiceTestimonial = index < testimonials.length
+                const socialIconData = isServiceTestimonial
+                  ? { icon: FaLinkedinIn, color: "text-blue-700", bg: "bg-blue-50" }
+                  : socialIcons[(index - testimonials.length) % socialIcons.length]
+                const SocialIcon = socialIconData.icon
+
+                return (
                 <motion.div
                   key={testimonial.id}
                   className={`flex-shrink-0 px-2 sm:px-4 ${
@@ -180,40 +223,59 @@ export default function TestimonialsSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-4 sm:p-6 lg:p-8 h-full relative group hover:-translate-y-1 sm:hover:-translate-y-2">
-                    {/* Video Play Button Overlay */}
-                    {testimonial.hasVideo && (
-                      <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-blue-600 text-white p-1.5 sm:p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
-                        <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <div className="h-full w-full overflow-hidden rounded-sm border-2 border-solid border-neutral-100">
+                    <div className="flex items-center justify-between gap-5 border-0 border-b-2 border-solid border-neutral-100 px-6 py-4">
+                      <div className="h-12 w-12 overflow-hidden rounded-full">
+                        <img
+                          src={testimonial.avatar || "/services/webdevelopment/placeholder.svg"}
+                          alt={testimonial.name}
+                          className="h-full w-full object-cover"
+                        />
                       </div>
-                    )}
-
-                    {/* Rating Stars */}
-                    <div className="flex mb-3 sm:mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
-                      ))}
+                      <div className="space-y-2 flex-1">
+                        <h3 className="font-medium uppercase text-black">
+                          {testimonial.name}
+                        </h3>
+                        <p className="text-xs font-medium uppercase text-neutral-400">
+                          {testimonial.role}
+                        </p>
+                      </div>
+                      <div className="relative flex items-center justify-center">
+                        {/* Verified Badge with Social Icon */}
+                        <div className="relative flex items-center justify-center">
+                          {/* Social Icon Background */}
+                          <div
+                            className={`h-12 w-12 rounded-full ${socialIconData.bg} flex items-center justify-center border-2 border-white shadow-md`}
+                          >
+                            <SocialIcon
+                              className={`h-6 w-6 ${socialIconData.color}`}
+                            />
+                          </div>
+                          {/* Verified Badge Overlay */}
+                          <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-0.5 border-2 border-white shadow-sm">
+                            <BadgeCheck className="h-4 w-4 text-white" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-
-                    {/* Testimonial Text */}
-                    <p className="text-gray-700 text-sm sm:text-base lg:text-lg leading-relaxed mb-4 sm:mb-6 italic">"{testimonial.text}"</p>
-
-                    {/* Client Info */}
-                    <div className="flex items-center">
-                      <img
-                        src={testimonial.avatar || "/services/webdevelopment/placeholder.svg"}
-                        alt={testimonial.name}
-                        className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full object-cover mr-3 sm:mr-4 border-2 border-gray-200"
-                      />
-                      <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-gray-900 text-sm sm:text-base lg:text-lg truncate">{testimonial.name}</h4>
-                        <p className="text-gray-600 text-xs sm:text-sm truncate">{testimonial.role}</p>
-                        <p className="text-blue-600 font-medium text-xs sm:text-sm truncate">{testimonial.company}</p>
+                    <div className="p-6 space-y-3">
+                      {/* Testimonial Text */}
+                      <p className="text-gray-700 text-sm sm:text-base lg:text-base leading-relaxed italic">
+                        "{testimonial.text}"
+                      </p>
+                      {/* Rating Stars */}
+                      <div className="flex">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current"
+                          />
+                        ))}
                       </div>
                     </div>
                   </div>
                 </motion.div>
-              ))}
+              )})}
             </motion.div>
           </div>
 
@@ -233,7 +295,7 @@ export default function TestimonialsSection() {
 
           {/* Dots Indicator */}
           <div className="flex justify-center mt-6 sm:mt-8 space-x-1">
-            {Array.from({ length: testimonials.length - slidesToShow + 1 }).map((_, index) => (
+            {Array.from({ length: allTestimonials.length - slidesToShow + 1 }).map((_, index) => (
               <div
                 key={index}
                 onClick={() => setCurrentSlide(index)}
@@ -255,7 +317,7 @@ export default function TestimonialsSection() {
 
         {/* CTA Button */}
         <motion.div
-          className="text-center mb-8 sm:mb-12 lg:mb-16 px-4"
+          className="text-center mb-8 sm:mb-12 lg:mb-16 px-4 mt-12 sm:mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

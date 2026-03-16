@@ -148,6 +148,86 @@ export const testimonials = [
     ),
     url: '/home/testimonial/testimonial-4.jpeg',
   },
+  {
+    name: 'Sanjay Kathuria',
+    role: 'Founder & Chief Mentor, CFA',
+    testimonial: (
+      <p className="text-neutral-800">
+        Creating a standout website can significantly boost business visibility; Geo Softech seems well equipped for that.
+      </p>
+    ),
+    url: '/services/Sanjay Kathuria, CFA.png',
+  },
+  {
+    name: 'BK Dadhich',
+    role: 'Self-employed, Conscious Foundation',
+    testimonial: (
+      <p className="text-neutral-800">
+        Totally agree! Crisp, clear, and impactful — exactly the kind of content businesses need more of.
+      </p>
+    ),
+    url: '/services/BK Dadhich.png',
+  },
+  {
+    name: 'Saumya Dudeja',
+    role: 'Founder, InfluencerConnect',
+    testimonial: (
+      <p className="text-neutral-800">
+        Nice share! Simple, clear, and straight to the point — exactly how good business communication should be. This is the kind of content that earns trust and shows your team’s expertise. Keep up the good work!
+      </p>
+    ),
+    url: '/services/Saumya Dudeja.png',
+  },
+  {
+    name: 'Devvarth Chavriya',
+    role: 'Founder and Director, Binplus Technologies',
+    testimonial: (
+      <p className="text-neutral-800">
+        Truly inspiring — simple yet impactful. Great to see such meaningful work being shared.
+      </p>
+    ),
+    url: '/services/Devvarth Chavriya.png',
+  },
+  {
+    name: 'Neeraj Arora',
+    role: 'Business Administrator',
+    testimonial: (
+      <p className="text-neutral-800">
+        Very interesting! Shows a solid understanding of what modern businesses need in a web development partner.
+      </p>
+    ),
+    url: '/services/Neeraj Arora.png',
+  },
+  {
+    name: 'Swapnil Mishra',
+    role: 'Chief Executive Officer, Nipundta',
+    testimonial: (
+      <p className="text-neutral-800">
+        Great initiative by Amar Korde — clear, professional, and focused on real business value. Wishing you continued success!
+      </p>
+    ),
+    url: '/services/Swapnil Mishra.png',
+  },
+  {
+    name: 'Gopal Tarpe',
+    role: 'Technical Manager',
+    testimonial: (
+      <p className="text-neutral-800">
+        Great start, sir! Really impressive approach and clear presentation. Looking forward to seeing more amazing work from you. Keep it up!
+      </p>
+    ),
+    url: '/services/Gopal Tarpe.png',
+  },
+  {
+    name: 'Indira Priyadarshini',
+    role: 'Self-employed, Icreativehub',
+    testimonial: (
+      <p className="text-neutral-800">
+        Geo Softech nails custom websites with responsive design and SEO expertise — built to boost your visibility!
+      </p>
+    ),
+    url: '/services/Indira Priyadarshini Dash.png',
+  },
 ];
 
 export const goal = [

@@ -16,8 +16,8 @@ const socialIcons = [
   { icon: FaInstagram, color: 'text-pink-600', bg: 'bg-pink-50' },
   { icon: FaLinkedinIn, color: 'text-blue-700', bg: 'bg-blue-50' },
   { icon: FaTwitter, color: 'text-sky-500', bg: 'bg-sky-50' },
-  { icon: FaYoutube, color: 'text-red-600', bg: 'bg-red-50' },
-  { icon: FaPinterest, color: 'text-red-700', bg: 'bg-red-50' },
+ 
+  
 ];
 
 // Function to get a social icon for each testimonial (based on index for consistency)
