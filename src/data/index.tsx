@@ -58,7 +58,7 @@ export const services = [
     name: 'SEO',
     subtitle: 'Dominate the digital landscape',
     url: '/home/services/service-3.jpg',
-    link: '/#',
+    link: '/services/seo',
   },
   {
     name: 'Content Marketing',
@@ -82,7 +82,7 @@ export const services = [
     name: 'SEO',
     subtitle: 'Dominate the digital landscape',
     url: '/home/services/service-3.jpg',
-    link: '/#',
+    link: '/services/seo',
   },
   {
     name: 'Content Marketing',

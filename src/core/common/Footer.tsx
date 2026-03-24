@@ -140,7 +140,7 @@ const Footer = (props: Props) => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="/services/seo" className="hover:text-primary transition-colors">
                   SEO Services
                 </a>
               </li>
