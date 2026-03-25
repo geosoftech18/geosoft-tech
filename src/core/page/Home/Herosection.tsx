@@ -65,9 +65,9 @@ const Herosection = () => {
                 <Button
                   variant="secondary"
                   rounded="rounded-full"
-                  className="!p-4"
+                  className="!p-4 group"
                 >
-                  <RiArrowRightSFill className="text-xl" />
+                  <RiArrowRightSFill className="text-xl group-hover:text-white" />
                 </Button>
               }
             >

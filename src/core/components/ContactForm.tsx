@@ -17,6 +17,8 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
   const [companyName, setCompanyName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [emailError, setEmailError] = useState<string | undefined>(undefined);
+  const [phoneError, setPhoneError] = useState<string | undefined>(undefined);
   const [selectedServices, setSelectedServices] = useState<
     string | undefined
   >();
@@ -34,6 +36,36 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
         confirmButtonText: 'Okay',
       });
       return;
+    }
+
+    const isValidEmail = (value: string) =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
+    const isValidPhone = (value: string) => {
+      const digits = value.replace(/\D/g, "");
+      return digits.length >= 10 && digits.length <= 15;
+    };
+
+    if (currentStep === 4) {
+      const nextEmailError = !isValidEmail(email) ? "Please enter a valid email address." : undefined;
+      const nextPhoneError = !isValidPhone(phoneNumber)
+        ? "Please enter a valid mobile number (10-15 digits)."
+        : undefined;
+
+      if (nextEmailError || nextPhoneError) {
+        setEmailError(nextEmailError);
+        setPhoneError(nextPhoneError);
+        DangerSwal.fire({
+          title: "Please check your details",
+          html: [nextEmailError, nextPhoneError].filter(Boolean).join("<br/>"),
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+        return;
+      }
+
+      setEmailError(undefined);
+      setPhoneError(undefined);
     }
     if (currentStep === 1 && selectedServices !== 'WEB DESIGN & DEVELOPMENT') {
       setCurrentStep(currentStep + 2);
@@ -57,7 +89,32 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
 
   const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isValidEmail = (value: string) =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
+    const cleanedPhone = phoneNumber.replace(/\D/g, "");
+    const isValidPhone = (value: string) => {
+      const digits = value.replace(/\D/g, "");
+      return digits.length >= 10 && digits.length <= 15;
+    };
+
     if (name && email && phoneNumber) {
+      const nextEmailError = !isValidEmail(email) ? "Please enter a valid email address." : undefined;
+      const nextPhoneError = !isValidPhone(phoneNumber)
+        ? "Please enter a valid mobile number (10-15 digits)."
+        : undefined;
+
+      if (nextEmailError || nextPhoneError) {
+        setEmailError(nextEmailError);
+        setPhoneError(nextPhoneError);
+        DangerSwal.fire({
+          title: "Please check your details",
+          html: [nextEmailError, nextPhoneError].filter(Boolean).join("<br/>"),
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+        return;
+      }
       try {
         const res = await fetch('/api/contact', {
           method: 'POST',
@@ -67,7 +124,7 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
           body: JSON.stringify({
             name,
             email,
-            phone_number: phoneNumber,
+            phone_number: cleanedPhone,
             company_name: companyName,
             requirement: selectedServices,
             work_preference: selectedWork,
@@ -363,7 +420,7 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  placeholder="eg. Mehul"
+                  placeholder="enter you name"
                   className="w-full resize-none border-b border-b-neutral-300 text-lg text-p outline-none transition-colors focus:border-b-p md:text-xl lg:text-2xl"
                 />
               </div>
@@ -378,12 +435,29 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
                   id="email"
                   name="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="eg.mehul@gmail.com"
+                  onChange={(e) => {
+                    const next = e.target.value;
+                    setEmail(next);
+                    if (emailError) {
+                      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(next.trim());
+                      if (isValidEmail) setEmailError(undefined);
+                    }
+                  }}
+                  onBlur={() => {
+                    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+                    setEmailError(isValidEmail ? undefined : "Please enter a valid email address.");
+                  }}
+                  type="email"
+                  inputMode="email"
+                  placeholder="eg.info@geosoftech.com"
                   required
+                  aria-invalid={emailError ? "true" : "false"}
                   className="w-full resize-none border-b border-b-neutral-300 text-lg text-p outline-none transition-colors focus:border-b-p md:text-xl lg:text-2xl"
                 />
               </div>
+              {emailError && (
+                <p className="w-full -mt-3 text-sm text-red-600">{emailError}</p>
+              )}
               <div className="flex w-full items-center gap-2">
                 <label
                   htmlFor="phoneNumber"
@@ -395,12 +469,34 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
                   id="phoneNumber"
                   name="phoneNumber"
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onChange={(e) => {
+                    const next = e.target.value;
+                    setPhoneNumber(next);
+                    if (phoneError) {
+                      const digits = next.replace(/\D/g, "");
+                      const isValidPhone = digits.length >= 10 && digits.length <= 15;
+                      if (isValidPhone) setPhoneError(undefined);
+                    }
+                  }}
+                  onBlur={() => {
+                    const digits = phoneNumber.replace(/\D/g, "");
+                    const isValidPhone = digits.length >= 10 && digits.length <= 15;
+                    setPhoneError(
+                      isValidPhone ? undefined : "Please enter a valid mobile number (10-15 digits)."
+                    );
+                  }}
+                  type="tel"
+                  inputMode="numeric"
                   placeholder="eg.1010101010"
                   required
+                  aria-invalid={phoneError ? "true" : "false"}
+                  pattern="[0-9]{10,15}"
                   className="w-full resize-none border-b border-b-neutral-300 text-lg text-p outline-none transition-colors focus:border-b-p md:text-xl lg:text-2xl"
                 />
               </div>
+              {phoneError && (
+                <p className="w-full -mt-3 text-sm text-red-600">{phoneError}</p>
+              )}
             </div>
             <FlipButton
               variant="flip"

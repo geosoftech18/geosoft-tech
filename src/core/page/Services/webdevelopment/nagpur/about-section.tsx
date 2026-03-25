@@ -31,22 +31,22 @@ const values = [
   {
     icon: Heart,
     title: "Client-First Approach",
-    description: "We prioritize our clients' success and build long-term partnerships based on trust and results.",
+    description: "Your triumph? Our obsession. Long-term ties, built on trust, fueled by results.",
   },
   {
     icon: Lightbulb,
     title: "Innovation & Creativity",
-    description: "We stay ahead of trends and use cutting-edge technologies to deliver exceptional solutions.",
+    description: "Ahead of the curve. Tools that are sharp, delivering solutions that are unreal.",
   },
   {
     icon: Zap,
     title: "Performance Driven",
-    description: "Every website we build is optimized for speed, SEO, and conversion to maximize your ROI.",
+    description: "Every site? Tuned for speed, search engines, conversions. ROI? Maxed.",
   },
   {
     icon: Users,
     title: "Local Expertise",
-    description: "Based in Mumbai, we understand the local market and audience behavior intimately.",
+    description: "Mumbai natives. The market? We breathe it. The audience? We know them",
   },
 ]
 
@@ -84,18 +84,13 @@ export function AboutSection() {
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">Our Story</h3>
             <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-muted-foreground">
               <p>
-                GEO Softech was born from a simple vision: to help Mumbai businesses thrive in the digital world. Since
-                2018, we've been transforming ideas into powerful digital experiences that drive real business results.
+              GEO Softech? Simple idea: Mumbai businesses killing it in the digital arena. Since 2018, morphing ideas into digital powerhouses, driving hard results.
               </p>
               <p>
-                What started as a small team of passionate developers has grown into Mumbai's leading web design agency,
-                trusted by over 300 businesses across various industries. Our local expertise combined with global best
-                practices makes us the perfect partner for your digital journey.
+              Started small. Passionate coders. Now? A leading agency in Mumbai, trusted by 300+ businesses. Local smarts, global plays? Perfect mix for your digital climb.
               </p>
               <p>
-                We don't just build websites – we create digital growth engines that help our clients succeed in
-                Mumbai's competitive business landscape. Every project is an opportunity to exceed expectations and
-                build lasting partnerships.
+              We're not just builders. We're architects of online expansion. Helping clients conquer Mumbai's tough landscape. Every project? A chance to blow minds, forge lasting bonds.
               </p>
             </div>
 

@@ -16,7 +16,11 @@ const benefits = [
 ]
 
 
-function InternationalPhoneInput() {
+function InternationalPhoneInput({
+  onPhoneChange,
+}: {
+  onPhoneChange?: (phone: string) => void;
+}) {
   const [selectedCountry, setSelectedCountry] = useState(countries[0])
   const [phoneNumber, setPhoneNumber] = useState("")
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -57,6 +61,7 @@ function InternationalPhoneInput() {
         const dialCode = detectedCountry.dialCode.replace("+", "")
         const phoneWithoutDialCode = digits.replace(dialCode, "")
         setPhoneNumber(phoneWithoutDialCode)
+        onPhoneChange?.(phoneWithoutDialCode ? detectedCountry.dialCode + phoneWithoutDialCode : "")
         return
       }
 
@@ -74,6 +79,7 @@ function InternationalPhoneInput() {
     }
 
     setPhoneNumber(digits)
+    onPhoneChange?.(digits ? selectedCountry.dialCode + digits : "")
   }
 
   const formatPhoneNumber = (number: string) => {
@@ -95,6 +101,10 @@ function InternationalPhoneInput() {
   const getFullPhoneNumber = () => {
     return selectedCountry.dialCode + phoneNumber
   }
+
+  React.useEffect(() => {
+    onPhoneChange?.(phoneNumber ? getFullPhoneNumber() : "")
+  }, [selectedCountry, phoneNumber, onPhoneChange])
 
   return (
     <div className="relative phone-input-container">
@@ -169,6 +179,90 @@ function InternationalPhoneInput() {
 }
 
 export function CTASection() {
+  const [phoneInputKey, setPhoneInputKey] = useState(0)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    description: "",
+  })
+
+  const serviceMap: Record<string, string> = {
+    "website-design": "Website Design",
+    ecommerce: "E-commerce Development",
+    seo: "SEO Services",
+    redesign: "Website Redesign",
+    maintenance: "Website Maintenance",
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (isSubmitting) return
+
+    if (!formData.name || !formData.email || !formData.phone || !formData.service) {
+      alert("Please fill in all required fields.")
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const selectedService = serviceMap[formData.service] || "Website Design"
+      const response = await fetch("/api/form-submission", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: "",
+          projectType: selectedService,
+          budget: "Not specified",
+          timeline: "Not specified",
+          message: formData.description || "",
+          selectedService,
+          formSource: "contact-form-section",
+        }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitStatus("success")
+
+        if (result.whatsappUrl) {
+          window.open(result.whatsappUrl, "_blank")
+        }
+
+        alert("Thank you! We'll contact you soon.")
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          description: "",
+        })
+        setPhoneInputKey((prev) => prev + 1)
+      } else {
+        setSubmitStatus("error")
+        alert("Submission failed. Please try again.")
+      }
+    } catch (err) {
+      console.error("Nagpur CTA submission error:", err)
+      setSubmitStatus("error")
+      alert("Submission failed. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section id="contact" className="py-12 sm:py-16 md:py-20 bg-[#00bf62] text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -194,7 +288,7 @@ export function CTASection() {
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-white flex-shrink-0 mt-0.5" />
                   <span className="text-sm sm:text-base text-primary-foreground">{benefit}</span>
                 </div>
               ))}
@@ -205,6 +299,7 @@ export function CTASection() {
                 size="lg"
                 variant="secondary"
                 className="bg-yellow-600 hover:bg-yellow-600/90 text-white text-sm sm:text-base"
+                onClick={() => window.open("tel:+917776085112", "_blank")}
               >
                 <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 Call Now
@@ -213,6 +308,7 @@ export function CTASection() {
                 size="lg"
                 variant="outline"
                 className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent text-sm sm:text-base"
+                onClick={() => window.open("https://wa.me/917776085112", "_blank")}
               >
                 <MessageCircle className="mr-2 h-4 w-4 sm:h-5 sm:w-5 text-white hover:text-black" />
                 WhatsApp Chat
@@ -223,10 +319,12 @@ export function CTASection() {
           <Card className="bg-background/95 backdrop-blur border-primary-foreground/20">
             <CardContent className="p-6 sm:p-8">
               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-4 sm:mb-6">Get Your Free Consultation</h3>
-              <form className="space-y-3 sm:space-y-4">
+              <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <input
                     type="text"
+                    value={formData.name}
+                    onChange={(ev) => setFormData((prev) => ({ ...prev, name: ev.target.value }))}
                     placeholder="Your Name"
                     className="w-full p-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   />
@@ -234,15 +332,24 @@ export function CTASection() {
                 <div>
                   <input
                     type="email"
+                    value={formData.email}
+                    onChange={(ev) => setFormData((prev) => ({ ...prev, email: ev.target.value }))}
                     placeholder="Email Address"
                     className="w-full p-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
                   />
                 </div>
                 <div>
-                  <InternationalPhoneInput />
+                  <InternationalPhoneInput
+                    key={phoneInputKey}
+                    onPhoneChange={(phone) => setFormData((prev) => ({ ...prev, phone }))}
+                  />
                 </div>
                 <div>
-                  <select className="w-full p-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-[#00bf62] text-sm sm:text-base">
+                  <select
+                    value={formData.service}
+                    onChange={(ev) => setFormData((prev) => ({ ...prev, service: ev.target.value }))}
+                    className="w-full p-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-[#00bf62] text-sm sm:text-base"
+                  >
                     <option value="">Select Service</option>
                     <option value="website-design">Website Design</option>
                     <option value="ecommerce">E-commerce Development</option>
@@ -253,20 +360,27 @@ export function CTASection() {
                 </div>
                 <div>
                   <textarea
+                    value={formData.description}
+                    onChange={(ev) => setFormData((prev) => ({ ...prev, description: ev.target.value }))}
                     placeholder="Tell us about your project..."
                     rows={4}
                     className="w-full p-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[#00bf62] resize-none text-sm sm:text-base"
-                  ></textarea>
+                  />
                 </div>
                 <Button
                   type="submit"
                   size="lg"
                   className="w-full bg-[#00bf62] hover:bg-[#00bf62]/90 text-primary-foreground text-sm sm:text-base"
+                  disabled={isSubmitting}
                 >
                   Get Free Consultation
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </Button>
               </form>
+
+              {submitStatus === "error" && (
+                <p className="mt-3 text-sm text-red-600">Something went wrong. Please try again.</p>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -278,11 +392,11 @@ export function CTASection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
             <div className="flex items-center gap-2">
               <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
-              <span className="text-white">+91 98765 43210</span>
+              <span className="text-white">+91 7776085112</span>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
-              <span className="text-white">hello@geosoftech.com</span>
+              <span className="text-white">info@geosoftech.com</span>
             </div>
             <div className="flex items-center gap-2">
               <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 text-white" />

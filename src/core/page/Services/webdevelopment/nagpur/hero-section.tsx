@@ -30,8 +30,10 @@ export function HeroSection() {
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl lg:text-xl text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
-          In today’s digital-first world, your website is not just a digital brochure—it’s the heartbeat of your business. Customers judge your credibility, trustworthiness, and professionalism by the way your website looks and functions. That’s why choosing the right website designing company in Nagpur is crucial. 
-At GEO SofTech, we specialize in creating modern, responsive, and SEO-friendly websites tailored to your business goals. As a leading web design services provider in Nagpur, we blend creativity, technology, and strategy to deliver websites that not only look stunning but also perform at the highest level. 
+          GEO Softech – Professional Website Designing Company in Nagpur
+          Forget digital brochures. Today? Websites breathe life into your business. It's how clients judge you. Trust. Prowess. Your website's look matters. Finding the right design shop in Nagpur?
+           Non-negotiable. At GEO SofTech, modern, responsive, SEO-amped websites? That's our jam. Tailored. We're not just another web design services outfit in Nagpur. Creativity, tech wizardry, strategic smarts – we fuse it all. Websites that wow? 
+           Absolutely. Websites that deliver? Even better.
  </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">

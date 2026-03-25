@@ -40,9 +40,11 @@ const Navbar: React.FC<navbar.index> = ({ logo, navlist }) => {
       {navlist?.links && (
         <div className="flex w-full justify-end bg-neutral-100 lg:hidden ">
           <Button
+            type="button"
             rounded="rounded-full"
             variant="secondary"
             className="my-1 mr-5 !bg-white py-1 hover:!bg-black"
+            onClick={() => handleOpenModal(true)}
           >
             Join Us
           </Button>

@@ -64,36 +64,36 @@ const whyChooseUs = [
   {
     icon: MapPin,
     title: "Local Expertise",
-    description: "As a Nagpur-based website designing company, we understand local markets and customer behavior.",
+    description: "Nagpur born and bred. We get the lay of the land, the local vibe.",
   },
   {
     icon: Palette,
     title: "Creative & modern Designs ",
-    description: "Our team of professional designers creates user-friendly UI/UX with engaging layouts.",
+    description: "Design pros crafting slick UI/UX, layouts that pull you in.",
   },
   {
     icon: Search,
     title: "SEO-Optimized",
-    description: " Every site is built with search engine optimization best practices.",
+    description: "Search engines? We speak their language. Sites built to rank.",
   },
   {
     icon: Heart,
     title: "Complete Digital Solutions",
-    description: "Along with design, we also provide website development, e-commerce, SEO, and digital marketing. ",
+    description: "Design? Just the start. We also build, market, optimize. Full suite.",
   },
   {
     icon: Award,
     title: "Affordable Pricing ",
-    description: "From startups to corporates, we provide cost-effective website design services in Nagpur.",
+    description: "Startups to giants, Nagpur web design that fits the budget.",
   },
 ]
 
 const benefits = [
-  "Boost Brand Credibility – A well-designed website builds trust and authority.",
-  "Higher Conversions – Our designs are optimized for lead generation and sales.",
-  "Faster Websites – Lightweight coding ensures quick loading speed.",
-  "Future-Ready Technology – Built with Next.js, Node.js, and modern CMS tools.",
-  "Local + Global Reach – Target Nagpur customers while expanding to global markets. ",
+  "Ramp Up Trust – Websites done right? Instant credibility.",
+  "Skyrocket Conversions – Designs honed for turning prospects into buyers.",
+  "Lightning Speed – Code that's lean, mean, and fast.",
+  "Tomorrow's Tech – Next.js, Node.js, slick CMS tools under the hood.Future-Ready Technology – Built with Next.js, Node.js, and modern CMS tools.",
+  "Local Muscle, Global Reach – Own Nagpur. Then, the world.",
 ]
 
 export function ExpertiseSection() {
@@ -107,11 +107,11 @@ export function ExpertiseSection() {
   }
 
   const websiteBenefits = [
-    "Build brand credibility in competitive markets ",
-    "Attract local and global customers ",
-    "Generate consistent leads and sales ",
-    "Provide a seamless customer experience ",
-    "Stay ahead with digital-first strategies ",
+    "Own your space in heated markets",
+    "Grab customers near, far, everywhere",
+    "Leads, sales...consistent flow",
+    "Smooth sailing for every visitor",
+    "Digital strategies? Stay ahead",
   ]
 
   const nextSlide = () => {
@@ -284,8 +284,7 @@ export function ExpertiseSection() {
           Why Nagpur Businesses Need a Professional Website 
           </h3>
           <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 text-center max-w-3xl mx-auto">
-          Nagpur is not only the big City of India but also a growing hub for startups, IT companies, 
-          and e-commerce businesses. A professional website is essential to: 
+          Nagpur: rising hub. Startups, tech firms, e-commerce taking off. A sharp website? Not optional.
           </p>
 
           <div className="relative">
