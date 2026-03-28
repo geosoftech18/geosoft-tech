@@ -178,7 +178,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
           // Add default values if missing
           const foundPost: BlogPost = {
             ...blogData,
-            author: 'SP Recycling Team',
+            author: 'GEO Softech Team',
             readTime: '5 min read',
             likes: 0,
             comments: 0
