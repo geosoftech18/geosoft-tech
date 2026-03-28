@@ -47,7 +47,7 @@ export async function PUT(
     const { id } = await params;
     const body = await req.json();
 
-    const { title, content, excerpt, tags, featuredImage, status } = body;
+    const { title, content, excerpt, tags, featuredImage, status, metaTitle, metaDescription } = body;
 
     // If title is being updated, regenerate slug
     let updateData: any = {
@@ -57,6 +57,13 @@ export async function PUT(
       featuredImage: featuredImage || null,
       status: status || 'draft'
     };
+
+    if (metaTitle !== undefined) {
+      updateData.metaTitle = String(metaTitle).trim();
+    }
+    if (metaDescription !== undefined) {
+      updateData.metaDescription = String(metaDescription).trim();
+    }
 
     if (title) {
       updateData.title = title;

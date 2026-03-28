@@ -8,6 +8,8 @@ export interface IBlog extends Document {
   status: 'published' | 'draft';
   featuredImage: string | null;
   slug: string;
+  metaTitle?: string;
+  metaDescription?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -48,6 +50,16 @@ const BlogSchema = new Schema<IBlog>({
     unique: true,
     trim: true,
     lowercase: true
+  },
+  metaTitle: {
+    type: String,
+    trim: true,
+    maxlength: [70, 'Meta title cannot exceed 70 characters']
+  },
+  metaDescription: {
+    type: String,
+    trim: true,
+    maxlength: [320, 'Meta description cannot exceed 320 characters']
   }
 }, {
   timestamps: true,

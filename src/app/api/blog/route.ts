@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     await connectDB();
 
     const body = await req.json();
-    const { title, content, excerpt, tags, featuredImage, status } = body;
+    const { title, content, excerpt, tags, featuredImage, status, metaTitle, metaDescription } = body;
 
     // Validate required fields
     if (!title || !content || !excerpt) {
@@ -85,7 +85,9 @@ export async function POST(req: NextRequest) {
       tags: tags || [],
       featuredImage: featuredImage || null,
       status: status || 'draft',
-      slug: finalSlug
+      slug: finalSlug,
+      ...(metaTitle !== undefined && { metaTitle: String(metaTitle).trim() }),
+      ...(metaDescription !== undefined && { metaDescription: String(metaDescription).trim() })
     });
 
     await blog.save();

@@ -29,6 +29,8 @@ interface BlogPost {
   status: string
   featuredImage: string | null
   slug?: string
+  metaTitle?: string
+  metaDescription?: string
   createdAt: string
   author?: string
   readTime?: string

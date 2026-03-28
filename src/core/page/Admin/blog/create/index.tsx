@@ -33,6 +33,8 @@ function BlogCreateContent() {
   const isEditing = !!editId
 
   const [title, setTitle] = useState('')
+  const [metaTitle, setMetaTitle] = useState('')
+  const [metaDescription, setMetaDescription] = useState('')
   const [content, setContent] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [newTag, setNewTag] = useState('')
@@ -82,6 +84,8 @@ function BlogCreateContent() {
           if (result.success && result.data) {
             const blog = result.data
             setTitle(blog.title)
+            setMetaTitle(blog.metaTitle ?? '')
+            setMetaDescription(blog.metaDescription ?? '')
             setContent(blog.content)
             setTags(blog.tags || [])
             setFeaturedImage(blog.featuredImage)
@@ -172,6 +176,8 @@ function BlogCreateContent() {
         tags,
         featuredImage,
         status: isPublished ? 'published' : 'draft',
+        metaTitle: metaTitle.trim(),
+        metaDescription: metaDescription.trim(),
       }
 
       let response
@@ -300,6 +306,49 @@ function BlogCreateContent() {
                   onChange={(e) => setTitle(e.target.value)}
                   className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue focus:ring-blue/20 rounded-xl h-12"
                 />
+              </motion.div>
+
+              {/* SEO metadata (optional; public page uses these when set) */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35 }}
+                className="space-y-4 rounded-xl border border-white/10 bg-white/5 p-4"
+              >
+                <p className="text-white/90 text-sm font-medium">SEO metadata</p>
+                <p className="text-white/50 text-xs">
+                  Optional. If left empty, the public blog page uses the post title and auto-generated excerpt for search listings.
+                </p>
+                <div className="space-y-2">
+                  <Label htmlFor="metaTitle" className="text-white/80 text-sm">
+                    Meta title
+                  </Label>
+                  <Input
+                    id="metaTitle"
+                    type="text"
+                    placeholder="Custom title for search engines (max 70 characters)"
+                    value={metaTitle}
+                    maxLength={70}
+                    onChange={(e) => setMetaTitle(e.target.value)}
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-blue focus:ring-blue/20 rounded-xl h-11"
+                  />
+                  <p className="text-white/40 text-xs text-right">{metaTitle.length}/70</p>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="metaDescription" className="text-white/80 text-sm">
+                    Meta description
+                  </Label>
+                  <textarea
+                    id="metaDescription"
+                    rows={3}
+                    placeholder="Short summary for search results (max 320 characters)"
+                    value={metaDescription}
+                    maxLength={320}
+                    onChange={(e) => setMetaDescription(e.target.value)}
+                    className="w-full rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-white/50 focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20 resize-y min-h-[88px]"
+                  />
+                  <p className="text-white/40 text-xs text-right">{metaDescription.length}/320</p>
+                </div>
               </motion.div>
 
               {/* Featured Image Upload */}
