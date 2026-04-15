@@ -175,11 +175,6 @@ export const root_meta_data = (props = default_root_props): Metadata => {
       locale: locale,
       type: type,
     },
-    themeColor: '#008BD0',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-    },
     verification: {
       google: 'google',
       yandex: 'yandex',
@@ -226,11 +221,6 @@ export const services_meta_data = (props = default_root_props): Metadata => {
       ],
       locale: locale,
       type: type,
-    },
-    themeColor: '#008BD0',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
     },
     verification: {
       google: 'google',
@@ -279,11 +269,6 @@ export const about_meta_data = (props = default_root_props): Metadata => {
       locale: locale,
       type: type,
     },
-    themeColor: '#008BD0',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-    },
     verification: {
       google: 'google',
       yandex: 'yandex',
@@ -331,11 +316,6 @@ export const projects_meta_data = (props = default_root_props): Metadata => {
       locale: locale,
       type: type,
     },
-    themeColor: '#008BD0',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-    },
     verification: {
       google: 'google',
       yandex: 'yandex',
@@ -382,11 +362,6 @@ export const contact_meta_data = (props = default_root_props): Metadata => {
       ],
       locale: locale,
       type: type,
-    },
-    themeColor: '#008BD0',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
     },
     verification: {
       google: 'google',

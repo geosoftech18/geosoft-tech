@@ -28,6 +28,7 @@ interface BlogPost {
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const loadBlogs = async () => {
@@ -35,13 +36,16 @@ export default function BlogPage() {
         const response = await fetch('/api/blog?status=published')
         const result = await response.json()
 
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || 'Failed to load blogs')
+        }
+
         if (result.success) {
           setPosts(result.data)
-        } else {
-          console.error('Error loading blogs:', result.error)
         }
       } catch (error) {
         console.error('Error loading blogs:', error)
+        setError('Unable to load blog posts right now. Please try again shortly.')
       } finally {
         setLoading(false)
       }
@@ -165,7 +169,19 @@ export default function BlogPage() {
         )}
 
         {/* Empty State (if no posts) */}
-        {!loading && posts.length === 0 && (
+        {!loading && error && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-16"
+          >
+            <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-xl text-gray-600 mb-2">Could not fetch blog posts</h3>
+            <p className="text-gray-500">{error}</p>
+          </motion.div>
+        )}
+
+        {!loading && !error && posts.length === 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
