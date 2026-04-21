@@ -106,12 +106,11 @@ export function ServicesSection() {
     <section id="services" className="py-12 sm:py-16 md:py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            Our Website Design & Development Services in Mumbai
+          <h2 className="max-w-4xl mx-auto text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
+          Our Web Design & Development Offerings in Mumbai
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            At GEO Softech, we offer a full spectrum of website designing services in Mumbai to match your business
-            needs and drive digital growth.
+          GEO Softech extends a comprehensive suite of web artistry in Mumbai. Each service is calibrated to resonate with your distinct business ethos and propel expansion in the digital realm.
           </p>
         </div>
 

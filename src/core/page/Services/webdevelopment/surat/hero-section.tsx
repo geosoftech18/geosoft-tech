@@ -9,7 +9,7 @@ export function HeroSection() {
   return (
   <section id="home" className="relative py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <img
           src="/mumbai-skyline-with-modern-buildings-and-tech-work.jpg"
           alt="Mumbai skyline"

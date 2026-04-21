@@ -71,31 +71,28 @@ export function AboutSection() {
         {/* Company Story */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            About GEO Softech
+          GEO Softech: An Introduction
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Founded in 2018, we are Mumbai's trusted web design and development partner, helping businesses establish a
-            strong digital presence.
+          Established in 2018, we stand as Mumbai's trusted allies in web innovation and construction. Dedicated to fortifying your digital presence.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 mb-12 sm:mb-16 lg:mb-20">
           <div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">Our Story</h3>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">Our Origin Story</h3>
             <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-muted-foreground">
               <p>
-                GEO Softech was born from a simple vision: to help Mumbai businesses thrive in the digital world. Since
-                2018, we've been transforming ideas into powerful digital experiences that drive real business results.
+              GEO Softech emerged from a singular vision: to empower Mumbai enterprises to excel in the digital sphere. Since 2018, 
+              we've transmuted ideas into robust digital experiences—experiences engineered to generate tangible business outcomes
               </p>
               <p>
-                What started as a small team of passionate developers has grown into Mumbai's leading web design agency,
-                trusted by over 300 businesses across various industries. Our local expertise combined with global best
-                practices makes us the perfect partner for your digital journey.
+              What began as a compact cadre of enthusiastic developers has burgeoned into Mumbai's premier web architecture firm. 
+              Trusted by over 300 ventures spanning diverse industries. Our blend of local insight, married with global benchmarks, positions us as the quintessential partner for your digital expedition.
               </p>
               <p>
-                We don't just build websites – we create digital growth engines that help our clients succeed in
-                Mumbai's competitive business landscape. Every project is an opportunity to exceed expectations and
-                build lasting partnerships.
+              We transcend mere website creation – we incubate digital growth engines. Engines designed to propel our clients to triumph within Mumbai's fiercely competitive commercial ecosystem.
+               Each undertaking is a chance to surpass expectations and cultivate enduring alliances.
               </p>
             </div>
 

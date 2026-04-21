@@ -31,7 +31,7 @@ const Navbar: React.FC<navbar.index> = ({ logo, navlist }) => {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-50 w-full bg-white data-[scrolled=true]:bg-white data-[scrolled=true]:!transition-all `}
+      className={`fixed inset-x-0 top-0 z-[9999] w-full bg-white data-[scrolled=true]:bg-white data-[scrolled=true]:!transition-all pointer-events-auto `}
       data-aos="fade-down"
       data-aos-duration="400"
       data-aos-delay="0"
@@ -284,7 +284,7 @@ const NavList: React.FC<navbar.navlist> = ({ links }) => {
                 {link.name}
               </a>
             ) : (
-              <Link
+              <a
                 id="menu-item"
                 href={link.url}
                 className="inline-block px-4 py-2 font-bold text-p-2 max-lg:w-full max-lg:border-0 max-lg:border-b max-lg:border-gray-600 max-lg:bg-white max-lg:px-7 max-lg:py-4"
@@ -296,7 +296,7 @@ const NavList: React.FC<navbar.navlist> = ({ links }) => {
                 }}
               >
                 {link.name}
-              </Link>
+              </a>
             )}
             {link.subLinks && Object.keys(link.subLinks).length > 0 && (
               <div className="absolute left-0 z-10 hidden w-max border-t-2 border-transparent bg-transparent pt-2 shadow-lg group-hover:block">
@@ -316,12 +316,12 @@ const NavList: React.FC<navbar.navlist> = ({ links }) => {
                                 }
                               }}
                             >
-                              <Link
+                              <a
                                 href={subLink.url}
                                 className="block px-4 py-2 hover:bg-gray-200"
                               >
                                 {subLink.name}
-                              </Link>
+                              </a>
                             </li>
                           ))}
                         </ul>

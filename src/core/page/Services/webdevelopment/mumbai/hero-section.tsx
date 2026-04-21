@@ -11,7 +11,7 @@ export function HeroSection() {
   return (
     <section id="home" className="relative py-12 sm:py-16 md:py-20 lg:py-32 mt-20 md:mt-0 overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <img
           src="/services/webdevelopment/mumbai-skyline-with-modern-buildings-and-tech-work.jpg"
           alt="Mumbai skyline"
@@ -28,13 +28,12 @@ export function HeroSection() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-foreground mb-4 sm:mb-6 text-balance leading-tight">
-            GEO Softech – Leading <span className="text-[#00bf62]">Website Designing Company</span> in Mumbai
+            GEO Softech – Premier <span className="text-[#00bf62]">Website Designing Company</span> in Mumbai
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl lg:text-xl text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
-            In today's digital-first world, your website is the first impression customers form about your business. We
-            specialize in custom web design, development, e-commerce solutions, and SEO-friendly websites tailored for
-            startups, SMEs, and large enterprises across Mumbai.
+          In this era dominated by digital interactions, your website acts as the initial encounter customers have with your business. We don't just design;
+           we sculpt bespoke digital presences, construct e-commerce ecosystems, and build SEO-aware sites. Our clientele? Ambitious startups, growing SMEs, and colossal enterprises spread throughout Mumbai.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">

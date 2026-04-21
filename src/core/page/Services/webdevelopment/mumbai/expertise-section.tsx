@@ -20,16 +20,16 @@ import { useState } from "react"
 const milestones = [
   {
     year: "2018",
-    title: "Company Founded",
-    description: "Started with a vision to transform digital presence in Mumbai",
+    title: "Genesis of the Firm",
+    description: "The vision: revolutionize digital presence for Mumbai enterprises.",
   },
   {
     year: "2020",
-    title: "100+ Projects",
-    description: "Reached our first major milestone with diverse client portfolio",
+    title: "Surpassing 100 Projects",
+    description: "A key milestone achieved, showcasing a diverse clientele.",
   },
-  { year: "2022", title: "Team Expansion", description: "Grew our expert team to serve enterprise clients better" },
-  { year: "2024", title: "300+ Success Stories", description: "Celebrating over 300 successful projects and counting" },
+  { year: "2022", title: "Expansion of Our Expertise", description: "Growing our cadre of specialists to better serve our enterprise partners." },
+  { year: "2024", title: "300+ Success Narratives", description: "Celebrating over 300 projects where we've helped clients thrive, and the journey continues." },
 ]
 
 const achievements = [
@@ -63,37 +63,37 @@ const testimonials = [
 const whyChooseUs = [
   {
     icon: MapPin,
-    title: "Local Expertise",
-    description: "Being based in Mumbai, we understand the market, audience behavior, and industry requirements.",
+    title: "Deep-Rooted Local Acumen",
+    description: "Grounded in Mumbai, we possess an intrinsic grasp of the local market dynamics, audience nuances, and sector-specific imperatives.",
   },
   {
     icon: Palette,
-    title: "Creative Designs",
-    description: "We craft UI/UX-friendly websites with modern layouts and mobile responsiveness.",
+    title: "Imaginative Digital Blueprints",
+    description: "We sculpt user-centric digital interfaces characterized by contemporary aesthetics and responsive adaptability.",
   },
   {
     icon: Search,
-    title: "SEO-Optimized",
-    description: "Our websites are designed with search engine optimization principles to improve visibility.",
+    title: "SEO-Centric Foundations",
+    description: "We embed search engine optimization (SEO) at the core of our design process, boosting your site's visibility.",
   },
   {
     icon: Heart,
-    title: "End-to-End Support",
-    description: "From website development, redesign, to maintenance, GEO Softech provides complete solutions.",
+    title: "Holistic Project Oversight",
+    description: "GEO Softech shepherds your project from its embryonic stage through design, launch, and ongoing refinement, offering complete support at every turn.",
   },
   {
     icon: Award,
-    title: "Proven Track Record",
-    description: "With over 300+ successful projects since 2018, we are trusted by businesses across India.",
+    title: "A History of Achievement",
+    description: "Boasting a portfolio of 300+ successful projects since 2018, we've earned the trust of numerous Indian enterprises.",
   },
 ]
 
 const benefits = [
-  "User-Centric Approach – We focus on user experience (UX) and easy navigation.",
-  "Performance-Driven Websites – Fast loading speed, secure coding, and SEO integration.",
-  "Affordable Packages – Flexible pricing for startups, SMEs, and enterprises.",
-  "Future-Ready Technology – Built with Next.js, Node.js, and modern CMS platforms.",
-  "Business Growth Support – Beyond design, we also provide SEO, digital marketing, and lead generation solutions.",
+  "Prioritizing User Journeys – Navigation crafted for simplicity and engagement.",
+  "Websites Engineered for Impact – Rapid loading times, fortified security, and fundamental SEO",
+  "Adaptable Investment Options – Tailored pricing plans for ventures of any scale.",
+  "Technology Ready for Tomorrow – Built upon Next.js, Node.js, and progressive CMS platforms.",
+  "Growth Beyond Design – SEO strategies, digital promotion, and solutions for lead enrichment",
 ]
 
 export function ExpertiseSection() {
@@ -107,11 +107,11 @@ export function ExpertiseSection() {
   }
 
   const websiteBenefits = [
-    "Build brand credibility",
-    "Generate quality leads",
-    "Expand customer reach locally and globally",
-    "Improve sales conversions",
-    "Stay ahead in the digital marketplace",
+    "Elevating Brand Prestige",
+    "Attracting High-Quality Prospects",
+    "Broadening Reach, Locally and Globally",
+    "Amplifying Sales Figures",
+    "Dominating the Digital Arena",
   ]
 
   const nextSlide = () => {
@@ -150,11 +150,10 @@ export function ExpertiseSection() {
         {/* Why Choose Us */}
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            Why Choose GEO Softech as Your Website Designing Partner in Mumbai?
+          Why Entrust GEO Softech as Your Mumbai Web Architect.
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            As a professional web design agency in Mumbai, we combine creativity, technology, and strategy to deliver
-            websites that are not just visually appealing but also performance-driven.
+          We're more than just a design team. We are Mumbai-based artisans merging imagination, tech prowess, and strategic insight to sculpt digital experiences that resonate and deliver tangible results.
           </p>
         </div>
 
@@ -265,7 +264,7 @@ export function ExpertiseSection() {
 
         <div className="mb-12 sm:mb-16 lg:mb-20">
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">
-            Benefits of Partnering with GEO Softech
+          The GEO Softech Advantage
           </h3>
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -281,12 +280,10 @@ export function ExpertiseSection() {
 
         <div className="mb-12 sm:mb-16 lg:mb-20 bg-muted/30 rounded-2xl p-6 sm:p-8 md:p-12">
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6 text-center">
-            Why Businesses in Mumbai Need a Professional Website
+          Why Mumbai Businesses Require a Premier Website
           </h3>
           <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 text-center max-w-3xl mx-auto">
-            Mumbai is India's business capital, where competition is fierce across industries. Whether you are a
-            startup, retail business, corporate brand, or e-commerce store, having a professionally designed website is
-            essential to:
+          Mumbai pulses as India's commercial heart. Competition is intense across all sectors. A professionally architected website is no longer optional—it's essential. Whether a budding startup, retail hub, established brand, or expansive e-commerce emporium, a stellar website is vital to:
           </p>
 
           <div className="relative">
@@ -388,7 +385,7 @@ export function ExpertiseSection() {
 
         {/* Company Journey */}
         <div className="mb-12 sm:mb-16 lg:mb-20">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">Our Journey Since 2018</h3>
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-8 sm:mb-12 text-center">Our Evolution Since 2018</h3>
 
           <div className="relative">
             {/* Carousel Container */}

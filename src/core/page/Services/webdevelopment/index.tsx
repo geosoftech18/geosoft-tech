@@ -18,8 +18,6 @@ import PopupForm from "./popup-form";
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false)
     const hasShownOnLoadRef = useRef(false)
-    const isInHeaderAreaRef = useRef(false)
-    const mouseMoveTimerRef = useRef<NodeJS.Timeout | null>(null)
     const pageLoadTimerRef = useRef<NodeJS.Timeout | null>(null)
 
     // Show popup on page load (after a delay)
@@ -58,41 +56,6 @@ export default function Home() {
         }
       }
 
-      // Track mouse movement to detect when mouse is above header (browser chrome area)
-      const handleMouseMove = (e: MouseEvent) => {
-        const mouseY = e.clientY
-        // Only trigger in the very top area (0-50px) - above the header navigation
-        // This allows users to click on header tabs without triggering popup
-        const isAboveHeader = mouseY <= 50
-
-        // If mouse enters the area above header (wasn't there before)
-        if (isAboveHeader && !isInHeaderAreaRef.current) {
-          isInHeaderAreaRef.current = true
-          
-          // Clear any existing timer
-          if (mouseMoveTimerRef.current) {
-            clearTimeout(mouseMoveTimerRef.current)
-          }
-
-          // Show popup after a short delay when entering area above header
-          mouseMoveTimerRef.current = setTimeout(() => {
-            if (isInHeaderAreaRef.current) {
-              showPopupFromHeader()
-            }
-          }, 100)
-        } 
-        // If mouse leaves the area above header
-        else if (!isAboveHeader && isInHeaderAreaRef.current) {
-          isInHeaderAreaRef.current = false
-          
-          // Clear timer if mouse moves out
-          if (mouseMoveTimerRef.current) {
-            clearTimeout(mouseMoveTimerRef.current)
-            mouseMoveTimerRef.current = null
-          }
-        }
-      }
-
       // Track when user is about to leave (beforeunload can only show browser dialog)
       const handleBeforeUnload = (e: BeforeUnloadEvent) => {
         e.preventDefault()
@@ -101,15 +64,10 @@ export default function Home() {
 
       // Add event listeners - use window for better compatibility
       window.addEventListener('mouseleave', handleMouseLeave)
-      window.addEventListener('mousemove', handleMouseMove)
       window.addEventListener('beforeunload', handleBeforeUnload)
 
       return () => {
-        if (mouseMoveTimerRef.current) {
-          clearTimeout(mouseMoveTimerRef.current)
-        }
         window.removeEventListener('mouseleave', handleMouseLeave)
-        window.removeEventListener('mousemove', handleMouseMove)
         window.removeEventListener('beforeunload', handleBeforeUnload)
       }
     }, [])
