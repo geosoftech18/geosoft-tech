@@ -71,8 +71,8 @@ const Testimonials = () => {
             const SocialIcon = socialIconData.icon;
             
             return (
-              <SwiperSlide key={index}>
-                <div className="h-full w-full overflow-hidden rounded-sm border-2 border-solid border-neutral-100">
+              <SwiperSlide key={index} className="!h-auto">
+                <div className="flex h-[340px] md:h-[360px] w-full flex-col overflow-hidden rounded-sm border-2 border-solid border-neutral-100 bg-white">
                   <div className="flex items-center justify-between gap-5 border-0 border-b-2 border-solid border-neutral-100 px-6 py-4">
                     <div className="h-12 w-12 overflow-hidden rounded-full">
                       <img
@@ -103,7 +103,9 @@ const Testimonials = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6">{item.testimonial}</div>
+                  <div className="flex-1 overflow-y-auto p-6 text-sm leading-relaxed">
+                    {item.testimonial}
+                  </div>
                 </div>
               </SwiperSlide>
             );

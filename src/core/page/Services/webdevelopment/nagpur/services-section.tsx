@@ -110,8 +110,8 @@ export function ServicesSection() {
           Our Website Designing Services in Nagpur 
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-          At GEO Softech, we offer a wide range of web design and 
-          development services tailored for businesses of all sizes
+          At GEO Softech, we offer a wide range of web design and
+           development services tailored for businesses of all sizes
           </p>
         </div>
 

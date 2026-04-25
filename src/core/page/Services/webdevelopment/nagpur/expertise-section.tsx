@@ -65,26 +65,31 @@ const whyChooseUs = [
     icon: MapPin,
     title: "Local Expertise",
     description: "Nagpur born and bred. We get the lay of the land, the local vibe.",
+    longDescription: "From the commercial hubs of Narendra Nagar to the emerging tech corridors, we understand the specific digital needs of Nagpur's diverse neighbourhoods, delivering websites that resonate with local customers.",
   },
   {
     icon: Palette,
     title: "Creative & modern Designs ",
     description: "Design pros crafting slick UI/UX, layouts that pull you in.",
+    longDescription: "Every successful project is led by a dedicated Web Designer who understands the local Nagpur market. We focus on aesthetic layouts that capture attention while ensuring your site remains functional and conversion-ready.",
   },
   {
     icon: Search,
     title: "SEO-Optimized",
     description: "Search engines? We speak their language. Sites built to rank.",
+    longDescription: "Traditional industries like Shri Vitthal Rice Mill also benefit from our local SEO strategies, ensuring that heritage businesses in Nagpur remain visible to modern consumers searching for quality staples online. We integrate advanced Search Engine Optimization into every build, ensuring your Nagpur business ranks high on Google and attracts ready-to-buy local customers.",
   },
   {
     icon: Heart,
     title: "Complete Digital Solutions",
     description: "Design? Just the start. We also build, market, optimize. Full suite.",
+    longDescription: "We also boost your brand visibility through strategic Social Media Marketing integration, ensuring your website and profiles work together to capture Nagpur's active online audience.",
   },
   {
     icon: Award,
     title: "Affordable Pricing ",
     description: "Startups to giants, Nagpur web design that fits the budget.",
+    longDescription: "Beyond organic growth, we provide high-impact PPC Services to ensure your Nagpur business dominates search results instantly. Our targeted ad strategies drive immediate traffic and high-intent leads to your doorstep.To complement organic growth, we implement strategic SEM to capture high-intent traffic instantly. Our paid search experts ensure your Nagpur business appears at the very top of results when customers are ready to buy.",
   },
 ]
 
@@ -171,15 +176,34 @@ export function ExpertiseSection() {
               <div className="flex md:hidden w-full">
                 {whyChooseUs.map((item, index) => (
                   <div key={index} className="w-full flex-shrink-0 px-2">
-                    <Card className="text-center border-border bg-[#00bf62]/10 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                      <CardContent className="p-6 sm:p-8">
-                        <div className="p-3 sm:p-4 bg-[#00bf62]/10 rounded-xl w-fit mx-auto mb-4 sm:mb-6">
-                          <item.icon className="h-8 w-8 sm:h-10 sm:w-10 text-[#00bf62]" />
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">{item.title}</h3>
-                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{item.description}</p>
-                      </CardContent>
-                    </Card>
+                    <div className="group h-full [perspective:1200px]">
+                      <div className="relative h-full min-h-[300px] transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] active:[transform:rotateY(180deg)]">
+                        <Card className="absolute inset-0 h-full text-center border-border bg-[#00bf62]/10 hover:shadow-lg transition-all duration-300 [backface-visibility:hidden]">
+                          <CardContent className="p-6 sm:p-8">
+                            <div className="p-3 sm:p-4 bg-[#00bf62]/10 rounded-xl w-fit mx-auto mb-4 sm:mb-6">
+                              <item.icon className="h-8 w-8 sm:h-10 sm:w-10 text-[#00bf62]" />
+                            </div>
+                            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                              {item.description}
+                            </p>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="absolute inset-0 h-full border-border bg-[#00bf62]/10 shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                          <CardContent className="p-6 sm:p-8 h-full flex flex-col justify-center">
+                            <h3 className="text-lg sm:text-xl font-bold text-foreground mb-3 sm:mb-4 text-center">
+                              {item.title}
+                            </h3>
+                            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-center">
+                              {item.longDescription}
+                            </p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -190,15 +214,32 @@ export function ExpertiseSection() {
                   <div key={slideIndex} className="w-full flex-shrink-0 flex gap-6 px-2">
                     {whyChooseUs.slice(slideIndex * 2, slideIndex * 2 + 2).map((item, index) => (
                       <div key={index} className="w-1/2">
-                        <Card className="text-center border-border bg-[#00bf62]/10 hover:shadow-lg transition-all duration-300 hover:scale-105 h-full">
-                          <CardContent className="p-6">
-                            <div className="p-3 bg-[#00bf62]/10 rounded-xl w-fit mx-auto mb-4">
-                              <item.icon className="h-8 w-8 text-[#00bf62]" />
-                            </div>
-                            <h3 className="text-lg font-bold text-foreground mb-3">{item.title}</h3>
-                            <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                          </CardContent>
-                        </Card>
+                        <div className="group h-full [perspective:1200px]">
+                          <div className="relative h-full min-h-[300px] transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] active:[transform:rotateY(180deg)]">
+                            <Card className="absolute inset-0 h-full text-center border-border bg-[#00bf62]/10 hover:shadow-lg transition-all duration-300 [backface-visibility:hidden]">
+                              <CardContent className="p-6">
+                                <div className="p-3 bg-[#00bf62]/10 rounded-xl w-fit mx-auto mb-4">
+                                  <item.icon className="h-8 w-8 text-[#00bf62]" />
+                                </div>
+                                <h3 className="text-lg font-bold text-foreground mb-3">{item.title}</h3>
+                                <p className="text-muted-foreground text-sm leading-relaxed">
+                                  {item.description}
+                                </p>
+                              </CardContent>
+                            </Card>
+
+                            <Card className="absolute inset-0 h-full border-border bg-[#00bf62]/10 shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                              <CardContent className="p-6 h-full flex flex-col justify-center">
+                                <h3 className="text-lg font-bold text-foreground mb-3 text-center">
+                                  {item.title}
+                                </h3>
+                                <p className="text-muted-foreground text-sm leading-relaxed text-center">
+                                  {item.longDescription}
+                                </p>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -211,15 +252,28 @@ export function ExpertiseSection() {
                   <div key={slideIndex} className="w-full flex-shrink-0 flex gap-8 px-2">
                     {whyChooseUs.slice(slideIndex * 3, slideIndex * 3 + 3).map((item, index) => (
                       <div key={index} className="w-1/3">
-                        <Card className="text-center border-border bg-[#00bf62]/10 hover:shadow-lg transition-all duration-300 hover:scale-105 h-full">
-                          <CardContent className="p-6">
-                            <div className="p-3 bg-[#00bf62]/10 rounded-xl w-fit mx-auto mb-4">
-                              <item.icon className="h-8 w-8 text-[#00bf62]" />
-                            </div>
-                            <h3 className="text-xl font-bold text-foreground mb-3">{item.title}</h3>
-                            <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                          </CardContent>
-                        </Card>
+                        <div className="group h-full [perspective:1200px]">
+                          <div className="relative h-full min-h-[300px] transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                            <Card className="absolute inset-0 h-full text-center border-border bg-[#00bf62]/10 hover:shadow-lg transition-all duration-300 [backface-visibility:hidden]">
+                              <CardContent className="p-6">
+                                <div className="p-3 bg-[#00bf62]/10 rounded-xl w-fit mx-auto mb-4">
+                                  <item.icon className="h-8 w-8 text-[#00bf62]" />
+                                </div>
+                                <h3 className="text-xl font-bold text-foreground mb-3">{item.title}</h3>
+                                <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                              </CardContent>
+                            </Card>
+
+                            <Card className="absolute inset-0 h-full border-border bg-[#00bf62]/10 shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                              <CardContent className="p-6 h-full flex flex-col justify-center">
+                                <h3 className="text-xl font-bold text-foreground mb-3 text-center">{item.title}</h3>
+                                <p className="text-muted-foreground text-sm leading-relaxed text-center">
+                                  {item.longDescription}
+                                </p>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>

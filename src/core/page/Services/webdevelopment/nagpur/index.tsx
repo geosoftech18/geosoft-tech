@@ -6,7 +6,7 @@ import Portfoliosection from "./portfolio-section1"
 import { FAQSection } from "./faq-section"
 import { CTASection } from "./cta-section"
 
-import  TestimonialsSection  from "./testimonials-section"
+import HomeTestimonialsSection from "@/core/page/Home/Testimonials"
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <HeroSection />
       <ServicesSection />
       <ExpertiseSection />
-      <TestimonialsSection />
+      <HomeTestimonialsSection />
       <Portfoliosection/>
       {/* <PortfolioSection /> */}
       <AboutSection />
