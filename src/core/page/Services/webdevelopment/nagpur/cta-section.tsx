@@ -267,7 +267,7 @@ export function CTASection() {
     <section id="contact" className="py-12 sm:py-16 md:py-20 bg-[#00bf62] text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-semibold mb-4 text-balance text-white">
             Ready to Build Your Digital Presence?
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-primary-foreground/80 max-w-3xl mx-auto text-pretty">

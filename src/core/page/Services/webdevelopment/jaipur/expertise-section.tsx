@@ -153,8 +153,9 @@ export function ExpertiseSection() {
           Why Choose GEO Softech as Your Web Design Company in Jaipur? 
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-          Choosing the right web design company is crucial for your business growth. At GEO Softech, 
-          we focus on delivering creativity, technology, and business results.  
+          Choosing the right web design partner is crucial for growth. At GEO Softech, we blend creativity, tech, and strategic thinking to deliver a result-driven solution that enhances your online presence. Web Design India.
+
+  
           </p>
         </div>
 
@@ -283,9 +284,8 @@ export function ExpertiseSection() {
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6 text-center">
           Why Jaipur Businesses Need a Professional Website 
           </h3>
-          <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 text-center max-w-3xl mx-auto">
-          Jaipur is not only the Pink City of India but also a growing hub for startups, IT companies, 
-          and e-commerce businesses. A professional website is essential to: 
+          <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 text-center max-w-5xl mx-auto">
+          This region is not only the Pink City of India but also a growing hub for startups, IT companies, and online storefronts in the area, prominently showcased through a dynamic web design market landscape, including numerous local firms that cater to these needs. Central to the success of these ventures is the understanding of responsive design importance for regional projects, particularly in the realm of online storefront development, which has gained significant traction. In this competitive environment, responsive design proves essential for ensuring that sites perform optimally across various devices—an absolute necessity for attracting and retaining customers. By adopting this design approach, local online ventures can significantly enhance the user experience and engagement—factors that are crucial for success in the digital marketplace. A professional website that embraces responsive design is indispensable for maximizing reach and conversion rates, empowering businesses, supported by savvy regional designers, to establish a strong online presence and effectively compete with both local and global players in the realm of online commerce.
           </p>
 
           <div className="relative">

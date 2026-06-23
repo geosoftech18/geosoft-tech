@@ -168,7 +168,7 @@ export default function PortfolioSection() {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-semibold text-black mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -186,7 +186,7 @@ export default function PortfolioSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            See how our designs have helped businesses grow online with measurable results and stunning visuals.
+           From fintech platforms to fashion e-commerce — see how our web development and design work has delivered measurable business outcomes for clients across industries. 
           </motion.p>
         </motion.div>
 

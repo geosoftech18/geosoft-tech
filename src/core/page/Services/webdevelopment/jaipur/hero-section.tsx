@@ -29,10 +29,8 @@ export function HeroSection() {
             GEO Softech – Professional <span className="text-[#00bf62]">Website Designing Company </span> in Jaipur
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl lg:text-xl text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
-          In today’s digital era, your website is the face of your
-           business. It is often the first interaction potential customers have with your brand. If you are searching for a professional website designing company in Jaipur, GEO Softech is here 
-          to transform your vision into a powerful digital presence.  </p>
+          <p className="text-base sm:text-lg md:text-lg lg:text-lg text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
+          This region is not only the Pink City of India but also a growing hub for startups, IT companies, and online storefronts in the area, prominently showcased through a dynamic web design market landscape, including numerous local firms that cater to these needs. Central to the success of these ventures is the understanding of responsive design importance for regional projects, particularly in the realm of online storefront development, which has gained significant traction. In this competitive environment, responsive design proves essential for ensuring that sites perform optimally across various devices—an absolute necessity for attracting and retaining customers. By adopting this design approach, local online ventures can significantly enhance the user experience and engagement—factors that are crucial for success in the digital marketplace. A professional website that embraces responsive design is indispensable for maximizing reach and conversion rates, empowering businesses, supported by savvy regional designers, to establish a strong online presence and effectively compete with both local and global players in the realm of online commerce. </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
           <Button 

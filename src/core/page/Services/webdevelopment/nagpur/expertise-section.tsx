@@ -21,44 +21,19 @@ const milestones = [
   {
     year: "2018",
     title: "Company Founded",
-    description: "Started with a vision to transform digital presence in Mumbai",
+    description: "Started with a focused vision: help businesses build a stronger digital presence through quality web development. ",
   },
   {
     year: "2020",
     title: "100+ Projects",
-    description: "Reached our first major milestone with diverse client portfolio",
+    description: "Reached our first major milestone with a growing portfolio spanning retail, healthcare, education, and professional services. ",
   },
-  { year: "2022", title: "Team Expansion", description: "Grew our expert team to serve enterprise clients better" },
-  { year: "2024", title: "300+ Success Stories", description: "Celebrating over 300 successful projects and counting" },
+  { year: "2022", title: "Team Expansion", description: "Scaled our team of designers, developers, and strategists to take on larger enterprise projects. " },
+  { year: "2024", title: "300+ Success Stories", description: "Celebrating 300+ successful websites delivered for businesses across Nagpur, Mumbai, and beyond. " },
 ]
 
-const achievements = [
-  { icon: Users, number: "300+", label: "Projects Completed", color: "text-primary" },
-  { icon: Award, number: "7+", label: "Years Experience", color: "text-secondary" },
-  { icon: TrendingUp, number: "95%", label: "Client Satisfaction", color: "text-primary" },
-  { icon: Target, number: "24/7", label: "Support Available", color: "text-secondary" },
-]
 
-const testimonials = [
-  {
-    name: "Rajesh Sharma",
-    company: "Mumbai Retail Co.",
-    text: "GEO Softech transformed our online presence completely. Our e-commerce sales increased by 150% within 6 months.",
-    rating: 5,
-  },
-  {
-    name: "Priya Patel",
-    company: "Tech Startup",
-    text: "Professional team, excellent communication, and delivered exactly what we needed. Highly recommend for any business.",
-    rating: 5,
-  },
-  {
-    name: "Amit Kumar",
-    company: "Manufacturing Firm",
-    text: "Their local expertise in Mumbai market helped us connect better with our target audience. Great ROI on our investment.",
-    rating: 5,
-  },
-]
+
 
 const whyChooseUs = [
   {
@@ -94,11 +69,11 @@ const whyChooseUs = [
 ]
 
 const benefits = [
-  "Ramp Up Trust – Websites done right? Instant credibility.",
-  "Skyrocket Conversions – Designs honed for turning prospects into buyers.",
-  "Lightning Speed – Code that's lean, mean, and fast.",
-  "Tomorrow's Tech – Next.js, Node.js, slick CMS tools under the hood.Future-Ready Technology – Built with Next.js, Node.js, and modern CMS tools.",
-  "Local Muscle, Global Reach – Own Nagpur. Then, the world.",
+  "Instant Credibility — A professionally built site signals trust before a word is read ",
+  "Better Conversions — Layouts engineered to turn visitors into enquiries ",
+  "Faster Load Times — Lean, optimised code that keeps users on your page ",
+  "Future-Ready Technology — Built with Next.js, Node.js, and modern CMS tools ",
+  "Local + Global Reach — Own Nagpur's market. Then scale beyond it. ",
 ]
 
 export function ExpertiseSection() {
@@ -112,11 +87,11 @@ export function ExpertiseSection() {
   }
 
   const websiteBenefits = [
-    "Own your space in heated markets",
-    "Grab customers near, far, everywhere",
-    "Leads, sales...consistent flow",
-    "Smooth sailing for every visitor",
-    "Digital strategies? Stay ahead",
+    "Stand out in competitive local search results ",
+    "Generate consistent leads from organic and paid traffic ",
+    "Build trust before a prospect ever calls or walks in ",
+    "Provide a seamless experience across every device ",
+    "Stay ahead of competitors still operating on outdated platforms ",
   ]
 
   const nextSlide = () => {
@@ -154,12 +129,11 @@ export function ExpertiseSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Why Choose Us */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-semibold text-foreground mb-4 text-balance">
           Why GEO SofTech is Recognized as the Best Web Design Company in Nagpur? 
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-          Choosing the right web design company is crucial for your business growth. At GEO Softech, 
-          we focus on delivering creativity, technology, and business results.  
+          Choosing the right website development partner in Nagpur is a business decision, not just a design one. Here's what sets us apart. 
           </p>
         </div>
 
@@ -337,10 +311,12 @@ export function ExpertiseSection() {
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6 text-center">
           Why Nagpur Businesses Need a Professional Website 
           </h3>
-          <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 text-center max-w-3xl mx-auto">
-          Nagpur: rising hub. Startups, tech firms, e-commerce taking off. A sharp website? Not optional.
+          <p className="text-base sm:text-lg text-muted-foreground  text-center max-w-3xl mx-auto">
+          Nagpur is no longer just a central India transit hub — it's a fast-growing commercial and technology centre. With rising competition across retail, healthcare, education, manufacturing, and services, your website is often the first and most critical touchpoint with potential customers. 
           </p>
-
+          <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 text-center max-w-3xl mx-auto">
+          A professional website built by a reliable web development company in Nagpur gives you a measurable edge: 
+          </p>
           <div className="relative">
             {/* Carousel Container */}
             <div className="overflow-hidden">

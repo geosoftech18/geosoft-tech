@@ -26,13 +26,13 @@ export function HeroSection() {
           </div>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-foreground mb-4 sm:mb-6 text-balance leading-tight">
-            GEO Softech – Professional <span className="text-[#00bf62]">Website Designing Company </span> in Nagpur
+            GEO Softech – Professional <span className="text-[#00bf62]">Website Designing Company </span> in Nagpur That Builds Sites to Grow Your Business 
           </h1>
 
           <p className="text-base sm:text-sm md:text-lg lg:text-lg text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
-          GEO Softech, Professional Website Designing Company in Nagpur Forget digital brochures. Today? Websites breathe life into your business.
-           It's how clients judge you. Trust. Prowess. Your website's look matters. Finding the right design shop in Nagpur? Non-negotiable.
-           At GEO SofTech, modern, responsive, SEO-amped websites? That's our jam. Tailored. We're not just another web design services outfit in Nagpur. Creativity, tech wizardry, strategic smarts , we fuse it all. Websites that wow? Absolutely. Websites that deliver? Even better.
+          Your website is the first thing potential customers judge you by. A slow, outdated, or poorly designed site doesn't just look bad — it actively loses you business. <br />
+
+           At GEO Softech, we build custom, responsive, and SEO-friendly websites for Nagpur businesses that are designed to rank on Google and convert visitors into paying customers. Not template shops. Not cookie-cutter designs. Websites built around your specific business goals. 
  </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
@@ -56,7 +56,7 @@ export function HeroSection() {
                 <Users className="h-5 w-5 sm:h-6 sm:w-6 text-[#00bf62]" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-bold text-foreground">300+</div>
+                <div className="text-xl sm:text-2xl font-bold text-foreground">360+</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Successful Projects</div>
               </div>
             </div>
@@ -65,7 +65,7 @@ export function HeroSection() {
                 <Award className="h-5 w-5 sm:h-6 sm:w-6 text-[#00bf62]" />
               </div>
               <div>
-                <div className="text-xl sm:text-2xl font-bold text-foreground">7+</div>
+                <div className="text-xl sm:text-2xl font-bold text-foreground">8+</div>
                 <div className="text-xs sm:text-sm text-muted-foreground">Years Experience</div>
               </div>
             </div>

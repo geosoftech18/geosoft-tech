@@ -8,27 +8,27 @@ const faqs = [
   {
     question: "Which is the best website designing company in Nagpur?",
     answer:
-      "GEO Softech is one of the best website designing companies in Nagpur, offering professional, affordable, and SEO-friendly web design solutions for startups, SMEs, and enterprises.",
+      "GEO Softech is among Nagpur's most trusted web development agencies, with 300+ projects delivered across industries including retail, healthcare, education, manufacturing, and professional services. \n\nWe combine local market knowledge with modern development practices to build websites that rank on Google and convert visitors into leads. Our client testimonials and live portfolio reflect consistent, measurable results. ",
   },
   {
     question: " Do you provide e-commerce website designing in Nagpur?",
     answer:
-      "Yes, we specialize in e-commerce website development with secure payment integration, product management, and mobile-friendly design. ",
+      "Yes. E-commerce development is a core service. We build scalable online stores on WooCommerce, Shopify, Magento, and fully custom platforms — with secure payment gateway integration, inventory management, mobile commerce support, and conversion-optimised product pages. Whether you're launching a new online store or migrating an existing one, we handle the full build.",
   },
   {
     question: "What is the cost of website designing in Nagpur?",
     answer:
-      "The cost depends on your requirements, features, and design complexity. GEO Softech provides affordable website designing packages tailored for small businesses and enterprises.",
+      "Website development costs depend on the scope, functionality, and technology stack required. A professional business website typically starts from ₹15,000–₹40,000, while e-commerce platforms and custom web applications vary based on complexity. \n\nWe offer flexible packages for startups, SMEs, and larger enterprises — with transparent pricing and no hidden charges. Contact us for a free project estimate tailored to your specific requirements. ",
   },
   {
-    question: " Can you redesign my old website?",
+    question: " Can you redesign my existing website without affecting my SEO rankings? ",
     answer:
-      "Absolutely. We offer website redesign services in Nagpur to modernize your site with a fresh UI/UX, responsive design, and better SEO performance.",
+      "Yes. Our website redesign services in Nagpur are specifically structured to preserve your existing SEO equity during the migration. We audit your current URL structure, meta data, and ranking pages before redesigning — and implement proper redirects, on-page SEO elements, and technical foundations to maintain or improve your search visibility post-launch. ",
   },
   {
-    question: " Do you also provide SEO and digital marketing along with website design?",
+    question: "Do you provide SEO and digital marketing services along with website development? ",
     answer:
-      "Yes. GEO Softech is a web design and digital marketing company in Nagpur providing end-to-end solutions, including SEO, social media, and branding. ",
+      "Yes. GEO Softech offers SEO services, social media marketing, and digital growth strategy alongside web development. We recommend integrating SEO-friendly website development from the start — including proper heading structure, page speed optimisation, schema markup, and mobile responsiveness — so your website is built to rank, not retrofitted for search later.  ",
   },
 ]
 
@@ -43,7 +43,7 @@ export function FAQSection() {
     <section className="py-12 sm:py-16 md:py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-semibold text-foreground mb-4 text-balance">
             Frequently Asked Questions
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">

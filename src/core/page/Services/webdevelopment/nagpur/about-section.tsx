@@ -31,22 +31,22 @@ const values = [
   {
     icon: Heart,
     title: "Client-First Approach",
-    description: "Your triumph? Our obsession. Long-term ties, built on trust, fueled by results.",
+    description: "Your business outcomes are our measuring stick. We build long-term client relationships on trust, transparency, and results — not one-off transactions. ",
   },
   {
     icon: Lightbulb,
     title: "Innovation & Creativity",
-    description: "Ahead of the curve. Tools that are sharp, delivering solutions that are unreal.",
+    description: "We stay ahead of front-end and back-end technology trends to deliver websites that are modern, maintainable, and built to last. ",
   },
   {
     icon: Zap,
     title: "Performance Driven",
-    description: "Every site? Tuned for speed, search engines, conversions. ROI? Maxed.",
+    description: "Every website we build is optimised for speed, search engine visibility, and conversion performance. ROI is always part of the brief. ",
   },
   {
     icon: Users,
     title: "Local Expertise",
-    description: "Mumbai natives. The market? We breathe it. The audience? We know them",
+    description: "We understand Nagpur's business market — its industries, its customers, its competition. That local knowledge informs every project we take on. ",
   },
 ]
 
@@ -70,9 +70,8 @@ export function AboutSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Company Story */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            About GEO Softech
-          </h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-semibold text-foreground mb-4 text-balance">
+          About GEO Softech      </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
             Founded in 2018, we are Mumbai's trusted web design and development partner, helping businesses establish a
             strong digital presence.
@@ -84,14 +83,11 @@ export function AboutSection() {
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6">Our Story</h3>
             <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-muted-foreground">
               <p>
-              GEO Softech? Simple idea: Mumbai businesses killing it in the digital arena. Since 2018, morphing ideas into digital powerhouses, driving hard results.
-              </p>
+              GEO Softech was built on a single conviction: that every business — whether a first-time startup or an established enterprise — deserves a website that actually works for them.               </p>
               <p>
-              Started small. Passionate coders. Now? A leading agency in Mumbai, trusted by 300+ businesses. Local smarts, global plays? Perfect mix for your digital climb.
-              </p>
+Since 2018, we have grown from a small team of passionate developers into a full-service web development agency trusted by 300+ businesses across Nagpur, Mumbai, and beyond. We combine sharp local market knowledge with the technical expertise to build sites that perform at a global standard.               </p>
               <p>
-              We're not just builders. We're architects of online expansion. Helping clients conquer Mumbai's tough landscape. Every project? A chance to blow minds, forge lasting bonds.
-              </p>
+              We don't just write code. We build digital infrastructure that helps businesses generate leads, build credibility, and grow consistently.               </p>
             </div>
 
             <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">

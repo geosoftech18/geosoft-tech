@@ -20,45 +20,45 @@ const services = [
     icon: Globe,
     title: "Corporate Website Design",
     description:
-      "Professional websites for companies, institutions, and brands. ",
+      "Professional, brand-aligned websites for companies, institutions, and service businesses that build trust and authority from the first click.  ",
     features: ["Professional UI/UX", "Brand Integration", "Content Management", "Performance Optimized"],
   },
   {
     icon: ShoppingCart,
     title: "E-commerce Website Development",
     description:
-      "Scalable online stores with secure payment gateways, inventory management, and conversion optimization.",
+      "Scalable online stores with secure payment gateways, inventory management, and conversion-focused product pages built to sell. ",
     features: ["WooCommerce", "Shopify", "Magento", "Custom Solutions"],
   },
   {
     icon: Smartphone,
     title: "Responsive Web Design",
     description:
-      "Mobile-friendly layouts that adapt to all screen sizes, ensuring optimal user experience across devices.",
+      "Mobile-first layouts that adapt flawlessly across all screen sizes — phones, tablets, and desktops — without compromising speed or usability. ",
     features: ["Mobile-First Design", "Cross-Browser Compatible", "Touch Optimized", "Fast Loading"],
   },
   {
     icon: Code,
     title: "WordPress & CMS Development ",
-    description: "Flexible and easy-to-manage websites for all industries. ",
+    description: "Flexible, easy-to-manage websites on WordPress or custom CMS platforms — so you can update your own content without depending on a developer every time.  ",
     features: ["WordPress", "Custom CMS", "Easy Management", "Scalable Architecture"],
   },
   {
     icon: Search,
-    title: "Landing Page Design",
-    description: "High-converting pages for marketing and lead generation campaigns that maximize your ROI.",
+    title: "Landing Page Design & Development",
+    description: "High-converting landing pages for campaigns, product launches, and lead generation — built to maximise ROI on every marketing rupee spent. ",
     features: ["Conversion Focused", "A/B Testing", "Lead Generation", "Campaign Integration"],
   },
   {
     icon: Palette,
     title: "Website Redesign Services",
-    description: "Modernize outdated websites with new features, fresh UI, and enhanced user experience.",
+    description: "Transform an outdated website into a modern, high-performance digital presence — without losing your existing SEO rankings or audience. ",
     features: ["Modern UI/UX", "Performance Boost", "SEO Enhancement", "Mobile Optimization"],
   },
   {
     icon: Settings,
     title: "Website Maintenance & Support",
-    description: "Regular updates, bug fixing, performance optimization, and ongoing technical support.",
+    description: "Regular updates, security patches, bug fixes, and performance monitoring — so your website stays fast, secure, and fully functional at all times. ",
     features: ["Regular Updates", "Bug Fixes", "Performance Monitoring", "24/7 Support"],
   },
 ]
@@ -106,12 +106,11 @@ export function ServicesSection() {
     <section id="services" className="py-12 sm:py-16 md:py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-semibold text-foreground mb-4 text-balance">
           Our Website Designing Services in Nagpur 
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-          At GEO Softech, we offer a wide range of web design and
-           development services tailored for businesses of all sizes
+          From corporate websites to full-scale e-commerce platforms, we deliver website design and development solutions built for Nagpur's startups, SMEs, and enterprises. 
           </p>
         </div>
 
