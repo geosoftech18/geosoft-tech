@@ -32,54 +32,36 @@ function buildReviews() {
       '@type': 'Rating',
       ratingValue: review.rating,
       bestRating: COMPANY_AGGREGATE_RATING.bestRating,
+      worstRating: COMPANY_AGGREGATE_RATING.worstRating,
     },
     reviewBody: review.body,
   }));
 }
 
 export function buildServiceReviewSchema(options: ServiceReviewSchemaOptions) {
-  const organizationId = `${ORGANIZATION.url}/#organization`;
-  const serviceId = `${options.url}#service`;
-
+  // Google Review Snippets support Product (not Service or self-serving Organization ratings).
+  // Structure matches: https://developers.google.com/search/docs/appearance/structured-data/review-snippet
   return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': organizationId,
-        name: ORGANIZATION.name,
-        url: ORGANIZATION.url,
-        logo: ORGANIZATION.logo,
-        telephone: ORGANIZATION.telephone,
-        email: ORGANIZATION.email,
-        sameAs: ORGANIZATION.sameAs,
-        aggregateRating: buildAggregateRating(),
-      },
-      {
-        '@type': 'Service',
-        '@id': serviceId,
-        name: options.name,
-        description: options.description,
-        url: options.url,
-        provider: {
-          '@id': organizationId,
-        },
-        brand: {
-          '@type': 'Brand',
-          name: ORGANIZATION.name,
-        },
-        ...(options.areaServed
-          ? {
-              areaServed: {
-                '@type': 'City',
-                name: options.areaServed,
-              },
-            }
-          : {}),
-        aggregateRating: buildAggregateRating(),
-        review: buildReviews(),
-      },
-    ],
+    '@context': 'https://schema.org/',
+    '@type': 'Product',
+    name: options.name,
+    description: options.description,
+    url: options.url,
+    image: ORGANIZATION.logo,
+    brand: {
+      '@type': 'Brand',
+      name: ORGANIZATION.name,
+    },
+    ...(options.areaServed
+      ? {
+          areaServed: {
+            '@type': 'City',
+            name: options.areaServed,
+          },
+        }
+      : {}),
+    aggregateRating: buildAggregateRating(),
+    review: buildReviews(),
   };
 }
 
