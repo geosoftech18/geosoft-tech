@@ -1,9 +1,18 @@
 import { Metadata } from 'next';
+import SuratPage from '@/core/page/Services/webdevelopment/surat';
+import { PageReviewSchema } from '@/seo/PageReviewSchema';
 
 export const metadata: Metadata = {
   title: 'Web Development Company in Surat – Business Websites | GEO Softech',
   description:
-    'Web development company in Surat building responsive, SEO-optimized websites for local businesses. Improve your online presence and leads. Contact GEO Softech Surat.',
+    'Web development company in Surat creating professional business websites with SEO-friendly development and mobile-first design.',
 };
 
-export { default } from '@/core/page/Services/webdevelopment/surat';
+export default function Page() {
+  return (
+    <>
+      <PageReviewSchema page="surat" />
+      <SuratPage />
+    </>
+  );
+}
