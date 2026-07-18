@@ -2,10 +2,34 @@ import { Metadata } from 'next';
 import connectDB from '@/lib/database/connection';
 import Blog from '@/lib/database/models/Blog';
 import { root_icons, root_robot } from '@/seo';
+import { canonicalUrl } from '@/seo/site';
+import { BlogPostingJsonLd } from '@/seo/BlogPostingJsonLd';
+import BlogDetailPage from '@/core/page/Blog/[slug]';
 
 const SITE_NAME = 'GEO Softech';
 const DEFAULT_DESCRIPTION =
   "Elevate your business with Geo SofTech's expert solutions in social media, SEO, and website development. Harness the power of strategic online presence for lasting success.";
+
+type BlogDoc = {
+  title?: string;
+  excerpt?: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  featuredImage?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  author?: string;
+};
+
+async function getPublishedBlog(slug: string): Promise<BlogDoc | null> {
+  try {
+    await connectDB();
+    const blog = await Blog.findOne({ slug, status: 'published' }).lean();
+    return (blog as BlogDoc) || null;
+  } catch {
+    return null;
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -13,7 +37,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const canonical = `https://www.geosoftech.com/blog/${slug}`;
+  const canonical = canonicalUrl(`/blog/${slug}`);
 
   let pageTitle = `Blog | ${SITE_NAME}`;
   let description = DEFAULT_DESCRIPTION;
@@ -28,36 +52,24 @@ export async function generateMetadata({
     },
   ];
 
-  try {
-    await connectDB();
-    const blog = await Blog.findOne({ slug, status: 'published' }).lean();
+  const blog = await getPublishedBlog(slug);
 
-    if (blog) {
-      const doc = blog as {
-        title?: string;
-        excerpt?: string;
-        metaTitle?: string;
-        metaDescription?: string;
-        featuredImage?: string | null;
-      };
-      const mt = doc.metaTitle?.trim();
-      const md = doc.metaDescription?.trim();
-      pageTitle = mt || doc.title || pageTitle;
-      description = md || doc.excerpt?.trim() || DEFAULT_DESCRIPTION;
+  if (blog) {
+    const mt = blog.metaTitle?.trim();
+    const md = blog.metaDescription?.trim();
+    pageTitle = mt || blog.title || pageTitle;
+    description = md || blog.excerpt?.trim() || DEFAULT_DESCRIPTION;
 
-      if (doc.featuredImage && /^https?:\/\//i.test(doc.featuredImage)) {
-        ogImages = [
-          {
-            url: doc.featuredImage,
-            width: 1200,
-            height: 630,
-            alt: doc.title || pageTitle,
-          },
-        ];
-      }
+    if (blog.featuredImage && /^https?:\/\//i.test(blog.featuredImage)) {
+      ogImages = [
+        {
+          url: blog.featuredImage,
+          width: 1200,
+          height: 630,
+          alt: blog.title || pageTitle,
+        },
+      ];
     }
-  } catch {
-    // Keep fallbacks if DB is unavailable
   }
 
   return {
@@ -78,4 +90,39 @@ export async function generateMetadata({
   };
 }
 
-export { default } from '@/core/page/Blog/[slug]';
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const blog = await getPublishedBlog(slug);
+
+  const datePublished = blog?.createdAt
+    ? new Date(blog.createdAt).toISOString()
+    : undefined;
+  const dateModified = blog?.updatedAt
+    ? new Date(blog.updatedAt).toISOString()
+    : datePublished;
+
+  return (
+    <>
+      {blog?.title && (
+        <BlogPostingJsonLd
+          title={blog.metaTitle?.trim() || blog.title}
+          description={
+            blog.metaDescription?.trim() ||
+            blog.excerpt?.trim() ||
+            DEFAULT_DESCRIPTION
+          }
+          slug={slug}
+          image={blog.featuredImage}
+          datePublished={datePublished}
+          dateModified={dateModified}
+          authorName={blog.author || 'GEO Softech'}
+        />
+      )}
+      <BlogDetailPage params={params} />
+    </>
+  );
+}

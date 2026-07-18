@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Plus, Minus, MessageCircle } from "lucide-react"
+import { FaqJsonLd } from "@/seo/FaqJsonLd"
 
 
 const faqData = [
@@ -46,6 +47,7 @@ export default function FAQSection() {
 
   return (
     <section className=" bg-gradient-to-b from-gray-50 to-white">
+      <FaqJsonLd faqs={faqData.map((f) => ({ question: f.question, answer: f.answer }))} />
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div

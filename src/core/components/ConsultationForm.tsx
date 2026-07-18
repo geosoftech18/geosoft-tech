@@ -228,7 +228,12 @@ export function ConsultationForm({ isOpen, onClose }: { isOpen: boolean; onClose
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          <form onSubmit={handleSubmit} className="p-6">
+          <form
+            onSubmit={handleSubmit}
+            className="p-6"
+            toolname="book_free_consultation"
+            tooldescription="Start a multi-step free consultation with GEO Softech. Collects personal details, project needs, and contact preferences so the team can follow up."
+          >
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
               <div className="space-y-6">
@@ -249,6 +254,8 @@ export function ConsultationForm({ isOpen, onClose }: { isOpen: boolean; onClose
                       type="text"
                       value={formData.fullName}
                       onChange={(e) => updateFormData('fullName', e.target.value)}
+                      name="fullName"
+                      toolparamdescription="Visitor's full name"
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#00bf62] focus:border-transparent transition-colors ${
                         errors.fullName ? 'border-red-500' : 'border-gray-300'
                       }`}
@@ -265,6 +272,8 @@ export function ConsultationForm({ isOpen, onClose }: { isOpen: boolean; onClose
                       type="email"
                       value={formData.email}
                       onChange={(e) => updateFormData('email', e.target.value)}
+                      name="email"
+                      toolparamdescription="Visitor's email address"
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#00bf62] focus:border-transparent transition-colors ${
                         errors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
@@ -282,6 +291,8 @@ export function ConsultationForm({ isOpen, onClose }: { isOpen: boolean; onClose
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => updateFormData('phone', e.target.value)}
+                    name="phone"
+                    toolparamdescription="Visitor's phone number with country code"
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#00bf62] focus:border-transparent transition-colors ${
                       errors.phone ? 'border-red-500' : 'border-gray-300'
                     }`}

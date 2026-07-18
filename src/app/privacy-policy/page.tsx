@@ -1,11 +1,11 @@
 import Markdown from '@/core/components/Markdown';
 import { Metadata } from 'next';
+import { Breadcrumb } from '@/core/components/Breadcrumb';
+import { canonicalAlternates } from '@/seo/site';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  alternates: {
-    canonical: `https://www.geosoftech.com/privacy-policy`,
-  },
+  ...canonicalAlternates('/privacy-policy'),
 };
 
 const StaticPage: React.FC = ({}) => {
@@ -59,6 +59,12 @@ If you have any questions about this Privacy Policy, please contact us at:\n\n[i
         <div
           className={`m-auto w-full max-w-[1400px] px-5 py-6 md:px-10 md:py-16 md:!pt-20`}
         >
+          <Breadcrumb
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Privacy Policy', href: '/privacy-policy' },
+            ]}
+          />
           <Markdown>{test}</Markdown>
         </div>
       </section>

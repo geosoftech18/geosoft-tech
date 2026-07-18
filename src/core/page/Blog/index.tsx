@@ -13,6 +13,7 @@ import {
   Tag,
   ArrowRight
 } from 'lucide-react'
+import { Breadcrumb } from '@/core/components/Breadcrumb'
 
 interface BlogPost {
   _id: string
@@ -59,7 +60,14 @@ export default function BlogPage() {
 
     <div className="min-h-screen bg-gradient-to-br from-s-100 via-white to-s-100 py-36 md:py-32 font-avant-garde">
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4">
+        <Breadcrumb
+          className="mb-6"
+          items={[
+            { name: 'Home', href: '/' },
+            { name: 'Blogs', href: '/blog' },
+          ]}
+        />
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

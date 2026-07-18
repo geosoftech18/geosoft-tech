@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { Card, CardContent } from "@/core/components/card"
 import { Button } from "@/core/components/ui/button"
+import { HowToJsonLd } from "@/seo/HowToJsonLd"
 
 const steps = [
   {
@@ -67,6 +68,11 @@ export function ProcessSection() {
 
   return (
     <section id="process" className="relative overflow-hidden py-12 sm:py-16 md:py-20 bg-muted/30">
+      <HowToJsonLd
+        name="Our Website Development Process — Clear, Collaborative, and Results-Focused"
+        description="From initial brief to final launch, every project follows a structured process designed to minimise surprises and maximise outcomes."
+        steps={steps.map((s) => ({ name: s.title, text: s.description }))}
+      />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,191,98,0.08),transparent_45%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(0,191,98,0.06),transparent_40%)]" />
 

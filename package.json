@@ -56,6 +56,7 @@
 		"rehype-slug": "^5.1.0",
 		"remark-gfm": "^3.0.1",
 		"render-with-react17": "^0.1.6",
+		"sharp": "^0.35.3",
 		"sitemap": "^7.1.1",
 		"sweetalert2": "^11.7.32",
 		"sweetalert2-react-content": "^5.0.7",

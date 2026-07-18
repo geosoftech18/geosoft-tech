@@ -2,11 +2,13 @@ import { contact_meta_data } from '@/seo';
 import { Metadata } from 'next';
 import Contact from '@/core/page/Contact';
 import { PageReviewSchema } from '@/seo/PageReviewSchema';
+import { canonicalAlternates } from '@/seo/site';
 
 export const metadata: Metadata = {
   ...contact_meta_data(),
   title:
     "Ready to Elevate Your Business? Let's Discuss Your Growth Trajectory!",
+  ...canonicalAlternates('/contact-us'),
 };
 
 export default function Page() {

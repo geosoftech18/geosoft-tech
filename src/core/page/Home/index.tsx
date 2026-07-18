@@ -1,25 +1,31 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Herosection from './Herosection';
-import FadeInOnScroll from '@/core/components/FadeInScroll';
 import HomeTabs from './HomeTabs';
-import Features from './Features';
-import Services from './Services';
-import Goal from './Goal';
-import Counters from './Counters';
-import Approach from './Approach';
-import Testimonials from './Testimonials';
-import Partners from './Partners';
-import Community from './Community';
-import FounderSection from '@/core/components/FounderSection';
-import Certifications from './Certifications';
-import PartnerBadges from './PartnerBadges';
+
+const FadeInOnScroll = dynamic(() => import('@/core/components/FadeInScroll'), {
+  ssr: true,
+});
+
+const Features = dynamic(() => import('./Features'), { ssr: true });
+const Services = dynamic(() => import('./Services'), { ssr: true });
+const Goal = dynamic(() => import('./Goal'), { ssr: true });
+const Counters = dynamic(() => import('./Counters'), { ssr: true });
+const Approach = dynamic(() => import('./Approach'), { ssr: true });
+const Testimonials = dynamic(() => import('./Testimonials'), { ssr: true });
+const Partners = dynamic(() => import('./Partners'), { ssr: true });
+const Community = dynamic(() => import('./Community'), { ssr: true });
+const FounderSection = dynamic(() => import('@/core/components/FounderSection'), {
+  ssr: true,
+});
+const Certifications = dynamic(() => import('./Certifications'), { ssr: true });
+const PartnerBadges = dynamic(() => import('./PartnerBadges'), { ssr: true });
 
 const Home = () => {
   return (
     <main>
-      <FadeInOnScroll>
-        <Herosection />
-      </FadeInOnScroll>
+      {/* Hero is not fade-wrapped so LCP paints immediately */}
+      <Herosection />
       <HomeTabs />
       <FadeInOnScroll>
         <Features />
@@ -51,9 +57,6 @@ const Home = () => {
       <FadeInOnScroll>
         <PartnerBadges />
       </FadeInOnScroll>
-      {/* <FadeInOnScroll>
-        <Blogs />
-      </FadeInOnScroll> */}
       <FadeInOnScroll>
         <Community />
       </FadeInOnScroll>

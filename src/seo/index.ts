@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { canonicalUrl } from './site';
 
 export const root_icons: Metadata = {
   icons: {
@@ -139,11 +140,12 @@ export const root_twitter = (props = default_twitter_props): Metadata => {
 
 export const root_meta_data = (props = default_root_props): Metadata => {
   const { description, locale, siteName, template, title, type, url } = props;
+  const pageUrl = canonicalUrl(url || '/');
   return {
     ...root_icons,
     ...root_robot,
     alternates: {
-      canonical: `https://www.geosoftech.com/${url}`,
+      canonical: pageUrl,
     },
     title: {
       default: 'GEO Softech',
@@ -156,7 +158,7 @@ export const root_meta_data = (props = default_root_props): Metadata => {
     openGraph: {
       title: title,
       description: description,
-      url: `https://www.geosoftech.com/${url}`,
+      url: pageUrl,
       siteName: siteName,
       images: [
         {
@@ -186,11 +188,12 @@ export const root_meta_data = (props = default_root_props): Metadata => {
 
 export const services_meta_data = (props = default_root_props): Metadata => {
   const { description, locale, siteName, template, title, type, url } = props;
+  const pageUrl = canonicalUrl(url && url !== '/' ? url : '/services');
   return {
     ...root_icons,
     ...root_robot,
     alternates: {
-      canonical: `https://www.geosoftech.com/services`,
+      canonical: pageUrl,
     },
     title: {
       default: 'GEO Softech',
@@ -203,7 +206,7 @@ export const services_meta_data = (props = default_root_props): Metadata => {
     openGraph: {
       title: title,
       description: description,
-      url: `https://www.geosoftech.com/services`,
+      url: pageUrl,
       siteName: siteName,
       images: [
         {
@@ -233,11 +236,12 @@ export const services_meta_data = (props = default_root_props): Metadata => {
 
 export const about_meta_data = (props = default_root_props): Metadata => {
   const { description, locale, siteName, template, title, type, url } = props;
+  const pageUrl = canonicalUrl(url && url !== '/' ? url : '/about');
   return {
     ...root_icons,
     ...root_robot,
     alternates: {
-      canonical: `https://www.geosoftech.com/about`,
+      canonical: pageUrl,
     },
     title: {
       default: 'GEO Softech',
@@ -250,7 +254,7 @@ export const about_meta_data = (props = default_root_props): Metadata => {
     openGraph: {
       title: title,
       description: description,
-      url: `https://www.geosoftech.com/about`,
+      url: pageUrl,
       siteName: siteName,
       images: [
         {
@@ -280,11 +284,12 @@ export const about_meta_data = (props = default_root_props): Metadata => {
 
 export const projects_meta_data = (props = default_root_props): Metadata => {
   const { description, locale, siteName, template, title, type, url } = props;
+  const pageUrl = canonicalUrl(url && url !== '/' ? url : '/portfolio');
   return {
     ...root_icons,
     ...root_robot,
     alternates: {
-      canonical: `https://www.geosoftech.com/portfolio`,
+      canonical: pageUrl,
     },
     title: {
       default: 'GEO Softech',
@@ -297,7 +302,7 @@ export const projects_meta_data = (props = default_root_props): Metadata => {
     openGraph: {
       title: title,
       description: description,
-      url: `https://www.geosoftech.com/portfolio`,
+      url: pageUrl,
       siteName: siteName,
       images: [
         {
@@ -327,11 +332,12 @@ export const projects_meta_data = (props = default_root_props): Metadata => {
 
 export const contact_meta_data = (props = default_root_props): Metadata => {
   const { description, locale, siteName, template, title, type, url } = props;
+  const pageUrl = canonicalUrl(url && url !== '/' ? url : '/contact-us');
   return {
     ...root_icons,
     ...root_robot,
     alternates: {
-      canonical: `https://www.geosoftech.com/contact-us`,
+      canonical: pageUrl,
     },
     title: {
       default: 'GEO Softech',
@@ -344,7 +350,7 @@ export const contact_meta_data = (props = default_root_props): Metadata => {
     openGraph: {
       title: title,
       description: description,
-      url: `https://www.geosoftech.com/contact-us`,
+      url: pageUrl,
       siteName: siteName,
       images: [
         {

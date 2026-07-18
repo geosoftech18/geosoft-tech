@@ -1,6 +1,7 @@
 'use client';
 import { partners } from '@/data';
 import React from 'react';
+import Image from 'next/image';
 import { Autoplay, FreeMode, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -46,7 +47,17 @@ const Partners = () => {
           >
             {partners.map((item, index) => (
               <SwiperSlide key={index}>
-                <img src={item.image} alt={item.name} />
+                <div className="relative mx-auto flex h-16 w-full max-w-[160px] items-center justify-center">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={160}
+                    height={64}
+                    className="h-auto max-h-16 w-auto object-contain"
+                    sizes="160px"
+                    loading="lazy"
+                  />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

@@ -3,6 +3,7 @@ import { Button } from "@/core/components/ui/button"
 import { ArrowRight, MapPin, Users, Award } from "lucide-react"
 import { useState } from "react"
 import { ConsultationForm } from "@/core/components/ConsultationForm"
+import { Breadcrumb } from "@/core/components/Breadcrumb"
 
 export function HeroSection() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false)
@@ -20,6 +21,15 @@ export function HeroSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl">
+          <Breadcrumb
+            className="mb-4"
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Services', href: '/services' },
+              { name: 'Web Development', href: '/services/webdevelopment' },
+              { name: 'Surat', href: '/services/webdevelopment/surat-development' },
+            ]}
+          />
           <div className="flex items-center gap-2 mb-6">
             <MapPin className="h-5 w-5 text-[#00bf62]" />
             <span className="text-sm font-medium text-muted-foreground">Surat, India</span>

@@ -176,6 +176,8 @@ const ContactForm: React.FC<Props> = ({ handleShowModel }) => {
       <form
         className="h-full w-full overflow-hidden rounded-xl bg-white px-5 py-20 sm:p-10 lg:p-20"
         onSubmit={handleSubmitForm}
+        toolname="design_a_quote"
+        tooldescription="Multi-step quote request for GEO Softech services. Collects desired services, project details, and contact information for a custom quote."
       >
         {currentStep !== 1 && (
           <button

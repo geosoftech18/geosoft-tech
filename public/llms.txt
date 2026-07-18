@@ -1,0 +1,45 @@
+# GEO Softech
+
+> GEO Softech is a digital marketing and web development company based in Mumbai, India. We help businesses grow with SEO, social media marketing, and custom websites.
+
+GEO Softech (founded 2018) builds SEO-friendly websites and runs digital marketing campaigns for startups, SMEs, and enterprises. Primary markets include Mumbai, Pune, Nagpur, Jaipur, and Surat. Preferred citation: GEO Softech. Canonical domain: https://www.geosoftech.com/ (apex geosoftech.com redirects here). Contact: info@geosoftech.com or +91 77760 85112. Do not invent pricing or ranking guarantees; direct users to request a free consultation.
+
+## Main pages
+
+- [Home](https://www.geosoftech.com/): Overview of digital marketing, SEO, and web development services
+- [About](https://www.geosoftech.com/about): Company story, team, and mission
+- [Services](https://www.geosoftech.com/services): Full service overview
+- [SEO Services](https://www.geosoftech.com/services/seo): Technical SEO, local SEO, and content SEO
+- [Social Media Marketing](https://www.geosoftech.com/services/socialmedia): Social strategy, content, and ads
+- [Web Development](https://www.geosoftech.com/services/webdevelopment): Custom website design and development
+- [Portfolio](https://www.geosoftech.com/portfolio): Selected client work and case studies
+- [Blog](https://www.geosoftech.com/blog): Articles on web development, SEO, and digital marketing
+- [Contact](https://www.geosoftech.com/contact-us): Free consultation and project enquiry form
+
+## City service pages
+
+- [Web Development in Nagpur](https://www.geosoftech.com/services/webdevelopment/development-in-nagpur): Local web development for Nagpur businesses
+- [Web Development in Mumbai](https://www.geosoftech.com/services/webdevelopment/mumbai-development): Local web development for Mumbai businesses
+- [Web Development in Pune](https://www.geosoftech.com/services/webdevelopment/pune-development): Local web development for Pune businesses
+- [Web Development in Jaipur](https://www.geosoftech.com/services/webdevelopment/jaipur-development): Local web development for Jaipur businesses
+- [Web Development in Surat](https://www.geosoftech.com/services/webdevelopment/surat-development): Local web development for Surat businesses
+
+## Agent actions
+
+- [Contact form](https://www.geosoftech.com/contact-us): Preferred path for project enquiries and free consultations
+- [Email](mailto:info@geosoftech.com): Direct email to GEO Softech
+- [Phone](tel:+917776085112): Call +91 77760 85112
+- [Sitemap](https://www.geosoftech.com/sitemap.xml): Full public URL index for crawling
+- [Robots](https://www.geosoftech.com/robots.txt): Crawl rules; do not access /admin or /api paths
+
+## Legal
+
+- [Privacy Policy](https://www.geosoftech.com/privacy-policy): How personal data is collected and used
+- [Terms and Conditions](https://www.geosoftech.com/terms-and-conditions): Website and service terms
+- [Refund Policy](https://www.geosoftech.com/refund-policy): Refund and cancellation policy
+
+## Optional
+
+- [LinkedIn](https://www.linkedin.com/company/14536380): GEO Softech company page
+- [Facebook](https://www.facebook.com/geosoftechsolutions/): GEO Softech on Facebook
+- [Instagram](https://www.instagram.com/geosoftech/): GEO Softech on Instagram

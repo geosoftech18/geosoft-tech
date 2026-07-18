@@ -18,6 +18,7 @@ import {
   MessageCircle,
   BookOpen
 } from 'lucide-react'
+import { Breadcrumb } from '@/core/components/Breadcrumb'
 
 interface BlogPost {
   _id?: string
@@ -272,10 +273,18 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   return (
     <>
    
-    <div className="min-h-screen bg-gradient-to-br from-s-100 via-white to-s-100 font-avant-garde">
+    <div className="min-h-screen bg-gradient-to-br from-s-100 via-white to-s-100 py-16 font-avant-garde">
       {/* Header */}
       <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-6">
+          <Breadcrumb
+            className="mb-3"
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Blogs', href: '/blog' },
+              { name: post.title, href: `/blog/${slug}` },
+            ]}
+          />
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}

@@ -45,7 +45,9 @@ const PartnerBadges = () => {
                   alt={badge.name}
                   width={240}
                   height={160}
+                  sizes="(max-width: 768px) 45vw, 220px"
                   className="object-contain"
+                  loading="lazy"
                   style={{
                     maxWidth: '100%',
                     height: 'auto',

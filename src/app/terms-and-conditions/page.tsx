@@ -1,15 +1,24 @@
 import { Metadata } from 'next';
+import { Breadcrumb } from '@/core/components/Breadcrumb';
+import { canonicalAlternates } from '@/seo/site';
 
 export const metadata: Metadata = {
   title: 'Terms and Conditions | GEO Softech',
   description:
     'Read the Terms and Conditions for using GEO Softech website and services.',
+  ...canonicalAlternates('/terms-and-conditions'),
 };
 
 export default function TermsAndConditionsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-s-100 via-white to-s-100 py-28 md:py-32">
       <section className="mx-auto w-full max-w-4xl px-4">
+        <Breadcrumb
+          items={[
+            { name: 'Home', href: '/' },
+            { name: 'Terms and Conditions', href: '/terms-and-conditions' },
+          ]}
+        />
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-lg md:p-10">
           <h1 className="mb-3 text-3xl font-bold text-t md:text-4xl">Terms and Conditions</h1>
           <p className="mb-8 text-sm text-slate-500">Last updated: April 2026</p>

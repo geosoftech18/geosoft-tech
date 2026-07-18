@@ -78,6 +78,8 @@ const Features = () => {
                       alt={item.name}
                       width={80}
                       height={60}
+                      sizes="80px"
+                      loading="lazy"
                     />
                     <h3 className="text-xl">{item.name}</h3>
                     <p className="text-lg text-neutral-500">

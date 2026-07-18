@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/core/components/card"  
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { FaqJsonLd } from "@/seo/FaqJsonLd"
 
 const faqs = [
   {
@@ -41,13 +42,14 @@ export function FAQSection() {
 
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-muted/30">
+      <FaqJsonLd faqs={faqs} />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
             Frequently Asked Questions
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-            Get answers to common questions about website designing services in Mumbai
+            Get answers to common questions about website designing services in Pune
           </p>
         </div>
 

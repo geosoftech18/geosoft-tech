@@ -1,40 +1,52 @@
 'use client';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+import { useEffect, useRef, useState } from 'react';
 
 interface FadeInOnScrollProps {
   children: React.ReactNode;
 }
 
+/**
+ * Lightweight scroll reveal using CSS transforms (compositor-friendly)
+ * instead of GSAP, to reduce main-thread work and layout thrashing.
+ */
 const FadeInOnScroll: React.FC<FadeInOnScrollProps> = ({ children }) => {
-  const elementRef = useRef(null);
+  const elementRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     const element = elementRef.current;
+    if (!element) return;
 
-    if (element) {
-      gsap.set(element, { autoAlpha: 0, y: 30 });
-
-      ScrollTrigger.create({
-        trigger: element,
-        start: 'top 80%', // Adjust the start position of trigger as needed
-        onEnter: () => {
-          gsap.to(element, {
-            duration: 1,
-            autoAlpha: 1,
-            y: 0,
-            ease: 'power2.out',
-            overwrite: true,
-          });
-        },
-      });
+    if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true);
+      return;
     }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.08 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
   }, []);
 
-  return <section ref={elementRef}>{children}</section>;
+  return (
+    <section
+      ref={elementRef}
+      className={`transition-[opacity,transform] duration-700 ease-out will-change-[opacity,transform] ${
+        visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+      }`}
+    >
+      {children}
+    </section>
+  );
 };
 
 export default FadeInOnScroll;

@@ -94,14 +94,21 @@ const ContactForm = ({}: Props) => {
         <form
           className="flex h-full w-full flex-col gap-5 rounded-xl bg-white p-8 shadow-lg"
           onSubmit={handleSubmit(handleSubmitForm)}
+          toolname="request_consultation"
+          tooldescription="Submit a project enquiry to GEO Softech. Collects name, email, service requirement, budget range, and message for a free consultation."
         >
           {/* first row */}
           <div className="flex flex-col justify-center space-y-8 md:flex-row md:space-x-8 md:space-y-0">
             <div className="flex w-full flex-col">
+              <label htmlFor="contact-name" className="sr-only">
+                Full name
+              </label>
               <input
+                id="contact-name"
                 className="rounded-tl-30 placeholder-white::placeholder  w-full  border-b-2 border-solid py-2 pr-12 text-neutral-500 focus:outline-none focus:ring-0 md:pl-4"
                 type="text"
                 placeholder="Name"
+                toolparamdescription="Visitor's full name"
                 {...register('name', {
                   required: 'Name is required',
                 })}
@@ -113,10 +120,15 @@ const ContactForm = ({}: Props) => {
               )}
             </div>
             <div className="flex w-full flex-col">
+              <label htmlFor="contact-email" className="sr-only">
+                Email address
+              </label>
               <input
+                id="contact-email"
                 className="rounded-tl-30 placeholder-white::placeholder  w-full border-b-2 border-solid py-2 pr-12 text-neutral-500 focus:outline-none focus:ring-0 md:pl-4"
                 type="email"
                 placeholder="Email"
+                toolparamdescription="Visitor's email address for follow-up"
                 {...register('email', {
                   required: 'Email is required',
                   pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -139,8 +151,13 @@ const ContactForm = ({}: Props) => {
               rules={{ required: 'Subject is required' }}
               render={({ field }) => (
                 <div className="flex w-full flex-col">
+                  <label htmlFor="contact-subject" className="sr-only">
+                    Service requirement
+                  </label>
                   <select
                     {...field}
+                    id="contact-subject"
+                    toolparamdescription="Service needed: Website Design, Social Media, SEO, or Content Marketing"
                     className="rounded-tl-30 w-full border-b-2 border-solid py-2 pr-12 text-neutral-500 focus:outline-none focus:ring-0 md:pl-4"
                   >
                     <option value="">Requirement</option>
@@ -164,8 +181,13 @@ const ContactForm = ({}: Props) => {
               rules={{ required: 'Budget is required' }}
               render={({ field }) => (
                 <div className="flex w-full flex-col">
+                  <label htmlFor="contact-budget" className="sr-only">
+                    Project budget
+                  </label>
                   <select
                     {...field}
+                    id="contact-budget"
+                    toolparamdescription="Approximate project budget in INR"
                     className="rounded-tl-30 placeholder-white::placeholder w-full border-b-2 border-solid py-2 pr-12 text-neutral-500 focus:outline-none focus:ring-0 md:pl-4"
                   >
                     <option value="">Your Budget</option>
@@ -193,8 +215,13 @@ const ContactForm = ({}: Props) => {
               defaultValue=""
               render={({ field }) => (
                 <>
+                  <label htmlFor="contact-message" className="sr-only">
+                    Project message
+                  </label>
                   <textarea
                     {...field}
+                    id="contact-message"
+                    toolparamdescription="Short description of the project or enquiry"
                     className="rounded-tl-30 placeholder-white::placeholder w-full border-b-2 border-solid py-2 pr-12 text-neutral-500 focus:outline-none focus:ring-0 md:pl-4"
                     placeholder="Message"
                   />

@@ -8,6 +8,7 @@ import { TypeAnimation } from "react-type-animation"
 import { X, ArrowRight, MessageCircle } from "lucide-react"
 import { RiArrowRightSLine, RiArrowRightSFill } from "react-icons/ri"
 import FlipButton from "@/core/components/FlipButton"
+import { Breadcrumb } from "@/core/components/Breadcrumb"
 import { trackGoogleAdsConversion } from "@/lib/utils/googleAdsConversion"
 
 
@@ -177,8 +178,18 @@ Thank you!`
 
   return (
     <div className="h-full w-full" id="hero">
-      <div className="h-screen w-full bg-[url(/services/webdevelopment/business-meeting.jpg)] bg-cover bg-center bg-no-repeat pt-16">
+      <div className="relative h-screen w-full bg-[url(/services/webdevelopment/business-meeting.jpg)] bg-cover bg-center bg-no-repeat pt-16">
         <div className="absolute inset-0 z-0 h-full w-full bg-transparent bg-gradient-to-tr from-t to-s opacity-70" />
+        <div className="absolute left-4 top-20 z-30 sm:left-8 md:top-24 lg:left-12">
+          <Breadcrumb
+            variant="light"
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Services', href: '/services' },
+              { name: 'Web Development', href: '/services/webdevelopment' },
+            ]}
+          />
+        </div>
         <div className="relative z-20 m-auto flex h-full w-full max-w-3xl flex-col items-center justify-center gap-5 pt-4 max-md:px-5">
           <h1 className="text-center text-3xl font-bold leading-none tracking-tighter text-neutral-50 md:text-4xl lg:text-[44px]">
             <div className="text-neutral-50">Your Trusted Website Designing</div>

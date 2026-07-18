@@ -18,8 +18,6 @@ const HomeTabs = () => {
       if (heroSection) {
         const heroSectionHeight = heroSection.clientHeight;
 
-        // Change the offset (in this case, 100) to the specific distance from the top of the hero section
-        // where you want the header to become fixed
         if (scrollPosition > heroSectionHeight - 100) {
           setIsHeaderFixed(true);
         } else {
@@ -56,7 +54,6 @@ const HomeTabs = () => {
           const sectionTop = element.offsetTop;
           const sectionHeight =
             element.getBoundingClientRect().top + window.pageYOffset;
-          const sectionBottom = sectionTop + sectionHeight;
 
           const progress =
             ((scrollPosition - sectionTop) / sectionHeight) * 100;
@@ -102,13 +99,12 @@ const HomeTabs = () => {
     },
   ];
 
-  const headerHeight = 160; // Your header height in pixels
+  const headerHeight = 160;
 
   const handleTabClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
 
     if (section) {
-      console.log(section.getBoundingClientRect().top + window.pageYOffset);
       const topPos =
         section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
       window.scrollTo({
@@ -119,29 +115,32 @@ const HomeTabs = () => {
   };
 
   return (
-    <section
+    <nav
+      aria-label="Page sections"
       className={`inset-x-0 z-40 w-full bg-white shadow-sm ${
         isHeaderFixed ? 'fixed top-20 max-lg:top-28' : 'sticky top-0'
       }`}
     >
-      <ul className="m-auto grid max-w-7xl grid-cols-4">
+      <ul className="m-auto grid max-w-7xl list-none grid-cols-4 p-0">
         {homePageTabs.map((item, index) => (
-          <div
-            className="relative flex w-auto cursor-pointer p-4 "
-            key={index}
-            onClick={() => handleTabClick(item.url.substring(1))}
-          >
-            <li className="my-auto w-full text-center text-xs text-black md:text-base">
-              {item.name}
-            </li>
-            <div
-              style={{ width: `${item.progress}%` }}
-              className="absolute bottom-0 left-0 h-0.5 w-0 bg-green-300"
-            />
-          </div>
+          <li key={index} className="relative my-auto w-full list-none text-center">
+            <button
+              type="button"
+              className="relative flex w-full cursor-pointer p-4 text-xs text-black md:text-base"
+              onClick={() => handleTabClick(item.url.substring(1))}
+              aria-label={`Go to ${item.name} section`}
+            >
+              <span className="mx-auto">{item.name}</span>
+              <span
+                style={{ width: `${item.progress}%` }}
+                className="absolute bottom-0 left-0 h-0.5 bg-green-300"
+                aria-hidden
+              />
+            </button>
+          </li>
         ))}
       </ul>
-    </section>
+    </nav>
   );
 };
 

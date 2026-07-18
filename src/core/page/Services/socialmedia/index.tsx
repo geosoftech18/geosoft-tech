@@ -7,6 +7,7 @@ import { Badge } from "@/core/components/badge"
 import { Input } from "@/core/components/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/core/components/select"
 import TestimonialsSection from "../testimonials-section"
+import { Breadcrumb } from "@/core/components/Breadcrumb"
 import { useToast } from "@/hooks/use-toast"
 import {
   ArrowRight,
@@ -874,6 +875,14 @@ export default function DigitalMarketingService() {
       {/* Hero Section */}
       <section className="relative overflow-hidden px-6 py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
+          <Breadcrumb
+            className="mb-6"
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'Services', href: '/services' },
+              { name: 'Social Media Marketing', href: '/services/socialmedia' },
+            ]}
+          />
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
             {/* Left Side - Main Content */}
             <div className="space-y-8">

@@ -10,6 +10,7 @@ import {
 import { Card, CardContent } from "@/core/components/card";
 import { HelpCircle, Clock, Target, Building2, FileText, DollarSign, TrendingUp, Shield, Users, MessageSquare, Sparkles, ArrowRight, FileCheck as CheckCircle2 } from "lucide-react";
 import { SEOAuditDialog } from "@/core/page/Services/seo/seo-audit-dialog";
+import { FaqJsonLd } from "@/seo/FaqJsonLd";
 
 export function FAQSection() {
   const [mounted, setMounted] = useState(false);
@@ -132,6 +133,9 @@ export function FAQSection() {
 
   return (
     <section className="relative py-24 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <FaqJsonLd
+        faqs={faqs.map((f) => ({ question: f.question, answer: f.answer }))}
+      />
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 right-10 w-96 h-96 bg-violet-300 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-300 rounded-full blur-3xl" />

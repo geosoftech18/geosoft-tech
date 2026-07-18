@@ -55,9 +55,11 @@ const Navbar: React.FC<navbar.index> = ({ logo, navlist }) => {
           <Image
             src={logo.url}
             alt={logo.alt}
-            width={'200'}
-            height={'200'}
-            className="max-xsm:h-11 relative z-10 lg:h-16 h-14 w-full object-contain object-center"
+            width={200}
+            height={64}
+            priority
+            sizes="(max-width: 1024px) 112px, 128px"
+            className="max-xsm:h-11 relative z-10 lg:h-16 h-14 w-auto object-contain object-center"
           />
         </Link>
         {navlist?.links && <NavList links={navlist.links} />}

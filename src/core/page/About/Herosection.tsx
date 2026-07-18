@@ -1,9 +1,18 @@
 import React from 'react';
+import { Breadcrumb } from '@/core/components/Breadcrumb';
 
 const Herosection = () => {
   return (
     <section className="h-full w-full" id="hero">
       <div className="w-full pt-16">
+        <div className="mx-auto w-full max-w-7xl px-8 pt-8">
+          <Breadcrumb
+            items={[
+              { name: 'Home', href: '/' },
+              { name: 'About', href: '/about' },
+            ]}
+          />
+        </div>
         <div className="mx-auto w-full max-w-md space-y-4 px-8 py-12 md:py-20">
           <h1 className="rounded-full text-center text-6xl font-medium text-neutral-800">
             About
