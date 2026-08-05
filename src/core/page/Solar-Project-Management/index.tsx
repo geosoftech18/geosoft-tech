@@ -16,7 +16,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#0f172a]">
      
       <Hero />
-      <Features />
+      {/* <Features /> */}
       <PlatformModules />
       <ModulePreview />
       <Solutions />

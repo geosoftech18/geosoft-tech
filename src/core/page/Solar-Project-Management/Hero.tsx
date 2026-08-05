@@ -36,7 +36,7 @@ export default function Hero() {
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-amber-500/8 blur-3xl animate-pulse-soft pointer-events-none" style={{ animationDelay: '1.5s' }} />
       <div className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-sky-500/6 blur-3xl animate-pulse-soft pointer-events-none" style={{ animationDelay: '3s' }} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:pt-28 pt-32 pb-16">
         <div className="flex flex-col items-center text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-orange-500/30 text-orange-400 text-sm font-medium mb-8 animate-fade-in">

@@ -56,13 +56,32 @@ export default function DemoForm() {
     setLoading(true);
     setError(null);
 
-    
+    try {
+      const response = await fetch('/api/solar-demo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
 
-    setLoading(false);
-    
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Unable to book your demo.');
+      }
+
       setSuccess(true);
       setForm(empty);
-    
+    } catch (submitError) {
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : 'Unable to book your demo. Please try again.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (success) {
@@ -226,9 +245,11 @@ export default function DemoForm() {
           </>
         ) : (
           <>
-            <Calendar className="w-5 h-5" />
-            Schedule My Free Demo
-            <Send className="w-4 h-4" />
+            <Calendar className="w-5 h-5 text-white" />
+           <span className="hidden sm:inline text-white">Schedule My Free Demo</span>
+           <span className="sm:hidden text-white">Schedule Demo</span>
+           
+            <Send className="w-4 h-4 text-white" />
           </>
         )}
       </button>

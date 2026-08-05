@@ -126,6 +126,9 @@ function GoogleLogo() {
 
 type Testimonial = { quote: string; name: string; role: string; location: string; initials: string; color: string };
 
+const testimonialNavBtnClass =
+  'inline-flex !h-10 !w-10 !min-w-10 !shrink-0 !items-center !justify-center !rounded-full !border !border-white/20 !bg-white/10 !p-0 !px-0 !py-0 !text-slate-300 shadow-none transition-all hover:!border-orange-400/50 hover:!bg-orange-500/20 hover:!text-white active:scale-95 [&>svg]:!h-4 [&>svg]:!w-4 [&>svg]:!text-current';
+
 function TestimonialCarousel({ testimonials }: { testimonials: Testimonial[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -188,33 +191,54 @@ function TestimonialCarousel({ testimonials }: { testimonials: Testimonial[] }) 
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-4 mt-8">
+      <div className="testimonial-carousel-controls relative z-10 flex items-center justify-center gap-4 mt-8">
         <button
+          type="button"
+          aria-label="Previous testimonial"
           onClick={prev}
-          className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+          className={testimonialNavBtnClass}
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft aria-hidden="true" />
         </button>
 
-        <div className="flex gap-2">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`transition-all duration-300 rounded-full ${
-                i === active ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 bg-white/20 hover:bg-white/40'
-              }`}
-            />
-          ))}
+        <div className="flex items-center gap-2">
+          {testimonials.map((_, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Go to testimonial ${i + 1}`}
+                aria-current={isActive ? 'true' : undefined}
+                onClick={() => setActive(i)}
+                className={`!p-0 !min-h-0 !min-w-0 shrink-0 rounded-full transition-all duration-300 ${
+                  isActive
+                    ? '!w-6 !h-2 !bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.45)]'
+                    : '!w-2 !h-2 !bg-white/30 hover:!bg-white/50'
+                }`}
+              />
+            );
+          })}
         </div>
 
         <button
+          type="button"
+          aria-label="Next testimonial"
           onClick={next}
-          className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
+          className={testimonialNavBtnClass}
         >
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight aria-hidden="true" />
         </button>
       </div>
+
+      <style jsx global>{`
+        .testimonial-carousel-controls button {
+          box-shadow: none !important;
+        }
+        .testimonial-carousel-controls button:not([aria-current]) {
+          line-height: 0;
+        }
+      `}</style>
     </div>
   );
 }
