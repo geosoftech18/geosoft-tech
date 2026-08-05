@@ -10,7 +10,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        // /api/blog stays crawlable so client-side hydration of blog pages is never blocked.
+        allow: ['/', '/api/blog'],
         disallow: [
           '/admin',
           '/admin/',
@@ -20,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'Googlebot',
-        allow: '/',
+        allow: ['/', '/api/blog'],
         disallow: ['/admin', '/admin/', '/api/'],
       },
     ],

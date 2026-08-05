@@ -26,12 +26,19 @@ interface BlogPost {
   createdAt: string
 }
 
-export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
+export default function BlogPage({
+  initialPosts,
+}: {
+  initialPosts?: BlogPost[]
+}) {
+  const hasServerPosts = Array.isArray(initialPosts)
+  const [posts, setPosts] = useState<BlogPost[]>(initialPosts ?? [])
+  const [loading, setLoading] = useState(!hasServerPosts)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (hasServerPosts) return
+
     const loadBlogs = async () => {
       try {
         const response = await fetch('/api/blog?status=published')
@@ -53,7 +60,7 @@ export default function BlogPage() {
     }
 
     loadBlogs()
-  }, [])
+  }, [hasServerPosts])
 
   return (
     <>

@@ -1,34 +1,26 @@
 import { Metadata } from 'next';
-import connectDB from '@/lib/database/connection';
-import Blog from '@/lib/database/models/Blog';
+import { notFound } from 'next/navigation';
 import { root_icons, root_robot } from '@/seo';
 import { canonicalUrl } from '@/seo/site';
 import { BlogPostingJsonLd } from '@/seo/BlogPostingJsonLd';
 import BlogDetailPage from '@/core/page/Blog/[slug]';
+import {
+  getPublishedPostBySlug,
+  getPublishedPosts,
+  getRelatedPosts,
+} from '@/lib/database/services/blogQueries';
 
 const SITE_NAME = 'GEO Softech';
 const DEFAULT_DESCRIPTION =
   "Elevate your business with Geo SofTech's expert solutions in social media, SEO, and website development. Harness the power of strategic online presence for lasting success.";
 
-type BlogDoc = {
-  title?: string;
-  excerpt?: string;
-  metaTitle?: string;
-  metaDescription?: string;
-  featuredImage?: string | null;
-  createdAt?: Date | string;
-  updatedAt?: Date | string;
-  author?: string;
-};
+// Pre-render every published post at build time; new posts are picked up on revalidate.
+export const revalidate = 300;
+export const dynamicParams = true;
 
-async function getPublishedBlog(slug: string): Promise<BlogDoc | null> {
-  try {
-    await connectDB();
-    const blog = await Blog.findOne({ slug, status: 'published' }).lean();
-    return (blog as BlogDoc) || null;
-  } catch {
-    return null;
-  }
+export async function generateStaticParams() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -52,7 +44,7 @@ export async function generateMetadata({
     },
   ];
 
-  const blog = await getPublishedBlog(slug);
+  const blog = await getPublishedPostBySlug(slug);
 
   if (blog) {
     const mt = blog.metaTitle?.trim();
@@ -96,33 +88,40 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const blog = await getPublishedBlog(slug);
+  const blog = await getPublishedPostBySlug(slug);
 
-  const datePublished = blog?.createdAt
-    ? new Date(blog.createdAt).toISOString()
-    : undefined;
-  const dateModified = blog?.updatedAt
-    ? new Date(blog.updatedAt).toISOString()
-    : datePublished;
+  // Return a real 404 instead of a soft-404 page that Google would index as thin content.
+  if (!blog) {
+    notFound();
+  }
+
+  const related = await getRelatedPosts(blog);
 
   return (
     <>
-      {blog?.title && (
-        <BlogPostingJsonLd
-          title={blog.metaTitle?.trim() || blog.title}
-          description={
-            blog.metaDescription?.trim() ||
-            blog.excerpt?.trim() ||
-            DEFAULT_DESCRIPTION
-          }
-          slug={slug}
-          image={blog.featuredImage}
-          datePublished={datePublished}
-          dateModified={dateModified}
-          authorName={blog.author || 'GEO Softech'}
-        />
-      )}
-      <BlogDetailPage params={params} />
+      <BlogPostingJsonLd
+        title={blog.metaTitle?.trim() || blog.title}
+        description={
+          blog.metaDescription?.trim() || blog.excerpt?.trim() || DEFAULT_DESCRIPTION
+        }
+        slug={slug}
+        image={blog.featuredImage}
+        datePublished={blog.createdAt}
+        dateModified={blog.updatedAt}
+        authorName="GEO Softech"
+      />
+      <BlogDetailPage
+        params={params}
+        initialSlug={slug}
+        initialPost={{
+          ...blog,
+          author: 'GEO Softech Team',
+          readTime: '5 min read',
+          likes: 0,
+          comments: 0,
+        }}
+        initialRelatedPosts={related.map((post) => ({ ...post, content: '' }))}
+      />
     </>
   );
 }

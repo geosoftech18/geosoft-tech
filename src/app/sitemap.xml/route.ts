@@ -2,9 +2,12 @@ import { NextRequest } from 'next/server';
 import { SitemapStream, SitemapStreamOptions, streamToPromise } from 'sitemap';
 import { Readable } from 'stream';
 import { SITE_URL } from '@/seo/site';
+import { getPublishedPosts } from '@/lib/database/services/blogQueries';
+
+export const revalidate = 300;
 
 export async function GET(_req: NextRequest) {
-  const links = [
+  const staticLinks = [
     { url: '/', changefreq: 'daily', priority: 1 },
     { url: '/about', changefreq: 'weekly', priority: 0.9 },
     { url: '/services', changefreq: 'weekly', priority: 0.9 },
@@ -43,6 +46,18 @@ export async function GET(_req: NextRequest) {
     { url: '/terms-and-conditions', changefreq: 'yearly', priority: 0.3 },
     { url: '/refund-policy', changefreq: 'yearly', priority: 0.3 },
   ];
+
+  const posts = await getPublishedPosts();
+  const blogLinks = posts
+    .filter((post) => Boolean(post.slug))
+    .map((post) => ({
+      url: `/blog/${post.slug}`,
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: post.updatedAt,
+    }));
+
+  const links = [...staticLinks, ...blogLinks];
 
   const streamOptions: SitemapStreamOptions = {
     hostname: SITE_URL,

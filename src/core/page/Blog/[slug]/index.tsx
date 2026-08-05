@@ -39,12 +39,23 @@ interface BlogPost {
   comments?: number
 }
 
-export default function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const [post, setPost] = useState<BlogPost | null>(null)
-  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
+export default function BlogDetailPage({
+  params,
+  initialPost,
+  initialRelatedPosts,
+  initialSlug,
+}: {
+  params: Promise<{ slug: string }>
+  initialPost?: BlogPost | null
+  initialRelatedPosts?: BlogPost[]
+  initialSlug?: string
+}) {
+  const hasServerPost = initialPost !== undefined
+  const [post, setPost] = useState<BlogPost | null>(initialPost ?? null)
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>(initialRelatedPosts ?? [])
+  const [loading, setLoading] = useState(!hasServerPost)
   const [liked, setLiked] = useState(false)
-  const [slug, setSlug] = useState<string>('')
+  const [slug, setSlug] = useState<string>(initialSlug ?? '')
 
   // Fallback dummy blog posts data
   // const dummyPosts: BlogPost[] = [
@@ -157,16 +168,18 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   // ]
 
   useEffect(() => {
+    if (initialSlug) return
+
     // Await params first
     const initParams = async () => {
       const resolvedParams = await params
       setSlug(resolvedParams.slug)
     }
     initParams()
-  }, [params])
+  }, [params, initialSlug])
 
   useEffect(() => {
-    if (!slug) return
+    if (!slug || hasServerPost) return
     
     // Load post from API
     const fetchPost = async () => {
@@ -219,7 +232,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
     }
 
     fetchPost()
-  }, [slug])
+  }, [slug, hasServerPost])
 
   const handleLike = () => {
     if (post) {
