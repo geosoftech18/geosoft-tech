@@ -4,6 +4,7 @@ import { Button}  from "@/core/components/ui/button"
 import { Breadcrumb } from "@/core/components/Breadcrumb"
 import { ArrowRight, MapPin, Users, Award } from "lucide-react"
 import { useState } from "react"
+import Link from "next/link"
 
 export function HeroSection() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false)
@@ -42,7 +43,19 @@ export function HeroSection() {
           <p className="text-base sm:text-sm md:text-lg lg:text-lg text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
           Your website is the first thing potential customers judge you by. A slow, outdated, or poorly designed site doesn't just look bad — it actively loses you business. <br />
 
-           At GEO Softech, we build custom, responsive, and SEO-friendly websites for Nagpur businesses that are designed to rank on Google and convert visitors into paying customers. Not template shops. Not cookie-cutter designs. Websites built around your specific business goals. 
+           At GEO Softech, we build custom, responsive, and SEO-friendly websites for Nagpur businesses that are designed to rank on Google and convert visitors into paying customers. Not template shops. Not cookie-cutter designs. Websites built around your specific business goals. Explore our full{" "}
+            <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              web development services
+            </Link>
+            {" "}and also see{" "}
+            <Link href="/services/webdevelopment/mumbai-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing company in Mumbai
+            </Link>
+            {" "}and{" "}
+            <Link href="/services/webdevelopment/pune-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing services in Pune
+            </Link>
+            .
  </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">

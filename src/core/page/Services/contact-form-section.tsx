@@ -224,7 +224,7 @@ Thank you!`
               <div className="md:h-3/4 lg:h-3/4">
                 <div className="max-w-6xl mx-auto">
                   <h2 className="text-white text-xl md:text-xl lg:text-2xl font-normal mb-6 md:mb-8">
-                    Why Choose WebCastle Technologies ?
+                    Why Choose GEO Softech ?
                   </h2>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-flow-col-3 gap-4 md:gap-4 lg:gap-6">

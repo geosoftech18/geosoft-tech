@@ -14,6 +14,7 @@ import FAQSection from "../faq-section";
 import QuoteFormSection from "../quote-form-section";
 import ContactFormSection from "../contact-form-section";
 import PopupForm from "./popup-form";
+import ServiceLocationInterlinks from "./service-location-interlinks";
 
 export default function Home() {
     const [showPopup, setShowPopup] = useState(false)
@@ -84,6 +85,7 @@ export default function Home() {
         <PortfolioSection />
         <TestimonialsSection />
         <TechnologyStackSection />
+        <ServiceLocationInterlinks />
         <FAQSection />
     
         <StickyFloatingButtons />

@@ -8,6 +8,7 @@ import { FAQSection } from "./faq-section"
 import { CTASection } from "./cta-section"
 
 import  TestimonialsSection  from "../nagpur/testimonials-section"
+import ServiceLocationInterlinks from "../service-location-interlinks"
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       {/* <PortfolioSection /> */}
       <AboutSection />
       <FAQSection />
+      <ServiceLocationInterlinks currentCity="jaipur" />
       <CTASection />
      
     </main>

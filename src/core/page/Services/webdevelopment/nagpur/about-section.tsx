@@ -5,6 +5,7 @@ import { Badge } from "@/core/components/badge"
 // import { Button } from "@/core/components/Button"
 import { MapPin, Users, Lightbulb, Heart, Zap, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
+import Link from "next/link"
 
 const teamMembers = [
   {
@@ -88,6 +89,21 @@ export function AboutSection() {
 Since 2018, we have grown from a small team of passionate developers into a full-service web development agency trusted by 300+ businesses across Nagpur, Mumbai, and beyond. We combine sharp local market knowledge with the technical expertise to build sites that perform at a global standard.               </p>
               <p>
               We don't just write code. We build digital infrastructure that helps businesses generate leads, build credibility, and grow consistently.               </p>
+              <p>
+                Beyond Nagpur, we also offer{" "}
+                <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+                  web development services
+                </Link>
+                {" "}nationwide, including{" "}
+                <Link href="/services/webdevelopment/jaipur-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+                  web development company in Jaipur
+                </Link>
+                {" "}and{" "}
+                <Link href="/services/webdevelopment/surat-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+                  website designing company in Surat
+                </Link>
+                .
+              </p>
             </div>
 
             <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">

@@ -170,27 +170,27 @@ const Footer = (props: Props) => {
             <ul className="space-y-2 text-xs sm:text-sm text-background/80">
             <li>
                 <a href="/services/webdevelopment/mumbai-development" className="hover:text-primary transition-colors">
-                  Mumbai
+                  Website Designing in Mumbai
                 </a>
               </li>
               <li>
                 <a href="/services/webdevelopment/pune-development" className="hover:text-primary transition-colors">
-                  Pune
+                  Website Designing in Pune
                 </a>
               </li>
               <li>
                 <a href="/services/webdevelopment/development-in-nagpur" className="hover:text-primary transition-colors">
-                  Nagpur
+                  Website Designing in Nagpur
                 </a>
               </li>
               <li>
                 <a href="/services/webdevelopment/jaipur-development" className="hover:text-primary transition-colors">
-                  Jaipur
+                  Web Development in Jaipur
                 </a>
               </li>
               <li>
                 <a href="/services/webdevelopment/surat-development" className="hover:text-primary transition-colors">
-                  Surat
+                  Website Designing in Surat
                 </a>
               </li>
              

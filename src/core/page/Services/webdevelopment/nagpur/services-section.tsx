@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/core/components/card"
 import { Button}  from "@/core/components/ui/button"
 import {
@@ -110,7 +111,11 @@ export function ServicesSection() {
           Our Website Designing Services in Nagpur 
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-          From corporate websites to full-scale e-commerce platforms, we deliver website design and development solutions built for Nagpur's startups, SMEs, and enterprises. 
+          From corporate websites to full-scale e-commerce platforms, we deliver{" "}
+            <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website design and development
+            </Link>
+            {" "}solutions built for Nagpur&apos;s startups, SMEs, and enterprises.
           </p>
         </div>
 

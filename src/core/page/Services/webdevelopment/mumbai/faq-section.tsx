@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Card, CardContent } from "@/core/components/card"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { FaqJsonLd } from "@/seo/FaqJsonLd"
@@ -77,6 +78,18 @@ export function FAQSection() {
             </Card>
           ))}
         </div>
+
+        <p className="max-w-4xl mx-auto mt-8 text-center text-sm sm:text-base text-muted-foreground">
+          Explore our full{" "}
+          <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+            web development services
+          </Link>
+          {" "}or{" "}
+          <Link href="/services/webdevelopment/development-in-nagpur" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+            website designing company in Nagpur
+          </Link>
+          .
+        </p>
       </div>
     </section>
   )

@@ -5,6 +5,7 @@ import { ArrowRight, MapPin, Users, Award } from "lucide-react"
 import { ConsultationForm } from "@/core/components/ConsultationForm"
 import { Breadcrumb } from "@/core/components/Breadcrumb"
 import { useState } from "react"
+import Link from "next/link"
 
 export function HeroSection() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false)
@@ -44,6 +45,19 @@ export function HeroSection() {
           <p className="text-base sm:text-lg md:text-xl lg:text-xl text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
           In this era dominated by digital interactions, your website acts as the initial encounter customers have with your business. We don't just design;
            we sculpt bespoke digital presences, construct e-commerce ecosystems, and build SEO-aware sites. Our clientele? Ambitious startups, growing SMEs, and colossal enterprises spread throughout Mumbai.
+            {" "}Explore our complete{" "}
+            <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              web development services
+            </Link>
+            {" "}and related hubs like{" "}
+            <Link href="/services/webdevelopment/development-in-nagpur" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing company in Nagpur
+            </Link>
+            {" "}and{" "}
+            <Link href="/services/webdevelopment/pune-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing services in Pune
+            </Link>
+            .
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">

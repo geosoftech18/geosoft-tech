@@ -15,6 +15,7 @@ import { FAQSection } from "./faq-section"
 import { CTASection } from "./cta-section"
 
 import HomeTestimonialsSection from "@/core/page/Home/Testimonials"
+import ServiceLocationInterlinks from "../service-location-interlinks"
 
 
 
@@ -40,6 +41,8 @@ export default function Home() {
       <IndustriesSection />
 
       <FAQSection />
+
+      <ServiceLocationInterlinks currentCity="nagpur" />
 
       <CTASection />
 

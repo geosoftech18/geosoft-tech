@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/core/components/card"
 import { Button } from "@/core/components/ui/button"
 import {
@@ -110,8 +111,11 @@ export function ServicesSection() {
           Our Website Designing Services in Surat 
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-          At GEO Softech, we offer a wide range of web design and 
-          development services tailored for businesses of all sizes
+          At GEO Softech, we offer a wide range of{" "}
+            <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              web design and development services
+            </Link>
+            {" "}tailored for businesses of all sizes
           </p>
         </div>
 

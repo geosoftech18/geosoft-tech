@@ -4,6 +4,7 @@ import { ArrowRight, MapPin, Users, Award } from "lucide-react"
 import { useState } from "react"
 import { ConsultationForm } from "@/core/components/ConsultationForm"
 import { Breadcrumb } from "@/core/components/Breadcrumb"
+import Link from "next/link"
 
 export function HeroSection() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false)
@@ -41,7 +42,20 @@ export function HeroSection() {
 
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
           In today’s fast-paced digital era, every business in Surat—from startups to enterprises—needs a professional website to establish credibility, 
-          attract customers, and grow online. Your website is often the first interaction potential clients have with your brand, making it essential to choose the right website designing company in Surat. 
+          attract customers, and grow online. Your website is often the first interaction potential clients have with your brand, making it essential to choose the right website designing company in Surat.
+            {" "}Explore our{" "}
+            <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              web development services
+            </Link>
+            {" "}and hubs like{" "}
+            <Link href="/services/webdevelopment/mumbai-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing company in Mumbai
+            </Link>
+            {" "}and{" "}
+            <Link href="/services/webdevelopment/development-in-nagpur" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing company in Nagpur
+            </Link>
+            .
  </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">

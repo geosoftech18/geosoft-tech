@@ -5,6 +5,7 @@ import { Badge } from "@/core/components/badge"
 import { Button}  from "@/core/components/ui/button"  
 import { MapPin, Users, Lightbulb, Heart, Zap, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
+import Link from "next/link"
 
 const teamMembers = [
   {
@@ -93,6 +94,21 @@ export function AboutSection() {
               <p>
               We transcend mere website creation – we incubate digital growth engines. Engines designed to propel our clients to triumph within Mumbai's fiercely competitive commercial ecosystem.
                Each undertaking is a chance to surpass expectations and cultivate enduring alliances.
+              </p>
+              <p>
+                Discover our nationwide{" "}
+                <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+                  web development services
+                </Link>
+                , plus city pages for{" "}
+                <Link href="/services/webdevelopment/jaipur-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+                  web development company in Jaipur
+                </Link>
+                {" "}and{" "}
+                <Link href="/services/webdevelopment/surat-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+                  website designing company in Surat
+                </Link>
+                .
               </p>
             </div>
 

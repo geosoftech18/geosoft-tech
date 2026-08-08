@@ -4,6 +4,7 @@ import { ArrowRight, MapPin, Users, Award } from "lucide-react"
 import { useState } from "react"
 import { ConsultationForm } from "@/core/components/ConsultationForm"
 import { Breadcrumb } from "@/core/components/Breadcrumb"
+import Link from "next/link"
 
 export function HeroSection() {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false)
@@ -40,7 +41,21 @@ export function HeroSection() {
           </h1>
 
           <p className="text-base sm:text-lg md:text-lg lg:text-lg text-muted-foreground mb-6 sm:mb-8 text-pretty max-w-3xl leading-relaxed">
-          This region is not only the Pink City of India but also a growing hub for startups, IT companies, and online storefronts in the area, prominently showcased through a dynamic web design market landscape, including numerous local firms that cater to these needs. Central to the success of these ventures is the understanding of responsive design importance for regional projects, particularly in the realm of online storefront development, which has gained significant traction. In this competitive environment, responsive design proves essential for ensuring that sites perform optimally across various devices—an absolute necessity for attracting and retaining customers. By adopting this design approach, local online ventures can significantly enhance the user experience and engagement—factors that are crucial for success in the digital marketplace. A professional website that embraces responsive design is indispensable for maximizing reach and conversion rates, empowering businesses, supported by savvy regional designers, to establish a strong online presence and effectively compete with both local and global players in the realm of online commerce. </p>
+          This region is not only the Pink City of India but also a growing hub for startups, IT companies, and online storefronts in the area, prominently showcased through a dynamic web design market landscape, including numerous local firms that cater to these needs. Central to the success of these ventures is the understanding of responsive design importance for regional projects, particularly in the realm of online storefront development, which has gained significant traction. In this competitive environment, responsive design proves essential for ensuring that sites perform optimally across various devices—an absolute necessity for attracting and retaining customers. By adopting this design approach, local online ventures can significantly enhance the user experience and engagement—factors that are crucial for success in the digital marketplace. A professional website that embraces responsive design is indispensable for maximizing reach and conversion rates, empowering businesses, supported by savvy regional designers, to establish a strong online presence and effectively compete with both local and global players in the realm of online commerce.
+            {" "}Explore our{" "}
+            <Link href="/services/webdevelopment" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              web development services
+            </Link>
+            {" "}and also{" "}
+            <Link href="/services/webdevelopment/mumbai-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing company in Mumbai
+            </Link>
+            {" "}and{" "}
+            <Link href="/services/webdevelopment/pune-development" className="font-medium text-[#00bf62] underline underline-offset-2 hover:text-[#00994e]">
+              website designing services in Pune
+            </Link>
+            .
+          </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12">
           <Button 
